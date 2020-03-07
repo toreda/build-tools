@@ -1,0 +1,36 @@
+{
+	"exclude": [
+		"node_modules",
+		"**/*.spec.ts",
+		"dist/**"
+	],
+	"include": [
+		"**/src/**/*.ts"
+	],
+	"filesGlob": [
+		"./src/**/*.ts",
+		"!./node_modules/**"
+	],
+
+	"compilerOptions": {
+		"preserveConstEnums": false,
+		"module": "commonjs",
+		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"target": "es6",
+		"lib": ["es6", "dom"],
+		"isolatedModules": true,
+		"removeComments": true,
+		"declaration": true,
+		"sourceMap": true,
+		"outDir": "./dist",
+		"strict": false,
+		"allowUnreachableCode": false,
+		"strictNullChecks": true,
+		"strictBindCallApply": true,
+		"strictPropertyInitialization": false,
+		"resolveJsonModule": true,
+		"alwaysStrict": false,
+		"noImplicitUseStrict": true
+	}
+}
