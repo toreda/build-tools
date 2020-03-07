@@ -1,8 +1,9 @@
 {
   "name": "@armorjs/build-tools",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "scripts": {
     "lint": "tslint --project .",
     "test": "jest --coverage",
@@ -22,9 +23,11 @@
     "@types/node": "^13.9.0",
     "@types/yargs": "^15.0.4",
     "fs-extra": "^8.1.0",
+    "graceful-fs": "^4.2.3",
     "gulp": "^4.0.2",
     "gulp-tslint": "^8.1.4",
     "gulp-typescript": "^6.0.0-alpha.1",
+    "tslint": "^6.0.0",
     "typescript": "^3.8.3"
   }
 }
