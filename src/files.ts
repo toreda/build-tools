@@ -1,17 +1,17 @@
-import { AJSBuildToolsFileUtils } from './file-utils';
-import { AJSBuildToolsFilesGetContentsOptions } from './get-contents-options';
+import {ArmorBTFileUtils} from './file-utils';
+import {ArmorBTFilesGetContentsOptions} from './get-contents-options';
 import {EventEmitter} from 'events';
 
-export class AJSBuildToolsFiles {
+export class ArmorBTFiles {
 	public readonly events: EventEmitter;
-	public readonly utils: AJSBuildToolsFileUtils;
+	public readonly utils: ArmorBTFileUtils;
 
 	constructor(events: EventEmitter) {
 		this.events = events;
-		this.utils = new AJSBuildToolsFileUtils();
+		this.utils = new ArmorBTFileUtils();
 	}
 
-	public getContents(path: string, options?: AJSBuildToolsFilesGetContentsOptions): Promise<string|Error> {
+	public getContents(path: string, options?: ArmorBTFilesGetContentsOptions): Promise<string | Error> {
 		return this.utils.getContents(path, options);
 	}
 
@@ -30,9 +30,9 @@ export class AJSBuildToolsFiles {
 	}
 
 	public cleanDir(path: string, force?: boolean): Promise<any> {
-		return new Promise(async(resolve, reject) => {
+		return new Promise(async (resolve, reject) => {
 			if (typeof path !== 'string') {
-				return reject(new Error('cleanFolder failed - path argument is not a valid string.'))
+				return reject(new Error('cleanFolder failed - path argument is not a valid string.'));
 			}
 
 			const cleanPath = path.trim();
@@ -42,7 +42,11 @@ export class AJSBuildToolsFiles {
 
 			if (!force) {
 				if (cleanPath === '.' || cleanPath === '/' || cleanPath === './' || cleanPath === '../') {
-					return reject(new Error(`cleanDir failed - '${cleanPath}' is a protected path. Set the 'force' argument true to override this safety.`))
+					return reject(
+						new Error(
+							`cleanDir failed - '${cleanPath}' is a protected path. Set the 'force' argument true to override this safety.`
+						)
+					);
 				}
 			}
 

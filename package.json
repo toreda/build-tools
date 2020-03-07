@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/armorjs/build-tools#readme",
   "devDependencies": {
+    "@types/node": "^13.9.0",
+    "@types/yargs": "^15.0.4",
     "fs-extra": "^8.1.0",
     "gulp": "^4.0.2",
     "gulp-tslint": "^8.1.4",

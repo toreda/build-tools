@@ -3,15 +3,15 @@ import * as path from 'path';
 
 import {dest, src} from 'gulp';
 
-import {AJSBuildToolsConfig} from './config';
+import {ArmorBTConfig} from './config';
 import {EventEmitter} from 'events';
 import gulpTsLint from 'gulp-tslint';
 import gulpTypescript from 'gulp-typescript';
 
-export class AJSBuildToolsGulp {
+export class ArmorBTGulp {
 	public readonly events: EventEmitter;
 
-	constructor(events: EventEmitter, config: AJSBuildToolsConfig) {
+	constructor(events: EventEmitter, config: ArmorBTConfig) {
 		this.events = events;
 	}
 

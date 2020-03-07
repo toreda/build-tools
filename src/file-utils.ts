@@ -2,8 +2,7 @@ import * as fs from 'fs-extra';
 
 import Path from 'path';
 
-export class AJSBuildToolsFileUtils {
-
+export class ArmorBTFileUtils {
 	public deleteDirRecursive(path: string): Promise<any> {
 		return new Promise((resolve, reject) => {
 			try {

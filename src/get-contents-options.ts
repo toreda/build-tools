@@ -1,3 +1,3 @@
-export interface AJSBuildToolsFilesGetContentsOptions {
+export interface ArmorBTFilesGetContentsOptions {
 	fileEncoding: string;
 }
