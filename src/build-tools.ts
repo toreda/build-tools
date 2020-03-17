@@ -17,7 +17,7 @@ export class ArmorBuildTools {
 
 	public parseArgs(): ArmorBTConfig {
 		if (!yargs) {
-			throw new Error(`Failed parsing args - could not find yargs npm package.`);
+			throw new Error('Failed parsing args - could not find yargs npm package.');
 		}
 
 		const argv = yargs.argv;

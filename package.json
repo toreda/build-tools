@@ -1,13 +1,13 @@
 {
   "name": "@armorjs/build-tools",
-  "version": "0.0.3",
+  "version": "0.0.9",
   "description": "",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "scripts": {
     "lint": "tslint --project .",
     "test": "jest --coverage",
-    "build": "yarn tsc"
+    "build": "yarn lint && yarn tsc"
   },
   "repository": {
     "type": "git",
@@ -19,15 +19,18 @@
     "url": "https://github.com/armorjs/build-tools/issues"
   },
   "homepage": "https://github.com/armorjs/build-tools#readme",
-  "devDependencies": {
+  "dependencies": {
     "@types/node": "^13.9.0",
     "@types/yargs": "^15.0.4",
     "fs-extra": "^8.1.0",
     "graceful-fs": "^4.2.3",
     "gulp": "^4.0.2",
+    "gulp-nunjucks-render": "^2.2.3",
     "gulp-tslint": "^8.1.4",
     "gulp-typescript": "^6.0.0-alpha.1",
     "tslint": "^6.0.0",
-    "typescript": "^3.8.3"
-  }
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.0"
+  },
+  "devDependencies": {}
 }
