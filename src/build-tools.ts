@@ -3,6 +3,10 @@ import * as yargs from 'yargs';
 import {ArmorBTConfig} from './config';
 import {ArmorBTGulp} from './gulp';
 import {EventEmitter} from 'events';
+import Path from 'path';
+
+// tslint:disable-next-line
+const webpack = require('webpack');
 
 export class ArmorBuildTools {
 	public readonly events: EventEmitter;
@@ -33,5 +37,33 @@ export class ArmorBuildTools {
 		}
 
 		return config;
+	}
+
+	public webpack(customPath?: string): Promise<any> {
+		const standardPath = this.config.env === 'dev' ? './webpack.dev.js' : './webpack.prod.js';
+		const configJsonPath = customPath ? customPath : standardPath;
+		const resolvedPath = Path.resolve(standardPath);
+
+		return new Promise((resolve, reject) => {
+			import(resolvedPath).then((webpackConfig) => {
+				console.log(' @@@@@@ config: ' + JSON.stringify(webpackConfig));
+				webpack(webpackConfig, (err, stats) => {
+					if (err) {
+						console.error(`webpack build failed: ${err.message}.`);
+						return reject(err);
+					}
+
+					if (stats.hasErrors()) {
+						console.error('webpack build error: ');
+						stats.compilation.errors.forEach((error) => {
+							console.error(error);
+						});
+						return reject(stats.compilation.errors.join('\n'));
+					}
+
+					resolve();
+				});
+			});
+		});
 	}
 }

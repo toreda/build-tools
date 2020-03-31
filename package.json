@@ -1,6 +1,6 @@
 {
   "name": "@armorjs/build-tools",
-  "version": "0.0.9",
+  "version": "0.0.18",
   "description": "",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -28,6 +28,7 @@
     "gulp-nunjucks-render": "^2.2.3",
     "gulp-tslint": "^8.1.4",
     "gulp-typescript": "^6.0.0-alpha.1",
+    "ts-loader": "^6.2.1",
     "tslint": "^6.0.0",
     "typescript": "^3.8.3",
     "webpack": "^4.42.0"
