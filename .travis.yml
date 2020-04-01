@@ -1,0 +1,19 @@
+language: node_js
+
+node_js:
+  - "12"
+
+addons:
+  sonarcloud:
+    organization: "armorjs"
+    token:
+      secure: ""
+install:
+  - npm install
+
+script:
+  - yarn test && yarn build && sonar-scanner
+
+cache:
+  directories:
+    - '$HOME/.sonar/cache'
