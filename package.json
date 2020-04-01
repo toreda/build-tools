@@ -1,41 +1,42 @@
 {
-  "name": "@armorjs/build-tools",
-  "version": "0.0.18",
-  "description": "",
-  "main": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
-  "scripts": {
-    "lint": "tslint --project .",
-    "test": "jest --coverage",
-    "build": "yarn lint && yarn tsc"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/armorjs/build-tools.git"
-  },
-  "author": "Michael Brich",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/armorjs/build-tools/issues"
-  },
-  "homepage": "https://github.com/armorjs/build-tools#readme",
-  "dependencies": {
-    "@types/jest": "^25.1.4",
-    "@types/node": "^13.9.8",
-    "@types/yargs": "^15.0.4",
-    "fs-extra": "^9.0.0",
-    "graceful-fs": "^4.2.3",
-    "gulp": "^4.0.2",
-    "gulp-nunjucks-render": "^2.2.3",
-    "gulp-tslint": "^8.1.4",
-    "gulp-typescript": "^6.0.0-alpha.1",
-    "jest": "^25.2.4",
-    "prettier": "^2.0.2",
-    "ts-jest": "^25.3.0",
-    "ts-loader": "^6.2.2",
-    "tslint": "^6.1.0",
-    "typescript": "^3.8.3",
-    "webpack": "^4.42.1"
-  },
-  "devDependencies": {}
+	"name": "@armorjs/build-tools",
+	"version": "0.0.18",
+	"description": "",
+	"main": "./dist/index.js",
+	"typings": "./dist/index.d.ts",
+	"scripts": {
+		"lint": "tslint --project .",
+		"test": "jest --coverage",
+		"build": "yarn lint && yarn tsc"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/armorjs/build-tools.git"
+	},
+	"author": "Michael Brich",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/armorjs/build-tools/issues"
+	},
+	"homepage": "https://github.com/armorjs/build-tools#readme",
+	"dependencies": {
+		"@types/jest": "^25.1.4",
+		"@types/node": "^13.9.8",
+		"@types/yargs": "^15.0.4",
+		"fs-extra": "^9.0.0",
+		"graceful-fs": "^4.2.3",
+		"gulp": "^4.0.2",
+		"gulp-nunjucks-render": "^2.2.3",
+		"gulp-tslint": "^8.1.4",
+		"gulp-typescript": "^6.0.0-alpha.1",
+		"jest": "^25.2.4",
+		"jest-sonar-reporter": "^2.0.0",
+		"prettier": "^2.0.2",
+		"ts-jest": "^25.3.0",
+		"ts-loader": "^6.2.2",
+		"tslint": "^6.1.0",
+		"typescript": "^3.8.3",
+		"webpack": "^4.42.1"
+	},
+	"devDependencies": {}
 }
