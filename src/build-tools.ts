@@ -1,41 +1,41 @@
 import * as yargs from 'yargs';
 
-import {ArmorBTClean} from './clean';
-import {ArmorBTConfig} from './config';
-import { ArmorBTCreate } from './create';
-import {ArmorBTFileUtils} from './file-utils';
-import {ArmorBTFilesGetContentsOptions} from './get-contents-options';
-import {ArmorBTGulp} from './gulp';
-import {ArmorBTRun} from './run';
+import {ArmorBuildClean} from './clean';
+import {ArmorBuildConfig} from './config';
+import {ArmorBuildCreate} from './create';
+import {ArmorBuildFileUtils} from './file-utils';
+import {ArmorBuildFilesGetContentsOptions} from './get-contents-options';
+import {ArmorBuildGulp} from './gulp';
+import {ArmorBuildRun} from './run';
 import {EventEmitter} from 'events';
 import Path from 'path';
 
-export class ArmorBuildTools {
+export class ArmorBuild {
 	public readonly events: EventEmitter;
-	public readonly gulp: ArmorBTGulp;
-	public readonly config: ArmorBTConfig;
-	public readonly run: ArmorBTRun;
-	public readonly clean: ArmorBTClean;
-	public readonly create: ArmorBTCreate;
+	public readonly gulp: ArmorBuildGulp;
+	public readonly config: ArmorBuildConfig;
+	public readonly run: ArmorBuildRun;
+	public readonly clean: ArmorBuildClean;
+	public readonly create: ArmorBuildCreate;
 
-	public readonly fileUtils: ArmorBTFileUtils;
+	public readonly fileUtils: ArmorBuildFileUtils;
 
 	constructor(events: EventEmitter) {
 		this.events = events;
 		this.config = this.parseArgs();
-		this.fileUtils = new ArmorBTFileUtils();
-		this.run = new ArmorBTRun(events, this.config);
-		this.clean = new ArmorBTClean(events, this.config);
-		this.create = new ArmorBTCreate(events, this.config);
+		this.fileUtils = new ArmorBuildFileUtils();
+		this.run = new ArmorBuildRun(events, this.config);
+		this.clean = new ArmorBuildClean(events, this.config);
+		this.create = new ArmorBuildCreate(events, this.config);
 	}
 
-	public parseArgs(): ArmorBTConfig {
+	public parseArgs(): ArmorBuildConfig {
 		if (!yargs) {
 			throw new Error('Failed parsing args - could not find yargs npm package.');
 		}
 
 		const argv = yargs.argv;
-		const config = new ArmorBTConfig();
+		const config = new ArmorBuildConfig();
 
 		if (typeof argv.env === 'string') {
 			const lowerEnv = argv.env.toLowerCase();
@@ -49,7 +49,7 @@ export class ArmorBuildTools {
 		return config;
 	}
 
-	public getContents(path: string, options?: ArmorBTFilesGetContentsOptions): Promise<string | Error> {
+	public getContents(path: string, options?: ArmorBuildFilesGetContentsOptions): Promise<string | Error> {
 		return this.fileUtils.getContents(path, options);
 	}
 }

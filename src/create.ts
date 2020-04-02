@@ -1,19 +1,19 @@
-import {ArmorBTConfig} from './config';
-import {ArmorBTFileUtils} from './file-utils';
-import {ArmorBTGulp} from './gulp';
+import {ArmorBuildConfig} from './config';
+import {ArmorBuildFileUtils} from './file-utils';
+import {ArmorBuildGulp} from './gulp';
 import {EventEmitter} from 'events';
 
-export class ArmorBTCreate {
+export class ArmorBuildCreate {
 	public readonly events: EventEmitter;
-	public readonly fileUtils: ArmorBTFileUtils;
-	public readonly config: ArmorBTConfig;
-	public readonly gulp: ArmorBTGulp;
+	public readonly fileUtils: ArmorBuildFileUtils;
+	public readonly config: ArmorBuildConfig;
+	public readonly gulp: ArmorBuildGulp;
 
-	constructor(events: EventEmitter, config: ArmorBTConfig) {
+	constructor(events: EventEmitter, config: ArmorBuildConfig) {
 		this.events = events;
-		this.fileUtils = new ArmorBTFileUtils();
+		this.fileUtils = new ArmorBuildFileUtils();
 		this.config = config;
-		this.gulp = new ArmorBTGulp(events, config);
+		this.gulp = new ArmorBuildGulp(events, config);
 	}
 
 	public dir(path: string, failIfExists?: boolean): Promise<any> {

@@ -3,7 +3,7 @@ import * as path from 'path';
 
 import {dest, src} from 'gulp';
 
-import {ArmorBTConfig} from './config';
+import {ArmorBuildConfig} from './config';
 import {EventEmitter} from 'events';
 import gulpTsLint from 'gulp-tslint';
 import gulpTypescript from 'gulp-typescript';
@@ -11,11 +11,11 @@ import gulpTypescript from 'gulp-typescript';
 // tslint:disable-next-line
 const nunjucksRender = require('gulp-nunjucks-render');
 
-export class ArmorBTGulp {
+export class ArmorBuildGulp {
 	public readonly events: EventEmitter;
-	public readonly config: ArmorBTConfig;
+	public readonly config: ArmorBuildConfig;
 
-	constructor(events: EventEmitter, config: ArmorBTConfig) {
+	constructor(events: EventEmitter, config: ArmorBuildConfig) {
 		if (!events) {
 			throw new Error('Armor Build Tools (Gulp) init failed - events constructor argument missing.');
 		}

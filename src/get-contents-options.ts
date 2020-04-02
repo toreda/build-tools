@@ -1,3 +1,3 @@
-export interface ArmorBTFilesGetContentsOptions {
+export interface ArmorBuildFilesGetContentsOptions {
 	fileEncoding: string;
 }

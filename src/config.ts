@@ -1,4 +1,4 @@
-export class ArmorBTConfig {
+export class ArmorBuildConfig {
 	public env: string;
 
 	constructor() {

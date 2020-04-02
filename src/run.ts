@@ -3,9 +3,9 @@ import * as sourcemaps from 'gulp-sourcemaps';
 
 import {dest, src} from 'gulp';
 
-import {ArmorBTConfig} from './config';
-import {ArmorBTFileUtils} from './file-utils';
-import {ArmorBTGulp} from './gulp';
+import {ArmorBuildConfig} from './config';
+import {ArmorBuildFileUtils} from './file-utils';
+import {ArmorBuildGulp} from './gulp';
 import {EventEmitter} from 'events';
 import Path from 'path';
 
@@ -14,17 +14,17 @@ const webpack = require('webpack');
 // tslint:disable-next-line
 const tsc = require('gulp-typescript');
 
-export class ArmorBTRun {
+export class ArmorBuildRun {
 	public readonly events: EventEmitter;
-	public readonly fileUtils: ArmorBTFileUtils;
-	public readonly config: ArmorBTConfig;
-	public readonly gulp: ArmorBTGulp;
+	public readonly fileUtils: ArmorBuildFileUtils;
+	public readonly config: ArmorBuildConfig;
+	public readonly gulp: ArmorBuildGulp;
 
-	constructor(events: EventEmitter, config: ArmorBTConfig) {
+	constructor(events: EventEmitter, config: ArmorBuildConfig) {
 		this.events = events;
-		this.fileUtils = new ArmorBTFileUtils();
+		this.fileUtils = new ArmorBuildFileUtils();
 		this.config = config;
-		this.gulp = new ArmorBTGulp(events, config);
+		this.gulp = new ArmorBuildGulp(events, config);
 	}
 
 	public webpack(customPath?: string): Promise<any> {
