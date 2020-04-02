@@ -1,22 +1,32 @@
 import * as yargs from 'yargs';
 
+import {ArmorBTClean} from './clean';
 import {ArmorBTConfig} from './config';
+import { ArmorBTCreate } from './create';
+import {ArmorBTFileUtils} from './file-utils';
+import {ArmorBTFilesGetContentsOptions} from './get-contents-options';
 import {ArmorBTGulp} from './gulp';
+import {ArmorBTRun} from './run';
 import {EventEmitter} from 'events';
 import Path from 'path';
-
-// tslint:disable-next-line
-const webpack = require('webpack');
 
 export class ArmorBuildTools {
 	public readonly events: EventEmitter;
 	public readonly gulp: ArmorBTGulp;
 	public readonly config: ArmorBTConfig;
+	public readonly run: ArmorBTRun;
+	public readonly clean: ArmorBTClean;
+	public readonly create: ArmorBTCreate;
+
+	public readonly fileUtils: ArmorBTFileUtils;
 
 	constructor(events: EventEmitter) {
 		this.events = events;
 		this.config = this.parseArgs();
-		this.gulp = new ArmorBTGulp(events, this.config);
+		this.fileUtils = new ArmorBTFileUtils();
+		this.run = new ArmorBTRun(events, this.config);
+		this.clean = new ArmorBTClean(events, this.config);
+		this.create = new ArmorBTCreate(events, this.config);
 	}
 
 	public parseArgs(): ArmorBTConfig {
@@ -39,31 +49,7 @@ export class ArmorBuildTools {
 		return config;
 	}
 
-	public webpack(customPath?: string): Promise<any> {
-		const standardPath = this.config.env === 'dev' ? './webpack.dev.js' : './webpack.prod.js';
-		const configJsonPath = customPath ? customPath : standardPath;
-		const resolvedPath = Path.resolve(standardPath);
-
-		return new Promise((resolve, reject) => {
-			import(resolvedPath).then((webpackConfig) => {
-				console.log(' @@@@@@ config: ' + JSON.stringify(webpackConfig));
-				webpack(webpackConfig, (err, stats) => {
-					if (err) {
-						console.error(`webpack build failed: ${err.message}.`);
-						return reject(err);
-					}
-
-					if (stats.hasErrors()) {
-						console.error('webpack build error: ');
-						stats.compilation.errors.forEach((error) => {
-							console.error(error);
-						});
-						return reject(stats.compilation.errors.join('\n'));
-					}
-
-					resolve();
-				});
-			});
-		});
+	public getContents(path: string, options?: ArmorBTFilesGetContentsOptions): Promise<string | Error> {
+		return this.fileUtils.getContents(path, options);
 	}
 }

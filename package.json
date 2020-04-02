@@ -5,8 +5,8 @@
 	"main": "./dist/index.js",
 	"typings": "./dist/index.d.ts",
 	"scripts": {
-		"lint": "tslint --project .",
-		"test": "jest --coverage",
+		"lint": "yarn tslint --project .",
+		"test": "yarn jest --coverage",
 		"build": "yarn lint && yarn tsc"
 	},
 	"repository": {
@@ -27,10 +27,12 @@
 		"graceful-fs": "^4.2.3",
 		"gulp": "^4.0.2",
 		"gulp-nunjucks-render": "^2.2.3",
+		"gulp-sourcemaps": "^2.6.5",
 		"gulp-tslint": "^8.1.4",
 		"gulp-typescript": "^6.0.0-alpha.1",
 		"jest": "^25.2.4",
 		"jest-sonar-reporter": "^2.0.0",
+		"merge-stream": "^2.0.0",
 		"prettier": "^2.0.2",
 		"ts-jest": "^25.3.0",
 		"ts-loader": "^6.2.2",

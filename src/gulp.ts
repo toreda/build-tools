@@ -11,7 +11,6 @@ import gulpTypescript from 'gulp-typescript';
 // tslint:disable-next-line
 const nunjucksRender = require('gulp-nunjucks-render');
 
-
 export class ArmorBTGulp {
 	public readonly events: EventEmitter;
 	public readonly config: ArmorBTConfig;
@@ -43,7 +42,7 @@ export class ArmorBTGulp {
 		return src(srcPattern).pipe(dest(destPath));
 	}
 
-	public tslint(tsConfigPath?: string) {
+	public tslint(tsConfigPath?: string): NodeJS.ReadWriteStream {
 		const configPath = typeof tsConfigPath === 'string' ? tsConfigPath : './tsconfig.json';
 		const project = gulpTypescript.createProject(configPath, {
 			declaration: true
