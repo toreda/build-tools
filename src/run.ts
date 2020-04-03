@@ -21,6 +21,14 @@ export class ArmorBuildRun {
 	public readonly gulp: ArmorBuildGulp;
 
 	constructor(events: EventEmitter, config: ArmorBuildConfig) {
+		if (!events) {
+			throw new Error('Armor Build (run) init failed - events argument missing in constructor.');
+		}
+
+		if (!config) {
+			throw new Error('Armor Build (run) init failed - config argument missing in constructor.');
+		}
+
 		this.events = events;
 		this.fileUtils = new ArmorBuildFileUtils();
 		this.config = config;
@@ -34,7 +42,6 @@ export class ArmorBuildRun {
 
 		return new Promise((resolve, reject) => {
 			import(resolvedPath).then((webpackConfig) => {
-				console.log(' @@@@@@ config: ' + JSON.stringify(webpackConfig));
 				webpack(webpackConfig, (err, stats) => {
 					if (err) {
 						console.error(`webpack build failed: ${err.message}.`);
