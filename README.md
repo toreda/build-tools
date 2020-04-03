@@ -1,7 +1,7 @@
 
 # ArmorJS - Build Tools
 
-[![Build Status](https://travis-ci.com/armorjs/build.svg?branch=master)](https://travis-ci.com/armorjs/build) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=armorjs_build&metric=coverage)](https://sonarcloud.io/dashboard?id=armorjs_build)
+[![Build Status](https://travis-ci.com/armorjs/build.svg?branch=master)](https://travis-ci.com/armorjs/build) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=armorjs_build-tools&metric=alert_status)](https://sonarcloud.io/dashboard?id=armorjs_build-tools) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=armorjs_build&metric=coverage)](https://sonarcloud.io/dashboard?id=armorjs_build)
 
 Helpers for commonly gulp build actions. Reduce code duplication and complexity in your gulpfiles across multiple projects.
 
