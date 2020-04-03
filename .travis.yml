@@ -12,7 +12,7 @@ addons:
     token:
       secure: ""
 install:
-  - npm install
+  - yarn install
 
 script:
   - yarn test && yarn build && sonar-scanner
