@@ -20,8 +20,8 @@
 	},
 	"homepage": "https://github.com/armorjs/build#readme",
 	"dependencies": {
-		"@types/jest": "^25.1.4",
-		"@types/node": "^13.9.8",
+		"@types/jest": "^25.1.5",
+		"@types/node": "^13.11.0",
 		"@types/yargs": "^15.0.4",
 		"fs-extra": "^9.0.0",
 		"graceful-fs": "^4.2.3",
@@ -34,14 +34,14 @@
 		"jest-sonar-reporter": "^2.0.0",
 		"merge-stream": "^2.0.0",
 		"prettier": "^2.0.2",
+		"sonar-scanner": "^3.1.0",
 		"ts-jest": "^25.3.0",
 		"ts-loader": "^6.2.2",
+		"ts-node": "^8.8.1",
+		"ts-register": "^0.1.0",
 		"tslint": "^6.1.0",
 		"typescript": "^3.8.3",
 		"webpack": "^4.42.1"
 	},
-	"devDependencies": {
-		"sonar-scanner": "^3.1.0",
-		"ts-node": "^8.8.1"
-	}
+	"devDependencies": {}
 }
