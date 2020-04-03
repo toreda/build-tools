@@ -1,4 +1,3 @@
-import * as mergeStream from 'merge-stream';
 import * as sourcemaps from 'gulp-sourcemaps';
 
 import {dest, src} from 'gulp';
@@ -13,6 +12,8 @@ import Path from 'path';
 const webpack = require('webpack');
 // tslint:disable-next-line
 const tsc = require('gulp-typescript');
+// tslint:disable-next-line
+const mergeStream = require('merge-stream');
 
 export class ArmorBuildRun {
 	public readonly events: EventEmitter;
@@ -67,7 +68,8 @@ export class ArmorBuildRun {
 	}
 
 	public typescript(destPath: string, tsConfigPath?: string): Promise<any> {
-		const tsConfig = tsConfigPath ? require(tsConfigPath) : require('./tsconfig.json');
+		const useConfigPath = tsConfigPath ? tsConfigPath : './tsconfig.json';
+		const tsConfig = require(Path.resolve(useConfigPath));
 		const filesGlob = tsConfig.filesGlob;
 		const tsResult = src(filesGlob).pipe(tsc(tsConfig.compilerOptions));
 		return mergeStream(tsResult, tsResult.js).pipe(sourcemaps.write('.')).pipe(dest('dist'));
