@@ -2,15 +2,15 @@ language: node_js
 
 node_js:
   - "12"
-os: [
-  "linux"
-],
-dist: "xenial",
+os:
+  - linux
+dist: 
+  - "xenial"
 addons:
   sonarcloud:
     organization: "armorjs"
     token:
-      secure: ""
+      secure: "aaaa"
 install:
   - yarn install
 
