@@ -1,6 +1,6 @@
 {
-	"name": "@armorjs/build-tools",
-	"version": "0.0.18",
+	"name": "@armorjs/build",
+	"version": "0.0.0",
 	"description": "",
 	"main": "./dist/index.js",
 	"typings": "./dist/index.d.ts",
@@ -11,14 +11,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/armorjs/build-tools.git"
+		"url": "git+https://github.com/armorjs/build.git"
 	},
 	"author": "Michael Brich",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/armorjs/build-tools/issues"
+		"url": "https://github.com/armorjs/build/issues"
 	},
-	"homepage": "https://github.com/armorjs/build-tools#readme",
+	"homepage": "https://github.com/armorjs/build#readme",
 	"dependencies": {
 		"@types/jest": "^25.1.4",
 		"@types/node": "^13.9.8",
