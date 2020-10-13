@@ -1,82 +1,95 @@
 
-# ArmorJS - Build
+# `@toreda/build-tools`
 
-![CI](https://github.com/armorjs/build/workflows/CI/badge.svg?branch=master) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=armorjs_build&metric=coverage)](https://sonarcloud.io/dashboard?id=armorjs_build) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=armorjs_build&metric=alert_status)](https://sonarcloud.io/dashboard?id=armorjs_build) 
+![CI](https://github.com/toreda/build-tools/workflows/CI/badge.svg?branch=master) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=toreda_build-tools&metric=coverage)](https://sonarcloud.io/dashboard?id=toreda_build-tools) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=toreda_build-tools&metric=alert_status)](https://sonarcloud.io/dashboard?id=toreda_build-tools)
 
-Helpers for commonly gulp build actions. Reduce code duplication and complexity in your gulpfiles across multiple projects.
+Helpers for common gulp build flows. Reduce complexity and code duplication in your gulpfile. Reduce redundancy and upkeep across multiple projects.
 
-## Contents
-- [About ArmorJS](#about-armorjs)
-- [Installation](#Installation)
-- [Usage](#usage)
-- [Build](#build)
-- [Testing](#testing)
-- [License](#license)
+# Contents
+* [**Usage**](#usage)
 
-## About ArmorJS
-ArmorJS solves unique challenges in the enterprise node ecosystem. Auditing projects for security, reliability, and even license compatibility are monumental tasks when a project includes thousands of frequently changing dependencies.
+* 	[**Package**](#Package)
+	-	[Install](#Install)
+	-	[Run Tests](#run-tests)
+	-	[Build](#build-from-source)
+	-   [License](#license)
 
-ArmorJS standards:
-* Full typescript support.
-* Consistent API between releases.
-* Extremely small footprint (for webpacking).
-* No more than 5 external dependencies (excluding dev dependencies).
-* Compatible with web, node, and serverless deployment.
-* Thorough test coverage.
-* MIT License.
+
+# Usage
+
+## Examples
+
+### `gulpfile.ts` for TypeScript library
+```typescript
+import { dest, parallel, series, src } from 'gulp';
+
+import { BuildTools } from '@toreda/build-tools';
+import { EventEmitter } from 'events';
+
+const build = new BuildTools(new EventEmitter());
+
+function runLint() {
+
+}
+
+function createDist() {
+	return build.create.dir('./dist', false);
+}
+
+function cleanDist() {
+	return build.clean.dir('./dist');
+}
+
+function buildSrc() {
+	return build.run.typescript('./dist', 'tsconfig.json');
+}
+
+exports.default = series(createDist, cleanDist, runLint, buildSrc);
+```
+
+
+# Package
 
 ## Install
+Install `@toreda/build-tools` directly from NPM.
 
-***With yarn (preferred):***
-```yarn add @armorjs/build```
-
-With NPM:
-```npm install @armorjs/build```
-
-## Usage
-
-### Library Usage
-
-#### Typescript
-```
-import { ArmorBuild } from '@armorjs/build';
+### Install with Yarn (preferred)
+```bash
+yarn add @toreda/build-tools --dev
 ```
 
-#### Node
-```
-const ArmorBuild = require('@armorjs/build');
-```
-
-## Build
-Build (or rebuild) the build package:
-
-***With Yarn (preferred):***
-```
-yarn install
-yarn build
+### Install using NPM
+```bash
+npm install build-tools --save-dev
 ```
 
-With NPM:
-```
-npm install
-npm run-script build
-```
 
-## Testing
+## Run Tests
+Install or clone `@toreda/adt` [(see above)](#install).
 
-This package uses jest for unit testing. Run the following commands from the directory where `@armorjs/build` has been installed.
+ADT unit tests use [Jest](https://jestjs.io/).
 
-***With yarn (preferred):***
-```
-yarn install
+Installing jest is not required after project dependencies are installed ([see above](#install)).
+```bash
 yarn test
 ```
 
-With NPM:
-```
-npm install
-npm run-script test
+# Build from source
+
+The next steps are the same whether you installed the package using NPM or cloned the repo from Github.
+
+### Build with Yarn
+ Enter the following commands in order from the adt project root.
+```bash
+yarn build
 ```
 
-## License
-[MIT](LICENSE) &copy; Michael Brich
+### Build with NPM
+ Enter the following commands in order from the adt project root.
+```bash
+npm run-script build
+```
+
+# License
+
+[MIT](LICENSE) &copy; Toreda, Inc.

@@ -2,9 +2,10 @@ import * as sourcemaps from 'gulp-sourcemaps';
 
 import {dest, src} from 'gulp';
 
-import {ArmorBuildConfig} from './config';
-import {ArmorBuildFileUtils} from './file-utils';
-import {ArmorBuildGulp} from './gulp';
+import {BuildFileUtils} from './file-utils';
+import {BuildGulp} from './gulp';
+import {BuildOptions} from './options';
+import {BuildState} from './state';
 import {EventEmitter} from 'events';
 import Path from 'path';
 
@@ -15,29 +16,30 @@ const tsc = require('gulp-typescript');
 // tslint:disable-next-line
 const mergeStream = require('merge-stream');
 
-export class ArmorBuildRun {
+export class BuildRun {
 	public readonly events: EventEmitter;
-	public readonly fileUtils: ArmorBuildFileUtils;
-	public readonly config: ArmorBuildConfig;
-	public readonly gulp: ArmorBuildGulp;
+	public readonly fileUtils: BuildFileUtils;
+	public readonly state: BuildState;
+	public readonly gulp: BuildGulp;
 
-	constructor(events: EventEmitter, config: ArmorBuildConfig) {
+	constructor(events: EventEmitter, state: BuildState) {
 		if (!events) {
-			throw new Error('Armor Build (run) init failed - events argument missing in constructor.');
+			throw new Error('BuildTools Run init failed - constructor arg missing.');
 		}
 
-		if (!config) {
-			throw new Error('Armor Build (run) init failed - config argument missing in constructor.');
+		if (!state) {
+			throw new Error('BuildTools Run init failed - state arg missing.');
 		}
 
+		this.fileUtils = new BuildFileUtils();
 		this.events = events;
-		this.fileUtils = new ArmorBuildFileUtils();
-		this.config = config;
-		this.gulp = new ArmorBuildGulp(events, config);
+		this.state = state;
+
+		this.gulp = new BuildGulp(events, this.state);
 	}
 
-	public webpack(customPath?: string): Promise<any> {
-		const standardPath = this.config.env === 'dev' ? './webpack.dev.js' : './webpack.prod.js';
+	public webpack(customPath?: string): Promise<NodeJS.ReadWriteStream> {
+		const standardPath = this.state.env() === 'dev' ? './webpack.dev.js' : './webpack.prod.js';
 		const configJsonPath = customPath ? customPath : standardPath;
 		const resolvedPath = Path.resolve(standardPath);
 
@@ -57,17 +59,13 @@ export class ArmorBuildRun {
 						return reject(stats.compilation.errors.join('\n'));
 					}
 
-					resolve();
+					resolve(src('.', {allowEmpty: true}));
 				});
 			});
 		});
 	}
 
-	public tslint(tsConfigPath?: string): NodeJS.ReadWriteStream {
-		return this.gulp.tslint(tsConfigPath);
-	}
-
-	public typescript(destPath: string, tsConfigPath?: string): Promise<any> {
+	public typescript(destPath: string, tsConfigPath?: string): Promise<NodeJS.ReadWriteStream> {
 		const useConfigPath = tsConfigPath ? tsConfigPath : './tsconfig.json';
 		const tsConfig = require(Path.resolve(useConfigPath));
 		const filesGlob = tsConfig.filesGlob;

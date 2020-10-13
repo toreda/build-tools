@@ -1,5 +1,5 @@
 export * from './build-tools';
-export * from './config';
+export * from './state';
 export * from './file-utils';
 export * from './gulp';
 export * from './inject';

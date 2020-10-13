@@ -1,19 +1,19 @@
-import {ArmorBuildConfig} from './config';
-import {ArmorBuildFileUtils} from './file-utils';
-import {ArmorBuildGulp} from './gulp';
+import {BuildFileUtils} from './file-utils';
+import {BuildGulp} from './gulp';
+import {BuildState} from './state';
 import {EventEmitter} from 'events';
 
-export class ArmorBuildCreate {
+export class BuildCreate {
 	public readonly events: EventEmitter;
-	public readonly fileUtils: ArmorBuildFileUtils;
-	public readonly config: ArmorBuildConfig;
-	public readonly gulp: ArmorBuildGulp;
+	public readonly fileUtils: BuildFileUtils;
+	public readonly state: BuildState;
+	public readonly gulp: BuildGulp;
 
-	constructor(events: EventEmitter, config: ArmorBuildConfig) {
+	constructor(events: EventEmitter, state: BuildState) {
 		this.events = events;
-		this.fileUtils = new ArmorBuildFileUtils();
-		this.config = config;
-		this.gulp = new ArmorBuildGulp(events, config);
+		this.fileUtils = new BuildFileUtils();
+		this.state = state;
+		this.gulp = new BuildGulp(events, state);
 	}
 
 	public dir(path: string, failIfExists?: boolean): Promise<any> {

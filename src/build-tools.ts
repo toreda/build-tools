@@ -1,55 +1,59 @@
 import * as yargs from 'yargs';
 
-import {ArmorBuildClean} from './clean';
-import {ArmorBuildConfig} from './config';
-import {ArmorBuildCreate} from './create';
-import {ArmorBuildFileUtils} from './file-utils';
-import {ArmorBuildFilesGetContentsOptions} from './get-contents-options';
-import {ArmorBuildGulp} from './gulp';
-import {ArmorBuildRun} from './run';
+import {BuildClean} from './clean';
+import {BuildCreate} from './create';
+import {BuildFileUtils} from './file-utils';
+import {BuildFilesGetContentsOptions} from './get-contents-options';
+import {BuildGulp} from './gulp';
+import {BuildRun} from './run';
+import {BuildState} from './state';
+import {BuildSteps} from './steps';
 import {EventEmitter} from 'events';
 import Path from 'path';
 
-export class ArmorBuild {
+export class BuildTools {
 	public readonly events: EventEmitter;
-	public readonly gulp: ArmorBuildGulp;
-	public readonly config: ArmorBuildConfig;
-	public readonly run: ArmorBuildRun;
-	public readonly clean: ArmorBuildClean;
-	public readonly create: ArmorBuildCreate;
+	public readonly gulp: BuildGulp;
+	public readonly state: BuildState;
+	public readonly run: BuildRun;
+	public readonly clean: BuildClean;
+	public readonly create: BuildCreate;
+	public readonly steps: BuildSteps;
 
-	public readonly fileUtils: ArmorBuildFileUtils;
+	public readonly fileUtils: BuildFileUtils;
 
-	constructor(events: EventEmitter) {
-		this.events = events;
-		this.config = this.parseArgs();
-		this.fileUtils = new ArmorBuildFileUtils();
-		this.run = new ArmorBuildRun(events, this.config);
-		this.clean = new ArmorBuildClean(events, this.config);
-		this.create = new ArmorBuildCreate(events, this.config);
+	constructor(events?: EventEmitter) {
+		this.events = events ? events : new EventEmitter();
+		const state = this.createState();
+		this.fileUtils = new BuildFileUtils();
+		this.run = new BuildRun(this.events, state);
+		this.clean = new BuildClean(this.events, state);
+		this.create = new BuildCreate(this.events, state);
+		this.state = state;
+		this.steps = new BuildSteps(this.gulp, this.run, this.create, this.clean);
 	}
 
-	public parseArgs(): ArmorBuildConfig {
+	public createState(): BuildState {
 		if (!yargs) {
 			throw new Error('Failed parsing args - could not find yargs npm package.');
 		}
 
 		const argv = yargs.argv;
-		const config = new ArmorBuildConfig();
+		const state = new BuildState();
 
 		if (typeof argv.env === 'string') {
 			const lowerEnv = argv.env.toLowerCase();
 			if (lowerEnv === 'dev' || lowerEnv === 'development') {
-				config.env = 'dev';
+				state.env('dev');
 			} else {
-				config.env = 'prod';
+				state.env('prod');
 			}
 		}
 
-		return config;
+		return state;
 	}
 
-	public getContents(path: string, options?: ArmorBuildFilesGetContentsOptions): Promise<string | Error> {
+	public getContents(path: string, options?: BuildFilesGetContentsOptions): Promise<string | Error> {
 		return this.fileUtils.getContents(path, options);
 	}
 }
