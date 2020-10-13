@@ -1,6 +1,6 @@
 {
 	"name": "@toreda/build-tools",
-	"version": "0.1.1",
+	"version": "0.1.3",
 	"description": "",
 	"public": true,
 	"main": "./dist/index.js",
@@ -31,8 +31,8 @@
 	},
 	"homepage": "https://github.com/toreda/build-tools#readme",
 	"dependencies": {
-		"@toreda/eslint-config": "^1.0.0",
-		"@toreda/prettier-config": "^1.0.0",
+		"@toreda/eslint-config": "^1.0.1",
+		"@toreda/prettier-config": "^1.0.1",
 		"@toreda/strong-types": "^0.9.0",
 		"@types/gulp": "^4.0.7",
 		"@types/jest": "^26.0.14",

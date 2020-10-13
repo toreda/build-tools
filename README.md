@@ -1,7 +1,10 @@
 
 # `@toreda/build-tools`
 
+![Toreda](https://content.toreda.com/logo/toreda-logo.png)
+
 ![CI](https://github.com/toreda/build-tools/workflows/CI/badge.svg?branch=master) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=toreda_build-tools&metric=coverage)](https://sonarcloud.io/dashboard?id=toreda_build-tools) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=toreda_build-tools&metric=alert_status)](https://sonarcloud.io/dashboard?id=toreda_build-tools)
+
 
 Helpers for common gulp build flows. Reduce complexity and code duplication in your gulpfile. Reduce redundancy and upkeep across multiple projects.
 

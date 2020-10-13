@@ -531,13 +531,13 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@toreda/eslint-config@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@toreda/eslint-config/-/eslint-config-1.0.0.tgz#2cd6a8378057acf6c30a726235de1ae778755085"
+"@toreda/eslint-config@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@toreda/eslint-config/-/eslint-config-1.0.1.tgz#92d4da0d40a4fe017765045d9572101e571c071a"
 
-"@toreda/prettier-config@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@toreda/prettier-config/-/prettier-config-1.0.0.tgz#f2707a7b19e7f29bca176e5a2beece27ee4ae4be"
+"@toreda/prettier-config@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@toreda/prettier-config/-/prettier-config-1.0.1.tgz#bd6c47352aa99560617f0f4a29f16ab7c3070b86"
 
 "@toreda/strong-types@^0.9.0":
   version "0.9.0"
