@@ -1,29 +1,29 @@
-import { ArmorBuildConfig } from '../src/config';
-import { ArmorBuildRun } from '../src/run';
-import { EventEmitter } from 'events';
+import {BuildRun} from '../src/run';
+import {EventEmitter} from 'events';
+import {BuildState} from '../src/state';
 
-describe("Run", () => {
-	let instance: ArmorBuildRun;
+describe('BuildRun', () => {
+	let instance: BuildRun;
 	let events: EventEmitter;
-	let config: ArmorBuildConfig;
+	let state: BuildState;
 
 	beforeAll(() => {
+		state = new BuildState();
 		events = new EventEmitter();
-		config = new ArmorBuildConfig();
-		instance = new ArmorBuildRun(events, config);
+		instance = new BuildRun(events, state);
 	});
 
-	describe("Constructor", () => {
-		it("should throw when events argument is missing", () => {
+	describe('Constructor', () => {
+		it('should throw when events argument is missing', () => {
 			expect(() => {
-				const customInstance = new ArmorBuildRun(undefined as any, config);
-			}).toThrow('Armor Build (run) init failed - events argument missing in constructor.');
+				const customInstance = new BuildRun(undefined as any, state);
+			}).toThrow('BuildRun init - events arg is missing.');
 		});
 
-		it("should throw when config argment is missing", () => {
+		it('should throw when state argment is missing', () => {
 			expect(() => {
-				const customInstance = new ArmorBuildRun(events, undefined as any);
-			}).toThrow('Armor Build (run) init failed - config argument missing in constructor.');
+				const customInstance = new BuildRun(events, undefined as any);
+			}).toThrow('BuildRun init - state arg is missing.');
 		});
 	});
 });

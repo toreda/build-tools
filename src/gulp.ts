@@ -1,15 +1,8 @@
-import * as fs from 'fs';
-
 import {dest, src} from 'gulp';
 
 import {BuildState} from './state';
 import {EventEmitter} from 'events';
-import Path from 'path';
-import gulpTypescript from 'gulp-typescript';
-
-import eslint = require('gulp-eslint');
-
-// tslint:disable-next-line
+const eslint = require('gulp-eslint');
 const nunjucksRender = require('gulp-nunjucks-render');
 
 export class BuildGulp {

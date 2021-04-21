@@ -30,6 +30,7 @@ export class BuildSteps {
 	public async lint(options: LintOptions): Promise<NodeJS.ReadWriteStream> {
 		const lintPath = options.path ? options.path : 'src/**';
 		this.build.eslint(lintPath);
+
 		return src('.', {allowEmpty: true});
 	}
 

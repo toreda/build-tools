@@ -1,4 +1,4 @@
-import * as yargs from 'yargs';
+import yargs from 'yargs';
 
 import {BuildClean} from './clean';
 import {BuildCreate} from './create';
@@ -9,7 +9,6 @@ import {BuildRun} from './run';
 import {BuildState} from './state';
 import {BuildSteps} from './steps';
 import {EventEmitter} from 'events';
-import Path from 'path';
 
 export class BuildTools {
 	public readonly events: EventEmitter;

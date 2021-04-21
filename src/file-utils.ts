@@ -1,11 +1,11 @@
-import * as fs from 'fs-extra';
+import fs from 'fs-extra';
 
 export class BuildFileUtils {
 	public deleteDirRecursive(path: string): Promise<any> {
 		return new Promise((resolve, reject) => {
 			try {
 				fs.remove(path, () => {
-					return resolve();
+					return resolve(true);
 				});
 			} catch (e) {
 				return reject(e);
@@ -18,7 +18,7 @@ export class BuildFileUtils {
 			options && typeof options.fileEncoding === 'string' ? options.fileEncoding : 'utf8';
 
 		return new Promise((resolve, reject) => {
-			fs.readFile(filePath, fileEncoding, (err, data) => {
+			fs.readFile(filePath, fileEncoding, (err, data: string) => {
 				if (err) {
 					return reject(
 						new Error(`Build failed to get file contents from '${filePath}' - ${err.message}.`)
@@ -46,13 +46,13 @@ export class BuildFileUtils {
 						)
 					);
 				} else {
-					return resolve();
+					return resolve(true);
 				}
 			}
 
 			fs.mkdirSync(path);
 
-			return resolve();
+			return resolve(true);
 		});
 	}
 }

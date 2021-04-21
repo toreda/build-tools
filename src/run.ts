@@ -1,18 +1,14 @@
-import * as sourcemaps from 'gulp-sourcemaps';
-
+import sourcemaps from 'gulp-sourcemaps';
+import tsc from 'gulp-typescript';
 import {dest, src} from 'gulp';
 
 import {BuildFileUtils} from './file-utils';
 import {BuildGulp} from './gulp';
-import {BuildOptions} from './options';
 import {BuildState} from './state';
 import {EventEmitter} from 'events';
 import Path from 'path';
+import webpack from 'webpack';
 
-// tslint:disable-next-line
-const webpack = require('webpack');
-// tslint:disable-next-line
-const tsc = require('gulp-typescript');
 // tslint:disable-next-line
 const mergeStream = require('merge-stream');
 
@@ -24,11 +20,11 @@ export class BuildRun {
 
 	constructor(events: EventEmitter, state: BuildState) {
 		if (!events) {
-			throw new Error('BuildTools Run init failed - constructor arg missing.');
+			throw new Error('BuildRun init - events arg is missing.');
 		}
 
 		if (!state) {
-			throw new Error('BuildTools Run init failed - state arg missing.');
+			throw new Error('BuildRun init - state arg is missing.');
 		}
 
 		this.fileUtils = new BuildFileUtils();
@@ -40,8 +36,8 @@ export class BuildRun {
 
 	public webpack(customPath?: string): Promise<NodeJS.ReadWriteStream> {
 		const standardPath = this.state.env() === 'dev' ? './webpack.dev.js' : './webpack.prod.js';
-		const configJsonPath = customPath ? customPath : standardPath;
-		const resolvedPath = Path.resolve(standardPath);
+		const configJsonPath = typeof customPath === 'string' ? customPath : standardPath;
+		const resolvedPath = Path.resolve(configJsonPath);
 
 		return new Promise((resolve, reject) => {
 			import(resolvedPath).then((webpackConfig) => {
@@ -49,6 +45,10 @@ export class BuildRun {
 					if (err) {
 						console.error(`webpack build failed: ${err.message}.`);
 						return reject(err);
+					}
+
+					if (!stats) {
+						throw new Error('weback build failure: no stats in build callback');
 					}
 
 					if (stats.hasErrors()) {

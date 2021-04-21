@@ -1,19 +1,10 @@
 {
-	"exclude": [
-		"node_modules",
-		"**/*.spec.ts",
-		"dist/**"
-	],
-	"include": [
-		"**/src/**/*.ts"
-	],
-	"filesGlob": [
-		"./src/**/*.ts",
-		"!./node_modules/**"
-	],
+	"exclude": ["node_modules", "**/*.spec.ts", "dist/**"],
+	"include": ["**/src/**/*.ts"],
+	"filesGlob": ["./src/**/*.ts", "!./node_modules/**"],
 
 	"compilerOptions": {
-		"preserveConstEnums": false,
+		"preserveConstEnums": true,
 		"module": "commonjs",
 		"esModuleInterop": true,
 		"moduleResolution": "node",
@@ -24,7 +15,7 @@
 		"declaration": true,
 		"sourceMap": true,
 		"outDir": "./dist",
-		"strict": false,
+		"strict": true,
 		"allowUnreachableCode": false,
 		"strictNullChecks": true,
 		"strictBindCallApply": true,

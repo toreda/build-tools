@@ -1,21 +1,21 @@
-import * as nunjucksRender from 'gulp-nunjucks-render';
+const nunjucksRender = require('gulp-nunjucks-render');
 
 import {dest, src} from 'gulp';
 
 import {BuildState} from './state';
 import {EventEmitter} from 'events';
 
-export class ArmorBuildInject {
+export class BuildInject {
 	public readonly events: EventEmitter;
 	public readonly state: BuildState;
 
 	constructor(events: EventEmitter, state: BuildState) {
 		if (!events) {
-			throw new Error('Armor Build (inject) init failed - events argument missing in constructor.');
+			throw new Error('BuildInject init failure - events argument missing in constructor.');
 		}
 
 		if (!state) {
-			throw new Error('Armor Build (inject) init failed - state argument missing in constructor.');
+			throw new Error('BuildInject init failure - state argument missing in constructor.');
 		}
 
 		this.events = events;

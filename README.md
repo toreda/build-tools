@@ -24,10 +24,10 @@ Helpers for common gulp build flows. Reduce complexity and code duplication in y
 
 ### `gulpfile.ts` for TypeScript library
 ```typescript
-import { dest, parallel, series, src } from 'gulp';
+import {dest, parallel, series, src} from 'gulp';
 
-import { BuildTools } from '@toreda/build-tools';
-import { EventEmitter } from 'events';
+import {BuildTools} from '@toreda/build-tools';
+import {EventEmitter} from 'events';
 
 const build = new BuildTools(new EventEmitter());
 
