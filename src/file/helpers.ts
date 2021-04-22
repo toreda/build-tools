@@ -1,6 +1,9 @@
 import fs from 'fs-extra';
 
-export class BuildFileUtils {
+/**
+ * @category Files
+ */
+export class FileHelpers {
 	public deleteDirRecursive(path: string): Promise<any> {
 		return new Promise((resolve, reject) => {
 			try {

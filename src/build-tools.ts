@@ -1,35 +1,35 @@
 import yargs from 'yargs';
 
-import {BuildClean} from './clean';
-import {BuildCreate} from './create';
-import {BuildFileUtils} from './file-utils';
-import {BuildFilesGetContentsOptions} from './get-contents-options';
-import {BuildGulp} from './gulp';
-import {BuildRun} from './run';
-import {BuildState} from './state';
-import {BuildSteps} from './steps';
+import {BuildCreate} from './build/create';
+import {BuildGulp} from './build/gulp';
+import {BuildRun} from './build/run';
+import {BuildState} from './build/state';
+import {BuildSteps} from './build/steps';
+import {Cleaner} from './cleaner';
 import {EventEmitter} from 'events';
+import {FileHelpers} from './file/helpers';
+import {FileOptions} from './file/options';
 
 export class BuildTools {
 	public readonly events: EventEmitter;
 	public readonly gulp: BuildGulp;
 	public readonly state: BuildState;
 	public readonly run: BuildRun;
-	public readonly clean: BuildClean;
+	public readonly cleaner: Cleaner;
 	public readonly create: BuildCreate;
 	public readonly steps: BuildSteps;
 
-	public readonly fileUtils: BuildFileUtils;
+	public readonly fileUtils: FileHelpers;
 
 	constructor(events?: EventEmitter) {
 		this.events = events ? events : new EventEmitter();
 		const state = this.createState();
-		this.fileUtils = new BuildFileUtils();
+		this.fileUtils = new FileHelpers();
 		this.run = new BuildRun(this.events, state);
-		this.clean = new BuildClean(this.events, state);
+		this.cleaner = new Cleaner(this.events, state);
 		this.create = new BuildCreate(this.events, state);
 		this.state = state;
-		this.steps = new BuildSteps(this.gulp, this.run, this.create, this.clean);
+		this.steps = new BuildSteps(this.gulp, this.run, this.create, this.cleaner);
 	}
 
 	public createState(): BuildState {
@@ -52,7 +52,7 @@ export class BuildTools {
 		return state;
 	}
 
-	public getContents(path: string, options?: BuildFilesGetContentsOptions): Promise<string | Error> {
+	public getContents(path: string, options?: FileOptions): Promise<string | Error> {
 		return this.fileUtils.getContents(path, options);
 	}
 }

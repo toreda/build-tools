@@ -1,6 +1,6 @@
-import {BuildFileUtils} from './file-utils';
-import {BuildGulp} from './gulp';
-import {BuildState} from './state';
+import {FileHelpers} from './file/helpers';
+import {BuildGulp} from './build/gulp';
+import {BuildState} from './build/state';
 import {EventEmitter} from 'events';
 
 /**
@@ -8,15 +8,15 @@ import {EventEmitter} from 'events';
  * directories in build output folder and intermediate
  * build folders.
  */
-export class BuildClean {
+export class Cleaner {
 	public readonly events: EventEmitter;
-	public readonly fileUtils: BuildFileUtils;
+	public readonly fileUtils: FileHelpers;
 	public readonly state: BuildState;
 	public readonly gulp: BuildGulp;
 
 	constructor(events: EventEmitter, state: BuildState) {
 		this.events = events;
-		this.fileUtils = new BuildFileUtils();
+		this.fileUtils = new FileHelpers();
 		this.state = state;
 		this.gulp = new BuildGulp(events, state);
 	}
@@ -28,7 +28,7 @@ export class BuildClean {
 	 * @param force
 	 * @returns
 	 */
-	public dir(path: string, force?: boolean): Promise<any> {
+	public dir(path: string, force?: boolean): Promise<boolean> {
 		return new Promise(async (resolve, reject) => {
 			if (typeof path !== 'string') {
 				return reject(new Error('cleanDir failure - path is not a valid string.'));
@@ -55,7 +55,7 @@ export class BuildClean {
 				return reject(e);
 			}
 
-			resolve(true);
+			return resolve(true);
 		});
 	}
 

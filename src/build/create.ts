@@ -1,17 +1,17 @@
-import {BuildFileUtils} from './file-utils';
+import {FileHelpers} from '../file/helpers';
 import {BuildGulp} from './gulp';
 import {BuildState} from './state';
 import {EventEmitter} from 'events';
 
 export class BuildCreate {
 	public readonly events: EventEmitter;
-	public readonly fileUtils: BuildFileUtils;
+	public readonly fileUtils: FileHelpers;
 	public readonly state: BuildState;
 	public readonly gulp: BuildGulp;
 
 	constructor(events: EventEmitter, state: BuildState) {
 		this.events = events;
-		this.fileUtils = new BuildFileUtils();
+		this.fileUtils = new FileHelpers();
 		this.state = state;
 		this.gulp = new BuildGulp(events, state);
 	}

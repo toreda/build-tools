@@ -2,7 +2,7 @@ import sourcemaps from 'gulp-sourcemaps';
 import tsc from 'gulp-typescript';
 import {dest, src} from 'gulp';
 
-import {BuildFileUtils} from './file-utils';
+import {FileHelpers} from '../file/helpers';
 import {BuildGulp} from './gulp';
 import {BuildState} from './state';
 import {EventEmitter} from 'events';
@@ -14,7 +14,7 @@ const mergeStream = require('merge-stream');
 
 export class BuildRun {
 	public readonly events: EventEmitter;
-	public readonly fileUtils: BuildFileUtils;
+	public readonly fileUtils: FileHelpers;
 	public readonly state: BuildState;
 	public readonly gulp: BuildGulp;
 
@@ -27,7 +27,7 @@ export class BuildRun {
 			throw new Error('BuildRun init - state arg is missing.');
 		}
 
-		this.fileUtils = new BuildFileUtils();
+		this.fileUtils = new FileHelpers();
 		this.events = events;
 		this.state = state;
 
