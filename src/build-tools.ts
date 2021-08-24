@@ -1,5 +1,3 @@
-import yargs from 'yargs';
-
 import {BuildCreate} from './build/create';
 import {BuildGulp} from './build/gulp';
 import {BuildRun} from './build/run';
@@ -9,6 +7,7 @@ import {Cleaner} from './cleaner';
 import {EventEmitter} from 'events';
 import {FileHelpers} from './file/helpers';
 import {FileOptions} from './file/options';
+import yargs from 'yargs';
 
 export class BuildTools {
 	public readonly events: EventEmitter;

@@ -1,12 +1,11 @@
-import {src} from 'gulp';
-
-import {Cleaner} from '../cleaner';
 import {BuildCreate} from './create';
 import {BuildGulp} from './gulp';
 import {BuildRun} from './run';
+import {Cleaner} from '../cleaner';
 import {LintOptions} from '../lint/options';
 import {TranspileOptions} from '../transpile/options';
 import {makeString} from '@toreda/strong-types';
+import {src} from 'gulp';
 
 export class BuildSteps {
 	private readonly build: BuildGulp;

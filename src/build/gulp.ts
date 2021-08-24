@@ -2,6 +2,7 @@ import {dest, src} from 'gulp';
 
 import {BuildState} from './state';
 import {EventEmitter} from 'events';
+
 const eslint = require('gulp-eslint');
 const nunjucksRender = require('gulp-nunjucks-render');
 

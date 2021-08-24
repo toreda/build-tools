@@ -1,15 +1,15 @@
 {
 	"exclude": ["node_modules", "**/*.spec.ts", "dist/**"],
-	"include": ["**/src/**/*.ts"],
-	"filesGlob": ["./src/**/*.ts", "!./node_modules/**"],
+	"include": ["./src/**.ts"],
+	"filesGlob": ["./src/**.ts", "!./node_modules/**"],
 
 	"compilerOptions": {
 		"preserveConstEnums": true,
-		"module": "commonjs",
+		"module": "es2015",
 		"esModuleInterop": true,
 		"moduleResolution": "node",
-		"target": "es6",
-		"lib": ["es6", "dom"],
+		"target": "es2015",
+		"lib": ["ES2015", "ES6", "DOM"],
 		"isolatedModules": false,
 		"removeComments": true,
 		"declaration": true,
@@ -23,5 +23,15 @@
 		"resolveJsonModule": true,
 		"alwaysStrict": false,
 		"noImplicitUseStrict": true
+	},
+	"ts-jest": {
+		"compilerOptions": {
+			"module": "commonjs"
+		}
+	},
+	"ts-node": {
+		"compilerOptions": {
+			"module": "commonjs"
+		}
 	}
 }

@@ -1,6 +1,6 @@
 import {BuildRun} from '../src/build/run';
-import {EventEmitter} from 'events';
 import {BuildState} from '../src/build/state';
+import {EventEmitter} from 'events';
 
 describe('BuildRun', () => {
 	let instance: BuildRun;

@@ -1,7 +1,7 @@
-import {FileHelpers} from './file/helpers';
 import {BuildGulp} from './build/gulp';
 import {BuildState} from './build/state';
 import {EventEmitter} from 'events';
+import {FileHelpers} from './file/helpers';
 
 /**
  * Helpers used to recursively clean files and

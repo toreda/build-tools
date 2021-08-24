@@ -1,7 +1,7 @@
-import {FileHelpers} from '../file/helpers';
 import {BuildGulp} from './gulp';
 import {BuildState} from './state';
 import {EventEmitter} from 'events';
+import {FileHelpers} from '../file/helpers';
 
 export class BuildCreate {
 	public readonly events: EventEmitter;
