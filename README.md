@@ -6,6 +6,7 @@
 ![CI](https://github.com/toreda/build-tools/workflows/CI/badge.svg?branch=master) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=toreda_build-tools&metric=coverage)](https://sonarcloud.io/dashboard?id=toreda_build-tools) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=toreda_build-tools&metric=alert_status)](https://sonarcloud.io/dashboard?id=toreda_build-tools)
 
 
+
 Helpers for common gulp build flows. Reduce complexity and code duplication in your gulpfile. Reduce redundancy and upkeep across multiple projects.
 
 # Contents
@@ -68,9 +69,9 @@ npm install build-tools --save-dev
 
 
 ## Run Tests
-Install or clone `@toreda/adt` [(see above)](#install).
+Install or clone `@toreda/build-tools` [(see above)](#install).
 
-ADT unit tests use [Jest](https://jestjs.io/).
+Our unit tests use [Jest](https://jestjs.io/).
 
 Installing jest is not required after project dependencies are installed ([see above](#install)).
 ```bash
@@ -82,13 +83,13 @@ yarn test
 The next steps are the same whether you installed the package using NPM or cloned the repo from Github.
 
 ### Build with Yarn
- Enter the following commands in order from the adt project root.
+ Enter the following commands in order from the build-tools project root.
 ```bash
 yarn build
 ```
 
 ### Build with NPM
- Enter the following commands in order from the adt project root.
+ Enter the following commands in order from the build-tools project root.
 ```bash
 npm run-script build
 ```

@@ -18,7 +18,7 @@ export class Cleaner {
 		this.events = events;
 		this.fileUtils = new FileHelpers();
 		this.state = state;
-		this.gulp = new BuildGulp(events, state);
+		this.gulp = new BuildGulp(state, events);
 	}
 
 	/**
@@ -65,7 +65,7 @@ export class Cleaner {
 	 * @param force
 	 * @returns
 	 */
-	public folder(path: string, force?: boolean): Promise<any> {
+	public folder(path: string, force?: boolean): Promise<boolean> {
 		return this.dir(path, force);
 	}
 }

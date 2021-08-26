@@ -27,7 +27,7 @@ export class BuildInject {
 		templatePath: string,
 		srcPattern: string,
 		dstPath: string
-	): Promise<any> {
+	): Promise<NodeJS.ReadWriteStream> {
 		return src(srcPattern)
 			.pipe(
 				nunjucksRender({

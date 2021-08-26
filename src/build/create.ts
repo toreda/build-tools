@@ -3,6 +3,9 @@ import {BuildState} from './state';
 import {EventEmitter} from 'events';
 import {FileHelpers} from '../file/helpers';
 
+/**
+ * Helpers to create files and folders during build process.
+ */
 export class BuildCreate {
 	public readonly events: EventEmitter;
 	public readonly fileUtils: FileHelpers;
@@ -13,16 +16,26 @@ export class BuildCreate {
 		this.events = events;
 		this.fileUtils = new FileHelpers();
 		this.state = state;
-		this.gulp = new BuildGulp(events, state);
+		this.gulp = new BuildGulp(state, events);
 	}
 
-	public dir(path: string, failIfExists?: boolean): Promise<any> {
-		const shouldFailIfExists = !!failIfExists;
-		return this.fileUtils.createDir(path, shouldFailIfExists);
+	/**
+	 * Create dir at target path. Fails by default when a file or dir already exists.
+	 * @param path
+	 * @param overwriteExisting
+	 * @returns
+	 */
+	public dir(path: string, overwriteExisting?: boolean): Promise<boolean> {
+		return this.fileUtils.createDir(path, overwriteExisting);
 	}
 
-	public folder(path: string, failIfExists?: boolean): Promise<any> {
-		const shouldFailIfExists = !!failIfExists;
-		return this.dir(path, shouldFailIfExists);
+	/**
+	 * Alias for dir
+	 * @param path				Path where dir will be created.
+	 * @param overwriteExisting
+	 * @returns
+	 */
+	public folder(path: string, overwriteExisting?: boolean): Promise<boolean> {
+		return this.dir(path, overwriteExisting);
 	}
 }

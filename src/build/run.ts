@@ -31,7 +31,7 @@ export class BuildRun {
 		this.events = events;
 		this.state = state;
 
-		this.gulp = new BuildGulp(events, this.state);
+		this.gulp = new BuildGulp(this.state, events);
 	}
 
 	public webpack(customPath?: string): Promise<NodeJS.ReadWriteStream> {
