@@ -1,10 +1,11 @@
+import {FileOptions} from './options';
 import fs from 'fs-extra';
 
 /**
  * @category Files
  */
 export class FileHelpers {
-	public deleteDirRecursive(path: string): Promise<any> {
+	public deleteDirRecursive(path: string): Promise<boolean | Error> {
 		return new Promise((resolve, reject) => {
 			try {
 				fs.remove(path, () => {
@@ -16,7 +17,13 @@ export class FileHelpers {
 		});
 	}
 
-	public getContents(filePath: string, options: any): Promise<any> {
+	/**
+	 * Get contents of file at target filePath as a string.
+	 * @param filePath
+	 * @param options
+	 * @returns
+	 */
+	public getContents(filePath: string, options?: FileOptions): Promise<string | null> {
 		const fileEncoding =
 			options && typeof options.fileEncoding === 'string' ? options.fileEncoding : 'utf8';
 
@@ -28,12 +35,16 @@ export class FileHelpers {
 					);
 				}
 
+				if (typeof data !== 'string') {
+					return resolve(null);
+				}
+
 				resolve(data);
 			});
 		});
 	}
 
-	public createDir(path: string, failIfExists: boolean): Promise<any> {
+	public createDir(path: string, overwriteExisting?: boolean): Promise<boolean> {
 		return new Promise((resolve, reject) => {
 			if (typeof path !== 'string') {
 				reject(
@@ -42,7 +53,7 @@ export class FileHelpers {
 			}
 
 			if (fs.existsSync(path)) {
-				if (failIfExists) {
+				if (overwriteExisting === true) {
 					return reject(
 						new Error(
 							'createFolder failed during build - folder exists at path and failIfExists is true.'

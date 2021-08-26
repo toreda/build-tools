@@ -1,13 +1,13 @@
-import {BuildCreate} from './create';
-import {BuildGulp} from './gulp';
-import {BuildRun} from './run';
+import {BuildCreate} from '../build/create';
+import {BuildGulp} from '../build/gulp';
+import {BuildRun} from '../build/run';
 import {Cleaner} from '../cleaner';
 import {LintOptions} from '../lint/options';
 import {TranspileOptions} from '../transpile/options';
 import {makeString} from '@toreda/strong-types';
 import {src} from 'gulp';
 
-export class BuildSteps {
+export class GulpSteps {
 	private readonly build: BuildGulp;
 	public readonly buildRun: BuildRun;
 	public readonly buildCreate: BuildCreate;
@@ -20,8 +20,13 @@ export class BuildSteps {
 		this.cleaner = cleaner;
 	}
 
+	/**
+	 * Run preconfigured webpack build step.
+	 * @returns
+	 */
 	public async webpack(): Promise<NodeJS.ReadWriteStream> {
 		await this.buildRun.webpack();
+
 		return src('.', {allowEmpty: true});
 	}
 
@@ -67,8 +72,8 @@ export class BuildSteps {
 	}
 
 	public async transpile(options: TranspileOptions): Promise<NodeJS.ReadWriteStream> {
-		const tsConfigDir = makeString(options.configDir, './dist');
-		const tsConfigFilname = makeString(options.configFilename, 'tsconfig.json');
+		const tsConfigDir = makeString('./dist', options.tsConfigDirPath);
+		const tsConfigFilname = makeString('tsconfig.json', options.tsConfigFilePath);
 
 		return await this.buildRun.typescript(tsConfigDir(), tsConfigFilname());
 	}

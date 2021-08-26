@@ -5,11 +5,11 @@
 
 	"compilerOptions": {
 		"preserveConstEnums": true,
-		"module": "es2015",
+		"module": "commonjs",
 		"esModuleInterop": true,
 		"moduleResolution": "node",
-		"target": "es2015",
-		"lib": ["ES2015", "ES6", "DOM"],
+		"target": "es6",
+		"lib": ["ES6", "DOM"],
 		"isolatedModules": false,
 		"removeComments": true,
 		"declaration": true,
@@ -23,15 +23,5 @@
 		"resolveJsonModule": true,
 		"alwaysStrict": false,
 		"noImplicitUseStrict": true
-	},
-	"ts-jest": {
-		"compilerOptions": {
-			"module": "commonjs"
-		}
-	},
-	"ts-node": {
-		"compilerOptions": {
-			"module": "commonjs"
-		}
 	}
 }

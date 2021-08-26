@@ -4,7 +4,7 @@ export {BuildInject} from './build/inject';
 export {BuildOptions} from './build/options';
 export {BuildRun} from './build/run';
 export {BuildState} from './build/state';
-export {BuildSteps} from './build/steps';
+export {GulpSteps} from './gulp/steps';
 export {BuildTools} from './build-tools';
 export {Cleaner} from './cleaner';
 export {FileHelpers} from './file/helpers';

@@ -10,13 +10,13 @@ export class BuildGulp {
 	public readonly events: EventEmitter;
 	public readonly state: BuildState;
 
-	constructor(events: EventEmitter, state: BuildState) {
-		if (!events) {
-			throw new Error('Armor Build Tools (Gulp) init failed - events constructor argument missing.');
+	constructor(state: BuildState, events: EventEmitter) {
+		if (!state) {
+			throw new Error('BuildGulp init - state constructor argument missing.');
 		}
 
-		if (!state) {
-			throw new Error('Armor Build Tools (Gulp) init failed - state constructor argument missing.');
+		if (!events) {
+			throw new Error('BuildGulp init - events constructor argument missing.');
 		}
 
 		this.events = events;
@@ -37,6 +37,12 @@ export class BuildGulp {
 			.pipe(dest(destPath));
 	}
 
+	/**
+	 * Recursively copy src dir contents matching regex pattern to target dest dir.
+	 * @param srcPattern		Regex pattern matching designed src files.
+	 * @param destPath			Target dir where contents are copied to.
+	 * @returns
+	 */
 	public copyContents(srcPattern: string, destPath: string): NodeJS.ReadWriteStream {
 		return src(srcPattern).pipe(dest(destPath));
 	}
