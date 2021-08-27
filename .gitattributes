@@ -9,6 +9,7 @@
 # Use lf as eol for these files
 .editorconfig   text    eol=lf
 .gitignore      text    eol=lf
+.npmignore		text	eol=lf
 .gitattributes 	text	eol=lf
 *.css           text    eol=lf
 *.df            text    eol=lf
