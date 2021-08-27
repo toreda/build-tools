@@ -1,14 +1,13 @@
 import {StrongMap, StrongString, makeString} from '@toreda/strong-types';
 
-import {BuildOptions} from './options';
+import {BuildOptions} from './build/options';
 
-export class BuildState extends StrongMap {
-	public env: StrongString;
+export class Config extends StrongMap {
+	public readonly env: StrongString;
 
 	constructor(options?: BuildOptions) {
 		super();
-
-		this.env = makeString('dev', 'dev');
+		this.env = makeString('dev');
 
 		this.parse(options);
 	}

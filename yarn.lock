@@ -744,6 +744,13 @@
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@toreda/eslint-config/-/eslint-config-2.2.0.tgz#ee3e0bb8d2263461ea214e04c728f498f2b09278"
 
+"@toreda/log@^0.5.4":
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/@toreda/log/-/log-0.5.4.tgz#d0d874ebaada35d73ec40252da5b663b98c06a89"
+  dependencies:
+    "@toreda/strong-types" "^0.11.2"
+    "@toreda/types" "^0.0.3"
+
 "@toreda/prettier-config@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@toreda/prettier-config/-/prettier-config-1.0.1.tgz#bd6c47352aa99560617f0f4a29f16ab7c3070b86"
@@ -918,6 +925,12 @@
 "@types/minimatch@*":
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.5.tgz#1001cc5e6a3704b83c236027e77f2f58ea010f40"
+
+"@types/mock-fs@^4.13.1":
+  version "4.13.1"
+  resolved "https://registry.yarnpkg.com/@types/mock-fs/-/mock-fs-4.13.1.tgz#9201554ceb23671badbfa8ac3f1fa9e0706305be"
+  dependencies:
+    "@types/node" "*"
 
 "@types/node@*", "@types/node@^16.7.1":
   version "16.7.1"
@@ -4627,6 +4640,10 @@ mkdirp@^0.5.1:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.5.tgz#d91cefd62d1436ca0f41620e251288d420099def"
   dependencies:
     minimist "^1.2.5"
+
+mock-fs@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/mock-fs/-/mock-fs-5.0.0.tgz#5574520ac824c01a10091bf951c66f677c71acaa"
 
 ms@2.0.0:
   version "2.0.0"

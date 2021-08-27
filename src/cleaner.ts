@@ -1,7 +1,8 @@
 import {BuildGulp} from './build/gulp';
-import {BuildState} from './build/state';
+import {Config} from './config';
 import {EventEmitter} from 'events';
 import {FileHelpers} from './file/helpers';
+import {Log} from '@toreda/log';
 
 /**
  * Helpers used to recursively clean files and
@@ -11,14 +12,16 @@ import {FileHelpers} from './file/helpers';
 export class Cleaner {
 	public readonly events: EventEmitter;
 	public readonly fileUtils: FileHelpers;
-	public readonly state: BuildState;
+	public readonly cfg: Config;
 	public readonly gulp: BuildGulp;
+	public readonly log: Log;
 
-	constructor(events: EventEmitter, state: BuildState) {
+	constructor(cfg: Config, events: EventEmitter, log: Log) {
 		this.events = events;
-		this.fileUtils = new FileHelpers();
-		this.state = state;
-		this.gulp = new BuildGulp(state, events);
+		this.fileUtils = new FileHelpers(log);
+		this.cfg = cfg;
+		this.log = log.makeLog('Cleaner');
+		this.gulp = new BuildGulp(cfg, events);
 	}
 
 	/**

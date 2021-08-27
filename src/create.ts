@@ -1,28 +1,30 @@
-import {BuildGulp} from './gulp';
-import {BuildState} from './state';
+import {BuildGulp} from './build/gulp';
+import {Config} from './config';
 import {EventEmitter} from 'events';
-import {FileHelpers} from '../file/helpers';
+import {FileHelpers} from './file/helpers';
+import {Log} from '@toreda/log';
 
 /**
- * Helpers to create files and folders during build process.
+ * Create files and folders during build.
  */
-export class BuildCreate {
+export class Create {
 	public readonly events: EventEmitter;
 	public readonly fileUtils: FileHelpers;
-	public readonly state: BuildState;
+	public readonly cfg: Config;
 	public readonly gulp: BuildGulp;
+	public readonly log: Log;
 
-	constructor(events: EventEmitter, state: BuildState) {
+	constructor(cfg: Config, events: EventEmitter, log: Log) {
 		this.events = events;
-		this.fileUtils = new FileHelpers();
-		this.state = state;
-		this.gulp = new BuildGulp(state, events);
+		this.fileUtils = new FileHelpers(log);
+		this.cfg = cfg;
+		this.gulp = new BuildGulp(cfg, events);
 	}
 
 	/**
 	 * Create dir at target path. Fails by default when a file or dir already exists.
-	 * @param path
-	 * @param overwriteExisting
+	 * @param path					Creates dir at this path.
+	 * @param overwriteExisting		Fails when
 	 * @returns
 	 */
 	public dir(path: string, overwriteExisting?: boolean): Promise<boolean> {
@@ -31,7 +33,7 @@ export class BuildCreate {
 
 	/**
 	 * Alias for dir
-	 * @param path				Path where dir will be created.
+	 * @param path					Creates dir at this path.
 	 * @param overwriteExisting
 	 * @returns
 	 */

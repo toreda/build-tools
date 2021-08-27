@@ -1,9 +1,10 @@
 import {dest, src} from 'gulp';
 
-import {BuildGulp} from './gulp';
-import {BuildState} from './state';
+import {BuildGulp} from './build/gulp';
+import {Config} from './config';
 import {EventEmitter} from 'events';
-import {FileHelpers} from '../file/helpers';
+import {FileHelpers} from './file/helpers';
+import {Log} from '@toreda/log';
 import Path from 'path';
 import sourcemaps from 'gulp-sourcemaps';
 import tsc from 'gulp-typescript';
@@ -12,30 +13,32 @@ import webpack from 'webpack';
 // tslint:disable-next-line
 const mergeStream = require('merge-stream');
 
-export class BuildRun {
+export class Run {
 	public readonly events: EventEmitter;
 	public readonly fileUtils: FileHelpers;
-	public readonly state: BuildState;
+	public readonly cfg: Config;
 	public readonly gulp: BuildGulp;
+	public readonly log: Log;
 
-	constructor(events: EventEmitter, state: BuildState) {
+	constructor(cfg: Config, events: EventEmitter, log: Log) {
+		if (!cfg) {
+			throw new Error('Run init - cfg arg missing.');
+		}
+
 		if (!events) {
-			throw new Error('BuildRun init - events arg is missing.');
+			throw new Error('Run init - events arg missing.');
 		}
 
-		if (!state) {
-			throw new Error('BuildRun init - state arg is missing.');
-		}
-
-		this.fileUtils = new FileHelpers();
+		this.log = log.makeLog('Run');
+		this.fileUtils = new FileHelpers(this.log);
 		this.events = events;
-		this.state = state;
+		this.cfg = cfg;
 
-		this.gulp = new BuildGulp(this.state, events);
+		this.gulp = new BuildGulp(cfg, events);
 	}
 
 	public webpack(customPath?: string): Promise<NodeJS.ReadWriteStream> {
-		const standardPath = this.state.env() === 'dev' ? './webpack.dev.js' : './webpack.prod.js';
+		const standardPath = this.cfg.env() === 'dev' ? './webpack.dev.js' : './webpack.prod.js';
 		const configJsonPath = typeof customPath === 'string' ? customPath : standardPath;
 		const resolvedPath = Path.resolve(configJsonPath);
 

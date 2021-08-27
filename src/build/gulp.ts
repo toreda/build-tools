@@ -1,6 +1,6 @@
 import {dest, src} from 'gulp';
 
-import {BuildState} from './state';
+import {Config} from '../config';
 import {EventEmitter} from 'events';
 
 const eslint = require('gulp-eslint');
@@ -8,11 +8,11 @@ const nunjucksRender = require('gulp-nunjucks-render');
 
 export class BuildGulp {
 	public readonly events: EventEmitter;
-	public readonly state: BuildState;
+	public readonly cfg: Config;
 
-	constructor(state: BuildState, events: EventEmitter) {
-		if (!state) {
-			throw new Error('BuildGulp init - state constructor argument missing.');
+	constructor(cfg: Config, events: EventEmitter) {
+		if (!cfg) {
+			throw new Error('BuildGulp init - cfg constructor argument missing.');
 		}
 
 		if (!events) {
@@ -20,7 +20,7 @@ export class BuildGulp {
 		}
 
 		this.events = events;
-		this.state = state;
+		this.cfg = cfg;
 	}
 
 	public renderNunjucksHtml(

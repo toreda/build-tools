@@ -1,29 +1,39 @@
-import {BuildRun} from '../src/build/run';
-import {BuildState} from '../src/build/state';
+import {Config} from '../src/config';
 import {EventEmitter} from 'events';
+import {Log} from '@toreda/log';
+import {Run} from '../src/run';
 
-describe('BuildRun', () => {
-	let instance: BuildRun;
+describe('Run', () => {
+	let instance: Run;
 	let events: EventEmitter;
-	let state: BuildState;
+	let cfg: Config;
+	let log: Log;
 
 	beforeAll(() => {
-		state = new BuildState();
+		log = new Log();
+		cfg = new Config();
 		events = new EventEmitter();
-		instance = new BuildRun(events, state);
+		instance = new Run(cfg, events, log);
 	});
 
 	describe('Constructor', () => {
-		it('should throw when events argument is missing', () => {
-			expect(() => {
-				const customInstance = new BuildRun(undefined as any, state);
-			}).toThrow('BuildRun init - events arg is missing.');
+		let constructorObj: Run;
+		beforeAll(() => {
+			constructorObj = new Run(cfg, events, log);
 		});
 
-		it('should throw when state argment is missing', () => {
+		it('should throw when cfg argument is undefined', () => {
 			expect(() => {
-				const customInstance = new BuildRun(events, undefined as any);
-			}).toThrow('BuildRun init - state arg is missing.');
+				const custom = new Run(undefined as any, events, log);
+			}).toThrow('Run init - cfg arg missing.');
 		});
+
+		it('should throw when cfg argment is missing', () => {
+			expect(() => {
+				const custom = new Run(undefined as any, events, log);
+			}).toThrow('Run init - cfg arg missing.');
+		});
+
+		it(`should initialize fileUtils property`, () => {});
 	});
 });

@@ -2,24 +2,24 @@ const nunjucksRender = require('gulp-nunjucks-render');
 
 import {dest, src} from 'gulp';
 
-import {BuildState} from './state';
+import {Config} from './config';
 import {EventEmitter} from 'events';
 
-export class BuildInject {
+export class Inject {
 	public readonly events: EventEmitter;
-	public readonly state: BuildState;
+	public readonly cfg: Config;
 
-	constructor(events: EventEmitter, state: BuildState) {
+	constructor(cfg: Config, events: EventEmitter) {
 		if (!events) {
-			throw new Error('BuildInject init failure - events argument missing in constructor.');
+			throw new Error('Inject init - events arg missing.');
 		}
 
-		if (!state) {
-			throw new Error('BuildInject init failure - state argument missing in constructor.');
+		if (!cfg) {
+			throw new Error('Inject init - cfg arg missing.');
 		}
 
 		this.events = events;
-		this.state = state;
+		this.cfg = cfg;
 	}
 
 	public async content(

@@ -1,22 +1,22 @@
-import {BuildCreate} from '../build/create';
 import {BuildGulp} from '../build/gulp';
-import {BuildRun} from '../build/run';
 import {Cleaner} from '../cleaner';
+import {Create} from '../create';
 import {LintOptions} from '../lint/options';
+import {Run} from '../run';
 import {TranspileOptions} from '../transpile/options';
 import {makeString} from '@toreda/strong-types';
 import {src} from 'gulp';
 
 export class GulpSteps {
 	private readonly build: BuildGulp;
-	public readonly buildRun: BuildRun;
-	public readonly buildCreate: BuildCreate;
+	public readonly run: Run;
+	public readonly create: Create;
 	public readonly cleaner: Cleaner;
 
-	constructor(build: BuildGulp, run: BuildRun, create: BuildCreate, cleaner: Cleaner) {
+	constructor(build: BuildGulp, run: Run, create: Create, cleaner: Cleaner) {
 		this.build = build;
-		this.buildRun = run;
-		this.buildCreate = create;
+		this.run = run;
+		this.create = create;
 		this.cleaner = cleaner;
 	}
 
@@ -25,7 +25,7 @@ export class GulpSteps {
 	 * @returns
 	 */
 	public async webpack(): Promise<NodeJS.ReadWriteStream> {
-		await this.buildRun.webpack();
+		await this.run.webpack();
 
 		return src('.', {allowEmpty: true});
 	}
@@ -45,7 +45,7 @@ export class GulpSteps {
 		}
 
 		for (const target of targetPaths) {
-			await this.buildCreate.dir(target);
+			await this.create.dir(target);
 		}
 
 		return src('.', {allowEmpty: true});
@@ -75,6 +75,6 @@ export class GulpSteps {
 		const tsConfigDir = makeString('./dist', options.tsConfigDirPath);
 		const tsConfigFilname = makeString('tsconfig.json', options.tsConfigFilePath);
 
-		return await this.buildRun.typescript(tsConfigDir(), tsConfigFilname());
+		return await this.run.typescript(tsConfigDir(), tsConfigFilname());
 	}
 }

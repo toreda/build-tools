@@ -1,14 +1,22 @@
+import {existsSync, mkdirSync, readFile, remove} from 'fs-extra';
+
 import {FileOptions} from './options';
-import fs from 'fs-extra';
+import {Log} from '@toreda/log';
 
 /**
  * @category Files
  */
 export class FileHelpers {
+	public readonly log: Log;
+
+	constructor(log: Log) {
+		this.log = log.makeLog('FileHelpers');
+	}
+
 	public deleteDirRecursive(path: string): Promise<boolean | Error> {
 		return new Promise((resolve, reject) => {
 			try {
-				fs.remove(path, () => {
+				remove(path, () => {
 					return resolve(true);
 				});
 			} catch (e) {
@@ -28,7 +36,7 @@ export class FileHelpers {
 			options && typeof options.fileEncoding === 'string' ? options.fileEncoding : 'utf8';
 
 		return new Promise((resolve, reject) => {
-			fs.readFile(filePath, fileEncoding, (err, data: string) => {
+			readFile(filePath, fileEncoding, (err, data: string) => {
 				if (err) {
 					return reject(
 						new Error(`Build failed to get file contents from '${filePath}' - ${err.message}.`)
@@ -52,7 +60,7 @@ export class FileHelpers {
 				);
 			}
 
-			if (fs.existsSync(path)) {
+			if (existsSync(path)) {
 				if (overwriteExisting === true) {
 					return reject(
 						new Error(
@@ -64,7 +72,7 @@ export class FileHelpers {
 				}
 			}
 
-			fs.mkdirSync(path);
+			mkdirSync(path);
 
 			return resolve(true);
 		});
