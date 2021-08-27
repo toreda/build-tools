@@ -9,6 +9,7 @@
 # Use lf as eol for these files
 .editorconfig   text    eol=lf
 .gitignore      text    eol=lf
+.gitattributes 	text	eol=lf
 *.css           text    eol=lf
 *.df            text    eol=lf
 *.htm           text    eol=lf
@@ -33,6 +34,8 @@ LICENSE			text	eol=lf
 README			text	eol=lf
 SECURITY		text	eol=lf
 *.md			text	eol=lf
+yarn.lock		text	eol=lf
+npm.lock		text	eol=lf
 
 # These files are binary and should be left untouched
 # (binary is a macro for -text -diff)
