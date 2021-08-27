@@ -9,3 +9,7 @@ yarn-error.log
 test-report.xml
 .github
 .vscode
+.DS_Store
+jest.config.js
+babel.config.js
+.eslintrc.js

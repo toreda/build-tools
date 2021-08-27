@@ -4,7 +4,15 @@
 			"path": "."
 		}
 	],
-	"settings": {},
+	"settings": {
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true
+		}
+	},
 	"extensions": {
 		"recommendations": [
 			"esbenp.prettier-vscode",

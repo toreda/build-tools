@@ -6,11 +6,12 @@ import {EventEmitter} from 'events';
 import {FileHelpers} from './file/helpers';
 import {Log} from '@toreda/log';
 import Path from 'path';
+import {WebpackOptions} from './webpack/options';
 import sourcemaps from 'gulp-sourcemaps';
 import tsc from 'gulp-typescript';
 import webpack from 'webpack';
 
-// tslint:disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const mergeStream = require('merge-stream');
 
 export class Run {
@@ -37,16 +38,23 @@ export class Run {
 		this.gulp = new BuildGulp(cfg, events);
 	}
 
-	public webpack(customPath?: string): Promise<NodeJS.ReadWriteStream> {
-		const standardPath = this.cfg.env() === 'dev' ? './webpack.dev.js' : './webpack.prod.js';
-		const configJsonPath = typeof customPath === 'string' ? customPath : standardPath;
-		const resolvedPath = Path.resolve(configJsonPath);
+	/**
+	 * Run webpack during build process.
+	 * @param options		Options provided to webpack.
+	 * @returns
+	 */
+	public webpack(options: WebpackOptions = {}): Promise<NodeJS.ReadWriteStream> {
+		const fnLog = this.log.makeLog('webpack');
+		fnLog.debug('Webpack started');
+		const cfgPath = this.cfg.getWebpackCfgPath(options);
+
+		const resolvedPath = Path.resolve(cfgPath);
 
 		return new Promise((resolve, reject) => {
 			import(resolvedPath).then((webpackConfig) => {
 				webpack(webpackConfig, (err, stats) => {
 					if (err) {
-						console.error(`webpack build failed: ${err.message}.`);
+						fnLog.error(`Webpack stopped due to failure: ${err.message}.`);
 						return reject(err);
 					}
 
@@ -55,9 +63,9 @@ export class Run {
 					}
 
 					if (stats.hasErrors()) {
-						console.error('webpack build error: ');
+						fnLog.error('webpack build error: ');
 						stats.compilation.errors.forEach((error) => {
-							console.error(error);
+							fnLog.error(error);
 						});
 						return reject(stats.compilation.errors.join('\n'));
 					}
@@ -70,6 +78,7 @@ export class Run {
 
 	public typescript(destPath: string, tsConfigPath?: string): Promise<NodeJS.ReadWriteStream> {
 		const useConfigPath = tsConfigPath ? tsConfigPath : './tsconfig.json';
+		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		const tsConfig = require(Path.resolve(useConfigPath));
 		const filesGlob = tsConfig.filesGlob;
 		const tsResult = src(filesGlob).pipe(tsc(tsConfig.compilerOptions));

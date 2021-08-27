@@ -3,7 +3,9 @@ import {dest, src} from 'gulp';
 import {Config} from '../config';
 import {EventEmitter} from 'events';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const eslint = require('gulp-eslint');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const nunjucksRender = require('gulp-nunjucks-render');
 
 export class BuildGulp {
