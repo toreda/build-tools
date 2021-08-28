@@ -1,5 +1,4 @@
 export {Build} from './build';
-export {BuildGulp} from './build/gulp';
 export {BuildOptions} from './build/options';
 export {BuildTools} from './build/tools';
 export {Clean} from './clean';

@@ -1,6 +1,5 @@
 import {dest, src} from 'gulp';
 
-import {BuildGulp} from './build/gulp';
 import {Config} from './config';
 import {EventEmitter} from 'events';
 import {Log} from '@toreda/log';
@@ -21,7 +20,6 @@ const mergeStream = require('merge-stream');
 export class Run {
 	public readonly events: EventEmitter;
 	public readonly cfg: Config;
-	public readonly gulp: BuildGulp;
 	public readonly log: Log;
 
 	constructor(cfg: Config, events: EventEmitter, log: Log) {
@@ -36,8 +34,6 @@ export class Run {
 		this.log = log.makeLog('Run');
 		this.events = events;
 		this.cfg = cfg;
-
-		this.gulp = new BuildGulp(cfg, events);
 	}
 
 	/**

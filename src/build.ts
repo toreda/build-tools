@@ -1,4 +1,3 @@
-import {BuildGulp} from './build/gulp';
 import {BuildOptions} from './build/options';
 import {Clean} from './clean';
 import {Config} from './config';
@@ -12,17 +11,30 @@ import {fileContents} from './file/contents';
 import {isType} from '@toreda/strong-types';
 import yargs from 'yargs';
 
+/**
+ *
+ * @category Build
+ */
 export class Build {
-	/** Global events instance. */
+	/** Global EventEmitter instance. */
 	public readonly events: EventEmitter;
-	public readonly gulp: BuildGulp;
+	/** Global config instance. */
 	public readonly cfg: Config;
+	/** Wrappers to run build processes. */
 	public readonly run: Run;
+	/** Clean files and folders. */
 	public readonly clean: Clean;
+	/** Create files and folders. */
 	public readonly create: Create;
+	/** Build steps wrapped in Gulp compatible functions. */
 	public readonly gulpSteps: GulpSteps;
+	/** Global log instance. */
 	public readonly log: Log;
 
+	/**
+	 *
+	 * @param options 		Configuration options used to initialize Build config.
+	 */
 	constructor(options: BuildOptions) {
 		this.events = this.initEvents();
 
@@ -34,7 +46,7 @@ export class Build {
 		this.clean = new Clean(cfg, this.events, this.log);
 		this.create = new Create(cfg, this.events, this.log);
 		this.cfg = new Config();
-		this.gulpSteps = new GulpSteps(this.gulp, this.run, this.create, this.clean);
+		this.gulpSteps = new GulpSteps(this.run, this.create, this.clean);
 	}
 
 	/**

@@ -18,19 +18,15 @@ export async function dirCreate(path: string, options?: FileOptions): Promise<bo
 			reject(new Error('Failed to createFolder during build - path argument was not a valid string.'));
 		}
 
-		try {
-			if (existsSync(path)) {
-				if (overwrite !== true) {
-					return reject(new Error('createFolder failed during build - folder exists at path.'));
-				} else {
-					return resolve(true);
-				}
+		if (existsSync(path)) {
+			if (overwrite !== true) {
+				return reject(new Error('createFolder failed during build - folder exists at path.'));
+			} else {
+				return resolve(true);
 			}
-
-			mkdirSync(path);
-		} catch (e) {
-			return reject(`dirCreate failed: ${e.message}.`);
 		}
+
+		mkdirSync(path);
 
 		return resolve(true);
 	});

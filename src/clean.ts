@@ -1,4 +1,3 @@
-import {BuildGulp} from './build/gulp';
 import {Config} from './config';
 import {EventEmitter} from 'events';
 import {Log} from '@toreda/log';
@@ -14,14 +13,12 @@ import {dirDelete} from './dir/delete';
 export class Clean {
 	public readonly events: EventEmitter;
 	public readonly cfg: Config;
-	public readonly gulp: BuildGulp;
 	public readonly log: Log;
 
 	constructor(cfg: Config, events: EventEmitter, log: Log) {
 		this.events = events;
 		this.cfg = cfg;
 		this.log = log.makeLog('Clean');
-		this.gulp = new BuildGulp(cfg, events);
 	}
 
 	/**

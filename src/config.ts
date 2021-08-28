@@ -20,6 +20,13 @@ export class Config extends StrongMap {
 		this.parse(options);
 	}
 
+	/**
+	 * Get path to webpack config file based on current build env. Uses paths
+	 * from provided options, but falls back to global Defaults when path option
+	 * is provided for current env.
+	 * @param options
+	 * @returns
+	 */
 	public getWebpackCfgPath(options: WebpackOptions): string {
 		if (this.env() === 'dev') {
 			if (typeof options.cfgPathDev === 'string') {

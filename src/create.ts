@@ -1,4 +1,3 @@
-import {BuildGulp} from './build/gulp';
 import {Config} from './config';
 import {EventEmitter} from 'events';
 import {Log} from '@toreda/log';
@@ -8,15 +7,16 @@ import {dirCreate} from './dir/create';
  * Create files and folders during build.
  */
 export class Create {
+	/** Global EventEmitter instance. */
 	public readonly events: EventEmitter;
+	/** Global config instance. */
 	public readonly cfg: Config;
-	public readonly gulp: BuildGulp;
+	/** Global log instance. */
 	public readonly log: Log;
 
 	constructor(cfg: Config, events: EventEmitter, log: Log) {
 		this.events = events;
 		this.cfg = cfg;
-		this.gulp = new BuildGulp(cfg, events);
 		this.log = log.makeLog('Create');
 	}
 
