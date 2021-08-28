@@ -54,7 +54,10 @@ export class GulpSteps {
 		return src('.', {allowEmpty: true});
 	}
 
-	public async createDir(targetPath: string | string[]): Promise<NodeJS.ReadWriteStream> {
+	public async createDir(
+		targetPath: string | string[],
+		overwrite?: boolean
+	): Promise<NodeJS.ReadWriteStream> {
 		const targetPaths: string[] = Array.isArray(targetPath) ? targetPath : [];
 
 		if (typeof targetPath === 'string') {
@@ -62,7 +65,7 @@ export class GulpSteps {
 		}
 
 		for (const target of targetPaths) {
-			await this.create.dir(target);
+			await this.create.dir(target, overwrite);
 		}
 
 		return src('.', {allowEmpty: true});
@@ -74,7 +77,7 @@ export class GulpSteps {
 	 * @param targetPath
 	 * @returns
 	 */
-	public async cleanDir(targetPath: string | string[]): Promise<NodeJS.ReadWriteStream> {
+	public async cleanDir(targetPath: string | string[], force?: boolean): Promise<NodeJS.ReadWriteStream> {
 		const targetPaths: string[] = Array.isArray(targetPath) ? targetPath : [];
 
 		if (typeof targetPath === 'string') {
@@ -82,7 +85,7 @@ export class GulpSteps {
 		}
 
 		for (const target of targetPaths) {
-			await this.clean.dir(target);
+			await this.clean.dir(target, force);
 		}
 
 		return src('.', {allowEmpty: true});
