@@ -1,8 +1,8 @@
 import {BuildGulp} from './build/gulp';
 import {Config} from './config';
 import {EventEmitter} from 'events';
-import {FileHelpers} from './file/helpers';
 import {Log} from '@toreda/log';
+import {dirDelete} from './dir/delete';
 
 /**
  * Helpers used to recursively clean files and
@@ -11,14 +11,12 @@ import {Log} from '@toreda/log';
  */
 export class Cleaner {
 	public readonly events: EventEmitter;
-	public readonly fileUtils: FileHelpers;
 	public readonly cfg: Config;
 	public readonly gulp: BuildGulp;
 	public readonly log: Log;
 
 	constructor(cfg: Config, events: EventEmitter, log: Log) {
 		this.events = events;
-		this.fileUtils = new FileHelpers(log);
 		this.cfg = cfg;
 		this.log = log.makeLog('Cleaner');
 		this.gulp = new BuildGulp(cfg, events);
@@ -53,7 +51,7 @@ export class Cleaner {
 			}
 
 			try {
-				await this.fileUtils.deleteDirRecursive(cleanPath);
+				await dirDelete(cleanPath);
 			} catch (e) {
 				return reject(e);
 			}

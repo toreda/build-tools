@@ -3,7 +3,6 @@ import {dest, src} from 'gulp';
 import {BuildGulp} from './build/gulp';
 import {Config} from './config';
 import {EventEmitter} from 'events';
-import {FileHelpers} from './file/helpers';
 import {Log} from '@toreda/log';
 import Path from 'path';
 import {WebpackOptions} from './webpack/options';
@@ -16,7 +15,6 @@ const mergeStream = require('merge-stream');
 
 export class Run {
 	public readonly events: EventEmitter;
-	public readonly fileUtils: FileHelpers;
 	public readonly cfg: Config;
 	public readonly gulp: BuildGulp;
 	public readonly log: Log;
@@ -31,7 +29,6 @@ export class Run {
 		}
 
 		this.log = log.makeLog('Run');
-		this.fileUtils = new FileHelpers(this.log);
 		this.events = events;
 		this.cfg = cfg;
 
