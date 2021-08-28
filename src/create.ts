@@ -26,8 +26,10 @@ export class Create {
 	 * @param overwriteExisting		Fails when
 	 * @returns
 	 */
-	public dir(path: string, overwriteExisting?: boolean): Promise<boolean> {
-		return dirCreate(path, overwriteExisting);
+	public dir(path: string, overwrite?: boolean): Promise<boolean> {
+		return dirCreate(path, {
+			overwrite: overwrite === true ? true : false
+		});
 	}
 
 	/**

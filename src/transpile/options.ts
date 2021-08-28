@@ -1,3 +1,8 @@
+/**
+ *
+ *
+ * @category TypeScript
+ */
 export interface TranspileOptions {
 	/** Path to tsconfig.json.
 	 * 	Uses './tsconfig.json' by default when not defined. */

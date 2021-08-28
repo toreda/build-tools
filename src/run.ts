@@ -13,6 +13,11 @@ import webpack from 'webpack';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const mergeStream = require('merge-stream');
 
+/**
+ * Run other packages used in the build process with minimal config.
+ *
+ * @category Run
+ */
 export class Run {
 	public readonly events: EventEmitter;
 	public readonly cfg: Config;

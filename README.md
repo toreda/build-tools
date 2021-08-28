@@ -27,10 +27,17 @@ Helpers for common gulp build flows. Reduce complexity and code duplication in y
 ```typescript
 import {dest, parallel, series, src} from 'gulp';
 
-import {BuildTools} from '@toreda/build-tools';
+import {Build} from '@toreda/build-tools';
 import {EventEmitter} from 'events';
+import {Log} from '@toreda/log';
 
-const build = new BuildTools(new EventEmitter());
+const log = new Log();
+const events = new EventEmitter();
+const build = new Build({
+	env: 'dev',
+	log: log,
+	events: events
+});
 
 function runLint() {
 
@@ -51,6 +58,7 @@ function buildSrc() {
 exports.default = series(createDist, cleanDist, runLint, buildSrc);
 ```
 
+### Using `Build`
 
 # Package
 

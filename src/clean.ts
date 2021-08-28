@@ -8,8 +8,10 @@ import {dirDelete} from './dir/delete';
  * Helpers used to recursively clean files and
  * directories in build output folder and intermediate
  * build folders.
+ *
+ * @category Clean
  */
-export class Cleaner {
+export class Clean {
 	public readonly events: EventEmitter;
 	public readonly cfg: Config;
 	public readonly gulp: BuildGulp;
@@ -18,7 +20,7 @@ export class Cleaner {
 	constructor(cfg: Config, events: EventEmitter, log: Log) {
 		this.events = events;
 		this.cfg = cfg;
-		this.log = log.makeLog('Cleaner');
+		this.log = log.makeLog('Clean');
 		this.gulp = new BuildGulp(cfg, events);
 	}
 

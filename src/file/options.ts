@@ -8,6 +8,7 @@ export interface FileOptions {
 	encoding?: string;
 	/** Is operation recursive? */
 	recursive?: boolean;
-	/** Target file or dir path when relevant to operation. */
-	path?: string;
+	/** Used by write operations to decide if the process failed when target
+	 *  destination already exists.  */
+	overwrite?: boolean;
 }

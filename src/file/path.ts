@@ -1,5 +1,3 @@
-import {FileOptions} from './options';
-
 /**
  * Get path property from input or a provided FileOptions object.
  * @param input
@@ -7,18 +5,14 @@ import {FileOptions} from './options';
  *
  * @category Files
  */
-export function filePath(input: string | FileOptions): string | null {
+export function filePath(input: string): string | null {
 	if (!input) {
 		return null;
 	}
 
-	if (typeof input === 'string') {
-		return input;
-	}
-
-	if (typeof input.path !== 'string') {
+	if (typeof input !== 'string') {
 		return null;
 	}
 
-	return input.path;
+	return input;
 }

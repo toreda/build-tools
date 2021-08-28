@@ -1,6 +1,6 @@
 import {BuildGulp} from './build/gulp';
 import {BuildOptions} from './build/options';
-import {Cleaner} from './cleaner';
+import {Clean} from './clean';
 import {Config} from './config';
 import {Create} from './create';
 import {EventEmitter} from 'events';
@@ -18,7 +18,7 @@ export class Build {
 	public readonly gulp: BuildGulp;
 	public readonly cfg: Config;
 	public readonly run: Run;
-	public readonly cleaner: Cleaner;
+	public readonly clean: Clean;
 	public readonly create: Create;
 	public readonly gulpSteps: GulpSteps;
 	public readonly log: Log;
@@ -31,10 +31,10 @@ export class Build {
 
 		const cfg = this.initConfig(process.argv.splice(2));
 		this.run = new Run(cfg, this.events, this.log);
-		this.cleaner = new Cleaner(cfg, this.events, this.log);
+		this.clean = new Clean(cfg, this.events, this.log);
 		this.create = new Create(cfg, this.events, this.log);
 		this.cfg = new Config();
-		this.gulpSteps = new GulpSteps(this.gulp, this.run, this.create, this.cleaner);
+		this.gulpSteps = new GulpSteps(this.gulp, this.run, this.create, this.clean);
 	}
 
 	/**

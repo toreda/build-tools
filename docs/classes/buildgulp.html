@@ -55,7 +55,7 @@
 					<a href="../modules.html">@toreda/build-tools</a>
 				</li>
 				<li>
-					<a href="buildgulp.html">BuildGulp</a>
+					<a href="BuildGulp.html">BuildGulp</a>
 				</li>
 			</ul>
 			<h1>Class BuildGulp</h1>
@@ -80,22 +80,22 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="buildgulp.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="BuildGulp.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="buildgulp.html#events" class="tsd-kind-icon">events</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="buildgulp.html#state" class="tsd-kind-icon">state</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="BuildGulp.html#cfg" class="tsd-kind-icon">cfg</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="BuildGulp.html#events" class="tsd-kind-icon">events</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="buildgulp.html#copycontents" class="tsd-kind-icon">copy<wbr>Contents</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="buildgulp.html#eslint" class="tsd-kind-icon">eslint</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="buildgulp.html#rendernunjuckshtml" class="tsd-kind-icon">render<wbr>Nunjucks<wbr>Html</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="BuildGulp.html#copyContents" class="tsd-kind-icon">copy<wbr>Contents</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="BuildGulp.html#eslint" class="tsd-kind-icon">eslint</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="BuildGulp.html#renderNunjucksHtml" class="tsd-kind-icon">render<wbr>Nunjucks<wbr>Html</a></li>
 							</ul>
 						</section>
 					</div>
@@ -107,25 +107,25 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Build<wbr>Gulp<span class="tsd-signature-symbol">(</span>events<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventEmitter</span>, state<span class="tsd-signature-symbol">: </span><a href="buildstate.html" class="tsd-signature-type" data-tsd-kind="Class">BuildState</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="buildgulp.html" class="tsd-signature-type" data-tsd-kind="Class">BuildGulp</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Build<wbr>Gulp<span class="tsd-signature-symbol">(</span>cfg<span class="tsd-signature-symbol">: </span><a href="Config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a>, events<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="BuildGulp.html" class="tsd-signature-type" data-tsd-kind="Class">BuildGulp</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/build/gulp.ts:10</li>
+									<li>Defined in src/build/gulp.ts:15</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>events: <span class="tsd-signature-type">EventEmitter</span></h5>
+									<h5>cfg: <a href="Config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h5>
 								</li>
 								<li>
-									<h5>state: <a href="buildstate.html" class="tsd-signature-type" data-tsd-kind="Class">BuildState</a></h5>
+									<h5>events: <span class="tsd-signature-type">EventEmitter</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="buildgulp.html" class="tsd-signature-type" data-tsd-kind="Class">BuildGulp</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="BuildGulp.html" class="tsd-signature-type" data-tsd-kind="Class">BuildGulp</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -133,22 +133,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="cfg" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> cfg</h3>
+					<div class="tsd-signature tsd-kind-icon">cfg<span class="tsd-signature-symbol">:</span> <a href="Config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/build/gulp.ts:13</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="events" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> events</h3>
 					<div class="tsd-signature tsd-kind-icon">events<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/build/gulp.ts:9</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="state" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> state</h3>
-					<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <a href="buildstate.html" class="tsd-signature-type" data-tsd-kind="Class">BuildState</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in src/build/gulp.ts:10</li>
+							<li>Defined in src/build/gulp.ts:12</li>
 						</ul>
 					</aside>
 				</section>
@@ -156,7 +156,7 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="copycontents" class="tsd-anchor"></a>
+					<a name="copyContents" class="tsd-anchor"></a>
 					<h3>copy<wbr>Contents</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">copy<wbr>Contents<span class="tsd-signature-symbol">(</span>srcPattern<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, destPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadWriteStream</span></li>
@@ -165,16 +165,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/build/gulp.ts:39</li>
+									<li>Defined in src/build/gulp.ts:48</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Recursively copy src dir contents matching regex pattern to target dest dir.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>srcPattern: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Regex pattern matching designed src files.</p>
+									</div>
 								</li>
 								<li>
 									<h5>destPath: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Target dir where contents are copied to.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ReadWriteStream</span></h4>
@@ -191,7 +202,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/build/gulp.ts:43</li>
+									<li>Defined in src/build/gulp.ts:52</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -205,7 +216,7 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="rendernunjuckshtml" class="tsd-anchor"></a>
+					<a name="renderNunjucksHtml" class="tsd-anchor"></a>
 					<h3>render<wbr>Nunjucks<wbr>Html</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">render<wbr>Nunjucks<wbr>Html<span class="tsd-signature-symbol">(</span>templatePath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, srcPattern<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, destPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadWriteStream</span></li>
@@ -214,7 +225,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/build/gulp.ts:25</li>
+									<li>Defined in src/build/gulp.ts:28</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -239,74 +250,83 @@
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class=" ">
-						<a href="../modules.html">Modules</a>
+						<a href="../modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-reference">
+						<a href="../modules.html#BuildTools" class="tsd-kind-icon">Build<wbr>Tools</a>
+					</li>
 					<li class=" tsd-kind-class">
-						<a href="buildcreate.html" class="tsd-kind-icon">Build<wbr>Create</a>
+						<a href="Build.html" class="tsd-kind-icon">Build</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="buildgulp.html" class="tsd-kind-icon">Build<wbr>Gulp</a>
+						<a href="BuildGulp.html" class="tsd-kind-icon">Build<wbr>Gulp</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="buildgulp.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="BuildGulp.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="buildgulp.html#events" class="tsd-kind-icon">events</a>
+								<a href="BuildGulp.html#cfg" class="tsd-kind-icon">cfg</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="buildgulp.html#state" class="tsd-kind-icon">state</a>
+								<a href="BuildGulp.html#events" class="tsd-kind-icon">events</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="buildgulp.html#copycontents" class="tsd-kind-icon">copy<wbr>Contents</a>
+								<a href="BuildGulp.html#copyContents" class="tsd-kind-icon">copy<wbr>Contents</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="buildgulp.html#eslint" class="tsd-kind-icon">eslint</a>
+								<a href="BuildGulp.html#eslint" class="tsd-kind-icon">eslint</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="buildgulp.html#rendernunjuckshtml" class="tsd-kind-icon">render<wbr>Nunjucks<wbr>Html</a>
+								<a href="BuildGulp.html#renderNunjucksHtml" class="tsd-kind-icon">render<wbr>Nunjucks<wbr>Html</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class">
-						<a href="buildinject.html" class="tsd-kind-icon">Build<wbr>Inject</a>
+						<a href="Clean.html" class="tsd-kind-icon">Clean</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="buildrun.html" class="tsd-kind-icon">Build<wbr>Run</a>
+						<a href="Config.html" class="tsd-kind-icon">Config</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="buildstate.html" class="tsd-kind-icon">Build<wbr>State</a>
+						<a href="Create.html" class="tsd-kind-icon">Create</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="buildsteps.html" class="tsd-kind-icon">Build<wbr>Steps</a>
+						<a href="GulpSteps.html" class="tsd-kind-icon">Gulp<wbr>Steps</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="buildtools.html" class="tsd-kind-icon">Build<wbr>Tools</a>
+						<a href="Inject.html" class="tsd-kind-icon">Inject</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="cleaner.html" class="tsd-kind-icon">Cleaner</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="filehelpers.html" class="tsd-kind-icon">File<wbr>Helpers</a>
+						<a href="Run.html" class="tsd-kind-icon">Run</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/buildoptions.html" class="tsd-kind-icon">Build<wbr>Options</a>
+						<a href="../interfaces/BuildOptions.html" class="tsd-kind-icon">Build<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/fileoptions.html" class="tsd-kind-icon">File<wbr>Options</a>
+						<a href="../interfaces/FileOptions.html" class="tsd-kind-icon">File<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/lintoptions.html" class="tsd-kind-icon">Lint<wbr>Options</a>
+						<a href="../interfaces/LintOptions.html" class="tsd-kind-icon">Lint<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/transpileoptions.html" class="tsd-kind-icon">Transpile<wbr>Options</a>
+						<a href="../interfaces/TranspileOptions.html" class="tsd-kind-icon">Transpile<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#dirCreate" class="tsd-kind-icon">dir<wbr>Create</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#dirDelete" class="tsd-kind-icon">dir<wbr>Delete</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#filePath" class="tsd-kind-icon">file<wbr>Path</a>
 					</li>
 				</ul>
 			</nav>

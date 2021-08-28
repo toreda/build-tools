@@ -1,8 +1,14 @@
-import {FileOptions} from '../file/options';
 import {filePath} from '../file/path';
 import {remove} from 'fs-extra';
 
-export async function dirDelete(input: string | FileOptions): Promise<boolean | Error> {
+/**
+ * Delete target directory
+ * @param input			File path of directory to delete.
+ * @returns
+ *
+ * @category Files
+ */
+export async function dirDelete(input: string): Promise<boolean | Error> {
 	const path = filePath(input);
 
 	if (path === null) {

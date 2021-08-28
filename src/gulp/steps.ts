@@ -1,5 +1,5 @@
 import {BuildGulp} from '../build/gulp';
-import {Cleaner} from '../cleaner';
+import {Clean} from '../clean';
 import {Create} from '../create';
 import {LintOptions} from '../lint/options';
 import {Run} from '../run';
@@ -7,17 +7,29 @@ import {TranspileOptions} from '../transpile/options';
 import {makeString} from '@toreda/strong-types';
 import {src} from 'gulp';
 
+/**
+ * Build steps that can be used directly in
+ */
 export class GulpSteps {
 	private readonly build: BuildGulp;
 	public readonly run: Run;
+	/** Create files and directories. */
 	public readonly create: Create;
-	public readonly cleaner: Cleaner;
+	/** Clean files & folders in preparation for build. */
+	public readonly clean: Clean;
 
-	constructor(build: BuildGulp, run: Run, create: Create, cleaner: Cleaner) {
+	/**
+	 * Constructor
+	 * @param build
+	 * @param run
+	 * @param create
+	 * @param clean
+	 */
+	constructor(build: BuildGulp, run: Run, create: Create, clean: Clean) {
 		this.build = build;
 		this.run = run;
 		this.create = create;
-		this.cleaner = cleaner;
+		this.clean = clean;
 	}
 
 	/**
@@ -30,6 +42,11 @@ export class GulpSteps {
 		return src('.', {allowEmpty: true});
 	}
 
+	/**
+	 * Run lint
+	 * @param options
+	 * @returns
+	 */
 	public async lint(options: LintOptions): Promise<NodeJS.ReadWriteStream> {
 		const lintPath = options.path ? options.path : 'src/**';
 		this.build.eslint(lintPath);
@@ -57,7 +74,7 @@ export class GulpSteps {
 	 * @param targetPath
 	 * @returns
 	 */
-	public async clean(targetPath: string | string[]): Promise<NodeJS.ReadWriteStream> {
+	public async cleanDir(targetPath: string | string[]): Promise<NodeJS.ReadWriteStream> {
 		const targetPaths: string[] = Array.isArray(targetPath) ? targetPath : [];
 
 		if (typeof targetPath === 'string') {
@@ -65,7 +82,7 @@ export class GulpSteps {
 		}
 
 		for (const target of targetPaths) {
-			await this.cleaner.dir(target);
+			await this.clean.dir(target);
 		}
 
 		return src('.', {allowEmpty: true});

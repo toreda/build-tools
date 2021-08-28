@@ -4,6 +4,12 @@ import {BuildOptions} from './build/options';
 import {Defaults} from './defaults';
 import {WebpackOptions} from './webpack/options';
 
+/**
+ * Configuration created from initial build options. All properties are guaranteed to
+ * exist and be the expected types.
+ *
+ * @category Config
+ */
 export class Config extends StrongMap {
 	public readonly env: StrongString;
 

@@ -1,3 +1,6 @@
+/**
+ * @category Config
+ */
 export type Charset =
 	| 'ASCII'
 	| 'cp1252'

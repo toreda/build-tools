@@ -1,6 +1,15 @@
 import {FileOptions} from './options';
 import {readFile} from 'fs-extra';
 
+/**
+ * Get file contents as a string for target file found at `filePath`.
+ * @param filePath
+ * @param options
+ * @returns			File contents as string when file is found at filePath, or null file is not found,
+ *					or the file could not be read due to permissions, or other errors.
+ *
+ * @category Files
+ */
 export async function fileContents(filePath: string, options?: FileOptions): Promise<string | null> {
 	const encoding = options && typeof options.encoding === 'string' ? options.encoding : 'utf8';
 

@@ -55,7 +55,7 @@
 					<a href="../modules.html">@toreda/build-tools</a>
 				</li>
 				<li>
-					<a href="transpileoptions.html">TranspileOptions</a>
+					<a href="TranspileOptions.html">TranspileOptions</a>
 				</li>
 			</ul>
 			<h1>Interface TranspileOptions</h1>
@@ -80,8 +80,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="transpileoptions.html#configdir" class="tsd-kind-icon">config<wbr>Dir</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="transpileoptions.html#configfilename" class="tsd-kind-icon">config<wbr>Filename</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="TranspileOptions.html#tsConfigDirPath" class="tsd-kind-icon">ts<wbr>Config<wbr>Dir<wbr>Path</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="TranspileOptions.html#tsConfigFilePath" class="tsd-kind-icon">ts<wbr>Config<wbr>File<wbr>Path</a></li>
 							</ul>
 						</section>
 					</div>
@@ -90,24 +90,35 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="configdir" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> config<wbr>Dir</h3>
-					<div class="tsd-signature tsd-kind-icon">config<wbr>Dir<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="tsConfigDirPath" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ts<wbr>Config<wbr>Dir<wbr>Path</h3>
+					<div class="tsd-signature tsd-kind-icon">ts<wbr>Config<wbr>Dir<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/transpile/options.ts:3</li>
+							<li>Defined in src/transpile/options.ts:11</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Path to dir containing tsconfig.json.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="configfilename" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> config<wbr>Filename</h3>
-					<div class="tsd-signature tsd-kind-icon">config<wbr>Filename<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="tsConfigFilePath" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ts<wbr>Config<wbr>File<wbr>Path</h3>
+					<div class="tsd-signature tsd-kind-icon">ts<wbr>Config<wbr>File<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/transpile/options.ts:2</li>
+							<li>Defined in src/transpile/options.ts:9</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Path to tsconfig.json.
+							Uses &#39;./tsconfig.json&#39; by default when not defined.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -115,63 +126,72 @@
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class=" ">
-						<a href="../modules.html">Modules</a>
+						<a href="../modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class">
-						<a href="../classes/buildcreate.html" class="tsd-kind-icon">Build<wbr>Create</a>
+					<li class=" tsd-kind-reference">
+						<a href="../modules.html#BuildTools" class="tsd-kind-icon">Build<wbr>Tools</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/buildgulp.html" class="tsd-kind-icon">Build<wbr>Gulp</a>
+						<a href="../classes/Build.html" class="tsd-kind-icon">Build</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/buildinject.html" class="tsd-kind-icon">Build<wbr>Inject</a>
+						<a href="../classes/BuildGulp.html" class="tsd-kind-icon">Build<wbr>Gulp</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/buildrun.html" class="tsd-kind-icon">Build<wbr>Run</a>
+						<a href="../classes/Clean.html" class="tsd-kind-icon">Clean</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/buildstate.html" class="tsd-kind-icon">Build<wbr>State</a>
+						<a href="../classes/Config.html" class="tsd-kind-icon">Config</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/buildsteps.html" class="tsd-kind-icon">Build<wbr>Steps</a>
+						<a href="../classes/Create.html" class="tsd-kind-icon">Create</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/buildtools.html" class="tsd-kind-icon">Build<wbr>Tools</a>
+						<a href="../classes/GulpSteps.html" class="tsd-kind-icon">Gulp<wbr>Steps</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/cleaner.html" class="tsd-kind-icon">Cleaner</a>
+						<a href="../classes/Inject.html" class="tsd-kind-icon">Inject</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="../classes/filehelpers.html" class="tsd-kind-icon">File<wbr>Helpers</a>
+						<a href="../classes/Run.html" class="tsd-kind-icon">Run</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="buildoptions.html" class="tsd-kind-icon">Build<wbr>Options</a>
+						<a href="BuildOptions.html" class="tsd-kind-icon">Build<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="fileoptions.html" class="tsd-kind-icon">File<wbr>Options</a>
+						<a href="FileOptions.html" class="tsd-kind-icon">File<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="lintoptions.html" class="tsd-kind-icon">Lint<wbr>Options</a>
+						<a href="LintOptions.html" class="tsd-kind-icon">Lint<wbr>Options</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="transpileoptions.html" class="tsd-kind-icon">Transpile<wbr>Options</a>
+						<a href="TranspileOptions.html" class="tsd-kind-icon">Transpile<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="transpileoptions.html#configdir" class="tsd-kind-icon">config<wbr>Dir</a>
+								<a href="TranspileOptions.html#tsConfigDirPath" class="tsd-kind-icon">ts<wbr>Config<wbr>Dir<wbr>Path</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="transpileoptions.html#configfilename" class="tsd-kind-icon">config<wbr>Filename</a>
+								<a href="TranspileOptions.html#tsConfigFilePath" class="tsd-kind-icon">ts<wbr>Config<wbr>File<wbr>Path</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#dirCreate" class="tsd-kind-icon">dir<wbr>Create</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#dirDelete" class="tsd-kind-icon">dir<wbr>Delete</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#filePath" class="tsd-kind-icon">file<wbr>Path</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

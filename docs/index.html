@@ -85,10 +85,17 @@
 				</a>
 				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">dest</span><span style="color: #000000">, </span><span style="color: #001080">parallel</span><span style="color: #000000">, </span><span style="color: #001080">series</span><span style="color: #000000">, </span><span style="color: #001080">src</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;gulp&#039;</span><span style="color: #000000">;</span>
 
-<span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">BuildTools</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@toreda/build-tools&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">Build</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@toreda/build-tools&#039;</span><span style="color: #000000">;</span>
 <span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">EventEmitter</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;events&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">Log</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@toreda/log&#039;</span><span style="color: #000000">;</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">build</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">BuildTools</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">EventEmitter</span><span style="color: #000000">());</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">log</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Log</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">events</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">EventEmitter</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">build</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Build</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">env:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;dev&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">log:</span><span style="color: #000000"> </span><span style="color: #001080">log</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">events:</span><span style="color: #000000"> </span><span style="color: #001080">events</span>
+<span style="color: #000000">});</span>
 
 <span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">runLint</span><span style="color: #000000">() {</span>
 
@@ -108,6 +115,9 @@
 
 <span style="color: #267F99">exports</span><span style="color: #000000">.</span><span style="color: #001080">default</span><span style="color: #000000"> = </span><span style="color: #795E26">series</span><span style="color: #000000">(</span><span style="color: #001080">createDist</span><span style="color: #000000">, </span><span style="color: #001080">cleanDist</span><span style="color: #000000">, </span><span style="color: #001080">runLint</span><span style="color: #000000">, </span><span style="color: #001080">buildSrc</span><span style="color: #000000">);</span>
 </code></pre>
+				<a href="#using-build" id="using-build" style="color: inherit; text-decoration: none;">
+					<h3>Using <code>Build</code></h3>
+				</a>
 				<a href="#package" id="package" style="color: inherit; text-decoration: none;">
 					<h1>Package</h1>
 				</a>
@@ -128,8 +138,8 @@
 				<a href="#run-tests" id="run-tests" style="color: inherit; text-decoration: none;">
 					<h2>Run Tests</h2>
 				</a>
-				<p>Install or clone <code>@toreda/adt</code> <a href="#install">(see above)</a>.</p>
-				<p>ADT unit tests use <a href="https://jestjs.io/">Jest</a>.</p>
+				<p>Install or clone <code>@toreda/build-tools</code> <a href="#install">(see above)</a>.</p>
+				<p>Our unit tests use <a href="https://jestjs.io/">Jest</a>.</p>
 				<p>Installing jest is not required after project dependencies are installed (<a href="#install">see above</a>).</p>
 				<pre><code class="language-bash"><span style="color: #000000">yarn </span><span style="color: #795E26">test</span>
 </code></pre>
@@ -140,13 +150,13 @@
 				<a href="#build-with-yarn" id="build-with-yarn" style="color: inherit; text-decoration: none;">
 					<h3>Build with Yarn</h3>
 				</a>
-				<p> Enter the following commands in order from the adt project root.</p>
+				<p> Enter the following commands in order from the build-tools project root.</p>
 				<pre><code class="language-bash"><span style="color: #000000">yarn build</span>
 </code></pre>
 				<a href="#build-with-npm" id="build-with-npm" style="color: inherit; text-decoration: none;">
 					<h3>Build with NPM</h3>
 				</a>
-				<p> Enter the following commands in order from the adt project root.</p>
+				<p> Enter the following commands in order from the build-tools project root.</p>
 				<pre><code class="language-bash"><span style="color: #000000">npm run-script build</span>
 </code></pre>
 				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
@@ -159,50 +169,59 @@
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class=" ">
-						<a href="modules.html">Modules</a>
+						<a href="modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class">
-						<a href="classes/buildcreate.html" class="tsd-kind-icon">Build<wbr>Create</a>
+					<li class=" tsd-kind-reference">
+						<a href="modules.html#BuildTools" class="tsd-kind-icon">Build<wbr>Tools</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/buildgulp.html" class="tsd-kind-icon">Build<wbr>Gulp</a>
+						<a href="classes/Build.html" class="tsd-kind-icon">Build</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/buildinject.html" class="tsd-kind-icon">Build<wbr>Inject</a>
+						<a href="classes/BuildGulp.html" class="tsd-kind-icon">Build<wbr>Gulp</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/buildrun.html" class="tsd-kind-icon">Build<wbr>Run</a>
+						<a href="classes/Clean.html" class="tsd-kind-icon">Clean</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/buildstate.html" class="tsd-kind-icon">Build<wbr>State</a>
+						<a href="classes/Config.html" class="tsd-kind-icon">Config</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/buildsteps.html" class="tsd-kind-icon">Build<wbr>Steps</a>
+						<a href="classes/Create.html" class="tsd-kind-icon">Create</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/buildtools.html" class="tsd-kind-icon">Build<wbr>Tools</a>
+						<a href="classes/GulpSteps.html" class="tsd-kind-icon">Gulp<wbr>Steps</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/cleaner.html" class="tsd-kind-icon">Cleaner</a>
+						<a href="classes/Inject.html" class="tsd-kind-icon">Inject</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/filehelpers.html" class="tsd-kind-icon">File<wbr>Helpers</a>
+						<a href="classes/Run.html" class="tsd-kind-icon">Run</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/buildoptions.html" class="tsd-kind-icon">Build<wbr>Options</a>
+						<a href="interfaces/BuildOptions.html" class="tsd-kind-icon">Build<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/fileoptions.html" class="tsd-kind-icon">File<wbr>Options</a>
+						<a href="interfaces/FileOptions.html" class="tsd-kind-icon">File<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/lintoptions.html" class="tsd-kind-icon">Lint<wbr>Options</a>
+						<a href="interfaces/LintOptions.html" class="tsd-kind-icon">Lint<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/transpileoptions.html" class="tsd-kind-icon">Transpile<wbr>Options</a>
+						<a href="interfaces/TranspileOptions.html" class="tsd-kind-icon">Transpile<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#dirCreate" class="tsd-kind-icon">dir<wbr>Create</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#dirDelete" class="tsd-kind-icon">dir<wbr>Delete</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#filePath" class="tsd-kind-icon">file<wbr>Path</a>
 					</li>
 				</ul>
 			</nav>

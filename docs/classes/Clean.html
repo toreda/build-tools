@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BuildCreate | @toreda/build-tools</title>
+	<title>Clean | @toreda/build-tools</title>
 	<meta name="description" content="Documentation for @toreda/build-tools">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,21 +55,30 @@
 					<a href="../modules.html">@toreda/build-tools</a>
 				</li>
 				<li>
-					<a href="buildcreate.html">BuildCreate</a>
+					<a href="Clean.html">Clean</a>
 				</li>
 			</ul>
-			<h1>Class BuildCreate</h1>
+			<h1>Class Clean</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Helpers used to recursively clean files and
+							directories in build output folder and intermediate
+						build folders.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">BuildCreate</span>
+						<span class="target">Clean</span>
 					</li>
 				</ul>
 			</section>
@@ -80,23 +89,23 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="buildcreate.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="Clean.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="buildcreate.html#events" class="tsd-kind-icon">events</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="buildcreate.html#fileutils" class="tsd-kind-icon">file<wbr>Utils</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="buildcreate.html#gulp" class="tsd-kind-icon">gulp</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="buildcreate.html#state" class="tsd-kind-icon">state</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Clean.html#cfg" class="tsd-kind-icon">cfg</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Clean.html#events" class="tsd-kind-icon">events</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Clean.html#gulp" class="tsd-kind-icon">gulp</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Clean.html#log" class="tsd-kind-icon">log</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="buildcreate.html#dir" class="tsd-kind-icon">dir</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="buildcreate.html#folder" class="tsd-kind-icon">folder</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Clean.html#dir" class="tsd-kind-icon">dir</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Clean.html#folder" class="tsd-kind-icon">folder</a></li>
 							</ul>
 						</section>
 					</div>
@@ -108,25 +117,28 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Build<wbr>Create<span class="tsd-signature-symbol">(</span>events<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventEmitter</span>, state<span class="tsd-signature-symbol">: </span><a href="buildstate.html" class="tsd-signature-type" data-tsd-kind="Class">BuildState</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="buildcreate.html" class="tsd-signature-type" data-tsd-kind="Class">BuildCreate</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Clean<span class="tsd-signature-symbol">(</span>cfg<span class="tsd-signature-symbol">: </span><a href="Config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a>, events<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EventEmitter</span>, log<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Log</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Clean.html" class="tsd-signature-type" data-tsd-kind="Class">Clean</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/build/create.ts:10</li>
+									<li>Defined in src/clean.ts:20</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
+									<h5>cfg: <a href="Config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h5>
+								</li>
+								<li>
 									<h5>events: <span class="tsd-signature-type">EventEmitter</span></h5>
 								</li>
 								<li>
-									<h5>state: <a href="buildstate.html" class="tsd-signature-type" data-tsd-kind="Class">BuildState</a></h5>
+									<h5>log: <span class="tsd-signature-type">Log</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="buildcreate.html" class="tsd-signature-type" data-tsd-kind="Class">BuildCreate</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="Clean.html" class="tsd-signature-type" data-tsd-kind="Class">Clean</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -134,42 +146,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="cfg" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> cfg</h3>
+					<div class="tsd-signature tsd-kind-icon">cfg<span class="tsd-signature-symbol">:</span> <a href="Config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in src/clean.ts:16</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="events" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> events</h3>
 					<div class="tsd-signature tsd-kind-icon">events<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/build/create.ts:7</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="fileutils" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> file<wbr>Utils</h3>
-					<div class="tsd-signature tsd-kind-icon">file<wbr>Utils<span class="tsd-signature-symbol">:</span> <a href="filehelpers.html" class="tsd-signature-type" data-tsd-kind="Class">FileHelpers</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in src/build/create.ts:8</li>
+							<li>Defined in src/clean.ts:15</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="gulp" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> gulp</h3>
-					<div class="tsd-signature tsd-kind-icon">gulp<span class="tsd-signature-symbol">:</span> <a href="buildgulp.html" class="tsd-signature-type" data-tsd-kind="Class">BuildGulp</a></div>
+					<div class="tsd-signature tsd-kind-icon">gulp<span class="tsd-signature-symbol">:</span> <a href="BuildGulp.html" class="tsd-signature-type" data-tsd-kind="Class">BuildGulp</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/build/create.ts:10</li>
+							<li>Defined in src/clean.ts:17</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="state" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> state</h3>
-					<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <a href="buildstate.html" class="tsd-signature-type" data-tsd-kind="Class">BuildState</a></div>
+					<a name="log" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> log</h3>
+					<div class="tsd-signature tsd-kind-icon">log<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Log</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/build/create.ts:9</li>
+							<li>Defined in src/clean.ts:18</li>
 						</ul>
 					</aside>
 				</section>
@@ -180,25 +192,31 @@
 					<a name="dir" class="tsd-anchor"></a>
 					<h3>dir</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">dir<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, failIfExists<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">dir<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, force<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/build/create.ts:19</li>
+									<li>Defined in src/clean.ts:34</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Clean target directory, recursively removing all files
+									and directories.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>path: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> failIfExists: <span class="tsd-signature-type">boolean</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> force: <span class="tsd-signature-type">boolean</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -206,25 +224,30 @@
 					<a name="folder" class="tsd-anchor"></a>
 					<h3>folder</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">folder<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, failIfExists<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">folder<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, force<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/build/create.ts:24</li>
+									<li>Defined in src/clean.ts:71</li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Alias for clean dir.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>path: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> failIfExists: <span class="tsd-signature-type">boolean</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> force: <span class="tsd-signature-type">boolean</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -234,77 +257,86 @@
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class=" ">
-						<a href="../modules.html">Modules</a>
+						<a href="../modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-reference">
+						<a href="../modules.html#BuildTools" class="tsd-kind-icon">Build<wbr>Tools</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="Build.html" class="tsd-kind-icon">Build</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="BuildGulp.html" class="tsd-kind-icon">Build<wbr>Gulp</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="buildcreate.html" class="tsd-kind-icon">Build<wbr>Create</a>
+						<a href="Clean.html" class="tsd-kind-icon">Clean</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="buildcreate.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="Clean.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="buildcreate.html#events" class="tsd-kind-icon">events</a>
+								<a href="Clean.html#cfg" class="tsd-kind-icon">cfg</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="buildcreate.html#fileutils" class="tsd-kind-icon">file<wbr>Utils</a>
+								<a href="Clean.html#events" class="tsd-kind-icon">events</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="buildcreate.html#gulp" class="tsd-kind-icon">gulp</a>
+								<a href="Clean.html#gulp" class="tsd-kind-icon">gulp</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="buildcreate.html#state" class="tsd-kind-icon">state</a>
+								<a href="Clean.html#log" class="tsd-kind-icon">log</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="buildcreate.html#dir" class="tsd-kind-icon">dir</a>
+								<a href="Clean.html#dir" class="tsd-kind-icon">dir</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="buildcreate.html#folder" class="tsd-kind-icon">folder</a>
+								<a href="Clean.html#folder" class="tsd-kind-icon">folder</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class">
-						<a href="buildgulp.html" class="tsd-kind-icon">Build<wbr>Gulp</a>
+						<a href="Config.html" class="tsd-kind-icon">Config</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="buildinject.html" class="tsd-kind-icon">Build<wbr>Inject</a>
+						<a href="Create.html" class="tsd-kind-icon">Create</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="buildrun.html" class="tsd-kind-icon">Build<wbr>Run</a>
+						<a href="GulpSteps.html" class="tsd-kind-icon">Gulp<wbr>Steps</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="buildstate.html" class="tsd-kind-icon">Build<wbr>State</a>
+						<a href="Inject.html" class="tsd-kind-icon">Inject</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="buildsteps.html" class="tsd-kind-icon">Build<wbr>Steps</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="buildtools.html" class="tsd-kind-icon">Build<wbr>Tools</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="cleaner.html" class="tsd-kind-icon">Cleaner</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="filehelpers.html" class="tsd-kind-icon">File<wbr>Helpers</a>
+						<a href="Run.html" class="tsd-kind-icon">Run</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/buildoptions.html" class="tsd-kind-icon">Build<wbr>Options</a>
+						<a href="../interfaces/BuildOptions.html" class="tsd-kind-icon">Build<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/fileoptions.html" class="tsd-kind-icon">File<wbr>Options</a>
+						<a href="../interfaces/FileOptions.html" class="tsd-kind-icon">File<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/lintoptions.html" class="tsd-kind-icon">Lint<wbr>Options</a>
+						<a href="../interfaces/LintOptions.html" class="tsd-kind-icon">Lint<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/transpileoptions.html" class="tsd-kind-icon">Transpile<wbr>Options</a>
+						<a href="../interfaces/TranspileOptions.html" class="tsd-kind-icon">Transpile<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#dirCreate" class="tsd-kind-icon">dir<wbr>Create</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#dirDelete" class="tsd-kind-icon">dir<wbr>Delete</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#filePath" class="tsd-kind-icon">file<wbr>Path</a>
 					</li>
 				</ul>
 			</nav>

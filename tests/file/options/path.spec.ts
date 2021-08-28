@@ -1,4 +1,3 @@
-import {FileOptions} from '../../../src/file/options';
 import {filePath} from '../../../src/file/path';
 
 describe('filePath', () => {
@@ -24,23 +23,5 @@ describe('filePath', () => {
 		const result = filePath(input as any);
 
 		expect(result).toBeNull();
-	});
-
-	it(`should return null when input is an object but object.path is a truthy non-string`, () => {
-		const input: FileOptions = {
-			path: 111131 as any
-		};
-
-		const result = filePath(input);
-
-		expect(result).toBeNull();
-	});
-
-	it(`should return path property from input object when object.path is a string`, () => {
-		const input: FileOptions = {
-			path: 'aaaaaa.ts'
-		};
-		const result = filePath(input);
-		expect(result).toBe(input.path);
 	});
 });

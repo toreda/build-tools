@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BuildState | @toreda/build-tools</title>
+	<title>Config | @toreda/build-tools</title>
 	<meta name="description" content="Documentation for @toreda/build-tools">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,16 +55,24 @@
 					<a href="../modules.html">@toreda/build-tools</a>
 				</li>
 				<li>
-					<a href="buildstate.html">BuildState</a>
+					<a href="Config.html">Config</a>
 				</li>
 			</ul>
-			<h1>Class BuildState</h1>
+			<h1>Class Config</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Configuration created from initial build options. All properties are guaranteed to
+						exist and be the expected types.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -72,7 +80,7 @@
 						<span class="tsd-signature-type">StrongMap</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">BuildState</span>
+								<span class="target">Config</span>
 							</li>
 						</ul>
 					</li>
@@ -85,20 +93,21 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="buildstate.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="Config.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="buildstate.html#enabled" class="tsd-kind-icon">enabled</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="buildstate.html#env" class="tsd-kind-icon">env</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Config.html#env" class="tsd-kind-icon">env</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-inherited tsd-is-external">
+						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="buildstate.html#parse" class="tsd-kind-icon">parse</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="Config.html#getWebpackCfgPath" class="tsd-kind-icon">get<wbr>Webpack<wbr>Cfg<wbr>Path</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Config.html#jsonify" class="tsd-kind-icon">jsonify</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="Config.html#parse" class="tsd-kind-icon">parse</a></li>
 							</ul>
 						</section>
 					</div>
@@ -110,53 +119,89 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Build<wbr>State<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/buildoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">BuildOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="buildstate.html" class="tsd-signature-type" data-tsd-kind="Class">BuildState</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Config<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/BuildOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">BuildOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="Config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides StrongMap.constructor</p>
 								<ul>
-									<li>Defined in src/build/state.ts:6</li>
+									<li>Defined in src/config.ts:16</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/buildoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">BuildOptions</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/BuildOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">BuildOptions</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="buildstate.html" class="tsd-signature-type" data-tsd-kind="Class">BuildState</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="Config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-					<a name="enabled" class="tsd-anchor"></a>
-					<h3>enabled</h3>
-					<div class="tsd-signature tsd-kind-icon">enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">StrongType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from StrongMap.enabled</p>
-						<ul>
-							<li>Defined in node_modules/@toreda/strong-types/dist/map.d.ts:4</li>
-						</ul>
-					</aside>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="env" class="tsd-anchor"></a>
-					<h3>env</h3>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> env</h3>
 					<div class="tsd-signature tsd-kind-icon">env<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">StrongString</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/build/state.ts:6</li>
+							<li>Defined in src/config.ts:14</li>
 						</ul>
 					</aside>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-inherited tsd-is-external">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getWebpackCfgPath" class="tsd-anchor"></a>
+					<h3>get<wbr>Webpack<wbr>Cfg<wbr>Path</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Webpack<wbr>Cfg<wbr>Path<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WebpackOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/config.ts:23</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <span class="tsd-signature-type">WebpackOptions</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="jsonify" class="tsd-anchor"></a>
+					<h3>jsonify</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">jsonify<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">StrongMapJsonifierOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from StrongMap.jsonify</p>
+								<ul>
+									<li>Defined in node_modules/@toreda/strong-types/dist/map.d.ts:6</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">StrongMapJsonifierOptions</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="parse" class="tsd-anchor"></a>
 					<h3>parse</h3>
@@ -168,7 +213,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from StrongMap.parse</p>
 								<ul>
-									<li>Defined in node_modules/@toreda/strong-types/dist/map.d.ts:6</li>
+									<li>Defined in node_modules/@toreda/strong-types/dist/map.d.ts:5</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -190,68 +235,80 @@
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class=" ">
-						<a href="../modules.html">Modules</a>
+						<a href="../modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class">
-						<a href="buildcreate.html" class="tsd-kind-icon">Build<wbr>Create</a>
+					<li class=" tsd-kind-reference">
+						<a href="../modules.html#BuildTools" class="tsd-kind-icon">Build<wbr>Tools</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="buildgulp.html" class="tsd-kind-icon">Build<wbr>Gulp</a>
+						<a href="Build.html" class="tsd-kind-icon">Build</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="buildinject.html" class="tsd-kind-icon">Build<wbr>Inject</a>
+						<a href="BuildGulp.html" class="tsd-kind-icon">Build<wbr>Gulp</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="buildrun.html" class="tsd-kind-icon">Build<wbr>Run</a>
+						<a href="Clean.html" class="tsd-kind-icon">Clean</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
-						<a href="buildstate.html" class="tsd-kind-icon">Build<wbr>State</a>
+						<a href="Config.html" class="tsd-kind-icon">Config</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-								<a href="buildstate.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-								<a href="buildstate.html#enabled" class="tsd-kind-icon">enabled</a>
+								<a href="Config.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="buildstate.html#env" class="tsd-kind-icon">env</a>
+								<a href="Config.html#env" class="tsd-kind-icon">env</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="Config.html#getWebpackCfgPath" class="tsd-kind-icon">get<wbr>Webpack<wbr>Cfg<wbr>Path</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-								<a href="buildstate.html#parse" class="tsd-kind-icon">parse</a>
+								<a href="Config.html#jsonify" class="tsd-kind-icon">jsonify</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="Config.html#parse" class="tsd-kind-icon">parse</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class">
-						<a href="buildsteps.html" class="tsd-kind-icon">Build<wbr>Steps</a>
+						<a href="Create.html" class="tsd-kind-icon">Create</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="buildtools.html" class="tsd-kind-icon">Build<wbr>Tools</a>
+						<a href="GulpSteps.html" class="tsd-kind-icon">Gulp<wbr>Steps</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="cleaner.html" class="tsd-kind-icon">Cleaner</a>
+						<a href="Inject.html" class="tsd-kind-icon">Inject</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="filehelpers.html" class="tsd-kind-icon">File<wbr>Helpers</a>
+						<a href="Run.html" class="tsd-kind-icon">Run</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/buildoptions.html" class="tsd-kind-icon">Build<wbr>Options</a>
+						<a href="../interfaces/BuildOptions.html" class="tsd-kind-icon">Build<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/fileoptions.html" class="tsd-kind-icon">File<wbr>Options</a>
+						<a href="../interfaces/FileOptions.html" class="tsd-kind-icon">File<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/lintoptions.html" class="tsd-kind-icon">Lint<wbr>Options</a>
+						<a href="../interfaces/LintOptions.html" class="tsd-kind-icon">Lint<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="../interfaces/transpileoptions.html" class="tsd-kind-icon">Transpile<wbr>Options</a>
+						<a href="../interfaces/TranspileOptions.html" class="tsd-kind-icon">Transpile<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#dirCreate" class="tsd-kind-icon">dir<wbr>Create</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#dirDelete" class="tsd-kind-icon">dir<wbr>Delete</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#filePath" class="tsd-kind-icon">file<wbr>Path</a>
 					</li>
 				</ul>
 			</nav>
