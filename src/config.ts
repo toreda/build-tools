@@ -1,5 +1,3 @@
-import {StrongMap, StrongString, makeString} from '@toreda/strong-types';
-
 import {BuildOptions} from './build/options';
 import {Defaults} from './defaults';
 import {WebpackOptions} from './webpack/options';
@@ -10,14 +8,15 @@ import {WebpackOptions} from './webpack/options';
  *
  * @category Config
  */
-export class Config extends StrongMap {
-	public readonly env: StrongString;
+export class Config {
+	public env: string;
 
 	constructor(options?: BuildOptions) {
-		super();
-		this.env = makeString('dev');
+		this.env = 'dev';
 
-		this.parse(options);
+		if (options && typeof options.env === 'string') {
+			this.env = options.env;
+		}
 	}
 
 	/**
@@ -28,7 +27,7 @@ export class Config extends StrongMap {
 	 * @returns
 	 */
 	public getWebpackCfgPath(options: WebpackOptions): string {
-		if (this.env() === 'dev') {
+		if (this.env === 'dev') {
 			if (typeof options.cfgPathDev === 'string') {
 				return options.cfgPathDev;
 			} else {

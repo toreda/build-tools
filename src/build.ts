@@ -60,7 +60,7 @@ export class Build {
 			return new Log();
 		}
 
-		if (!isType(options.log, Log)) {
+		if (!(options.log instanceof Log)) {
 			return new Log();
 		}
 
@@ -103,9 +103,9 @@ export class Build {
 		if (typeof args.env === 'string') {
 			const lowerEnv = args.env.toLowerCase();
 			if (lowerEnv === 'dev' || lowerEnv === 'development') {
-				cfg.env('dev');
+				cfg.env = 'dev';
 			} else {
-				cfg.env('prod');
+				cfg.env = 'prod';
 			}
 		}
 

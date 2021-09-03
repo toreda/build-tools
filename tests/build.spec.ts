@@ -2,7 +2,6 @@ import {Build} from '../src/build';
 import {BuildOptions} from '../src/build/options';
 import {EventEmitter} from 'events';
 import {Log} from '@toreda/log';
-import {isType} from '@toreda/strong-types';
 
 describe('Build', () => {
 	let events: EventEmitter;
@@ -34,21 +33,21 @@ describe('Build', () => {
 			it(`should make a new log instance options is not provided`, () => {
 				const result = instance.initLog();
 				expect(result).not.toBeUndefined();
-				expect(isType(result, Log)).toBe(true);
+				expect(result instanceof Log).toBe(true);
 			});
 
 			it(`should make a new log instance when options.log is not set`, () => {
 				options.log = undefined;
 				const result = instance.initLog(options);
 				expect(result).not.toBeUndefined();
-				expect(isType(result, Log)).toBe(true);
+				expect(result instanceof Log).toBe(true);
 			});
 
 			it(`should make a new log instance when options.logs is provided but is not a Log instance`, () => {
 				options.log = 'bbbbbbb' as any;
 				const result = instance.initLog(options);
 				expect(result).not.toBeUndefined();
-				expect(isType(result, Log)).toBe(true);
+				expect(result instanceof Log).toBe(true);
 			});
 
 			it(`should use options.log when provided`, () => {
@@ -56,7 +55,7 @@ describe('Build', () => {
 				options.log = sampleLog;
 				const result = instance.initLog(options);
 				expect(result).toEqual(sampleLog);
-				expect(isType(result, Log)).toBe(true);
+				expect(result instanceof Log).toBe(true);
 			});
 		});
 
@@ -64,21 +63,21 @@ describe('Build', () => {
 			it(`should make a new log instance options is not provided`, () => {
 				const result = instance.initEvents();
 				expect(result).not.toBeUndefined();
-				expect(isType(result, EventEmitter)).toBe(true);
+				expect(result instanceof EventEmitter).toBe(true);
 			});
 
 			it(`should make a new events instance when options.events is not set`, () => {
 				options.events = undefined;
 				const result = instance.initEvents(options);
 				expect(result).not.toBeUndefined();
-				expect(isType(result, EventEmitter)).toBe(true);
+				expect(result instanceof EventEmitter).toBe(true);
 			});
 
 			it(`should make a new events instance when options.events is provided but is not an EventEmitter instance`, () => {
 				options.events = 'aaaa' as any;
 				const result = instance.initEvents(options);
 				expect(result).not.toBeUndefined();
-				expect(isType(result, EventEmitter)).toBe(true);
+				expect(result instanceof EventEmitter).toBe(true);
 			});
 
 			it(`should use options.events when provided`, () => {
@@ -86,7 +85,7 @@ describe('Build', () => {
 				options.events = sampleEvents;
 				const result = instance.initEvents(options);
 				expect(result).toEqual(sampleEvents);
-				expect(isType(result, EventEmitter)).toBe(true);
+				expect(result instanceof EventEmitter).toBe(true);
 			});
 		});
 

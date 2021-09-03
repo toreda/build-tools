@@ -35,7 +35,6 @@
 		"@toreda/eslint-config": "^2.2.0",
 		"@toreda/log": "^0.5.4",
 		"@toreda/prettier-config": "^1.0.1",
-		"@toreda/strong-types": "^0.11.2",
 		"@typescript-eslint/eslint-plugin": "^4.29.3",
 		"@typescript-eslint/parser": "^4.29.3",
 		"@typescript-eslint/typescript-estree": "^4.29.3",
