@@ -1,5 +1,6 @@
 import {BuildOptions} from './build/options';
 import {Clean} from './clean';
+import {CliArgs} from './cli/args';
 import {Config} from './config';
 import {Create} from './create';
 import {EventEmitter} from 'events';
@@ -8,7 +9,7 @@ import {GulpSteps} from './gulp/steps';
 import {Log} from '@toreda/log';
 import {Run} from './run';
 import {fileContents} from './file/contents';
-import {isType} from '@toreda/strong-types';
+import {hideBin} from 'yargs/helpers';
 import yargs from 'yargs';
 
 /**
@@ -41,7 +42,7 @@ export class Build {
 		const log = this.initLog(options);
 		this.log = log.makeLog('Build');
 
-		const cfg = this.initConfig(process.argv.splice(2));
+		const cfg = this.initConfig(hideBin(process.argv));
 		this.run = new Run(cfg, this.events, this.log);
 		this.clean = new Clean(cfg, this.events, this.log);
 		this.create = new Create(cfg, this.events, this.log);
@@ -78,7 +79,7 @@ export class Build {
 			return new EventEmitter();
 		}
 
-		if (!isType(options.events, EventEmitter)) {
+		if (!(options.events instanceof EventEmitter)) {
 			return new EventEmitter();
 		}
 
@@ -98,7 +99,14 @@ export class Build {
 
 		const cfg = new Config();
 
-		const args = yargs(argv).argv;
+		const args: CliArgs = yargs(argv).options({
+			env: {
+				demand: false,
+				type: 'string',
+				default: 'prod',
+				description: 'Build environment'
+			}
+		}).argv as CliArgs;
 
 		if (typeof args.env === 'string') {
 			const lowerEnv = args.env.toLowerCase();
