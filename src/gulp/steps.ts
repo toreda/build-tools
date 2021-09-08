@@ -5,7 +5,6 @@ import {Create} from '../create';
 import {LintOptions} from '../lint/options';
 import {Run} from '../run';
 import {TranspileOptions} from '../transpile/options';
-import {makeString} from '@toreda/strong-types';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const eslint = require('gulp-eslint');
@@ -106,10 +105,11 @@ export class GulpSteps {
 	}
 
 	public async transpile(options: TranspileOptions): Promise<NodeJS.ReadWriteStream> {
-		const tsConfigDir = makeString('./dist', options.tsConfigDirPath);
-		const tsConfigFilname = makeString('tsconfig.json', options.tsConfigFilePath);
+		const tsConfigDir = typeof options.tsConfigDirPath === 'string' ? options.tsConfigDirPath : './dist';
+		const tsConfigFilname =
+			typeof options.tsConfigFilePath === 'string' ? options.tsConfigDirPath : 'tsconfig.json';
 
-		return await this.run.typescript(tsConfigDir(), tsConfigFilname());
+		return await this.run.typescript(tsConfigDir, tsConfigFilname);
 	}
 
 	/**
