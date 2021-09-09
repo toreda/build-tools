@@ -90,7 +90,6 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Build.html#clean" class="tsd-kind-icon">clean</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Build.html#create" class="tsd-kind-icon">create</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Build.html#events" class="tsd-kind-icon">events</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Build.html#gulp" class="tsd-kind-icon">gulp</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Build.html#gulpSteps" class="tsd-kind-icon">gulp<wbr>Steps</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Build.html#log" class="tsd-kind-icon">log</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="Build.html#run" class="tsd-kind-icon">run</a></li>
@@ -120,13 +119,18 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/build.ts:26</li>
+									<li>Defined in build.ts:39</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>options: <a href="../interfaces/BuildOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">BuildOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Configuration options used to initialize Build config.</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="Build.html" class="tsd-signature-type" data-tsd-kind="Class">Build</a></h4>
@@ -142,9 +146,14 @@
 					<div class="tsd-signature tsd-kind-icon">cfg<span class="tsd-signature-symbol">:</span> <a href="Config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/build.ts:19</li>
+							<li>Defined in build.ts:23</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Global config instance.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="clean" class="tsd-anchor"></a>
@@ -152,9 +161,14 @@
 					<div class="tsd-signature tsd-kind-icon">clean<span class="tsd-signature-symbol">:</span> <a href="Clean.html" class="tsd-signature-type" data-tsd-kind="Class">Clean</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/build.ts:21</li>
+							<li>Defined in build.ts:27</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Clean files and folders.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="create" class="tsd-anchor"></a>
@@ -162,9 +176,14 @@
 					<div class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">:</span> <a href="Create.html" class="tsd-signature-type" data-tsd-kind="Class">Create</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/build.ts:22</li>
+							<li>Defined in build.ts:29</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Create files and folders.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="events" class="tsd-anchor"></a>
@@ -172,24 +191,14 @@
 					<div class="tsd-signature tsd-kind-icon">events<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/build.ts:17</li>
+							<li>Defined in build.ts:21</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Global events instance.</p>
+							<p>Global EventEmitter instance.</p>
 						</div>
 					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="gulp" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> gulp</h3>
-					<div class="tsd-signature tsd-kind-icon">gulp<span class="tsd-signature-symbol">:</span> <a href="BuildGulp.html" class="tsd-signature-type" data-tsd-kind="Class">BuildGulp</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in src/build.ts:18</li>
-						</ul>
-					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="gulpSteps" class="tsd-anchor"></a>
@@ -197,9 +206,14 @@
 					<div class="tsd-signature tsd-kind-icon">gulp<wbr>Steps<span class="tsd-signature-symbol">:</span> <a href="GulpSteps.html" class="tsd-signature-type" data-tsd-kind="Class">GulpSteps</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/build.ts:23</li>
+							<li>Defined in build.ts:31</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Build steps wrapped in Gulp compatible functions.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="log" class="tsd-anchor"></a>
@@ -207,9 +221,14 @@
 					<div class="tsd-signature tsd-kind-icon">log<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Log</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/build.ts:24</li>
+							<li>Defined in build.ts:33</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Global log instance.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="run" class="tsd-anchor"></a>
@@ -217,9 +236,14 @@
 					<div class="tsd-signature tsd-kind-icon">run<span class="tsd-signature-symbol">:</span> <a href="Run.html" class="tsd-signature-type" data-tsd-kind="Class">Run</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/build.ts:20</li>
+							<li>Defined in build.ts:25</li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Wrappers to run build processes.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -234,7 +258,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/build.ts:103</li>
+									<li>Defined in build.ts:123</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -260,7 +284,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/build.ts:82</li>
+									<li>Defined in build.ts:95</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -289,7 +313,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/build.ts:64</li>
+									<li>Defined in build.ts:77</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -318,7 +342,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/build.ts:46</li>
+									<li>Defined in build.ts:59</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -373,9 +397,6 @@
 								<a href="Build.html#events" class="tsd-kind-icon">events</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="Build.html#gulp" class="tsd-kind-icon">gulp</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="Build.html#gulpSteps" class="tsd-kind-icon">gulp<wbr>Steps</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -401,9 +422,6 @@
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class">
-						<a href="BuildGulp.html" class="tsd-kind-icon">Build<wbr>Gulp</a>
-					</li>
-					<li class=" tsd-kind-class">
 						<a href="Clean.html" class="tsd-kind-icon">Clean</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -411,6 +429,9 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="Create.html" class="tsd-kind-icon">Create</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="Defaults.html" class="tsd-kind-icon">Defaults</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="GulpSteps.html" class="tsd-kind-icon">Gulp<wbr>Steps</a>
@@ -425,6 +446,12 @@
 						<a href="../interfaces/BuildOptions.html" class="tsd-kind-icon">Build<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="../interfaces/CliArgs.html" class="tsd-kind-icon">Cli<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/FileOp.html" class="tsd-kind-icon">File<wbr>Op</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="../interfaces/FileOptions.html" class="tsd-kind-icon">File<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -433,11 +460,17 @@
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/TranspileOptions.html" class="tsd-kind-icon">Transpile<wbr>Options</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/WebpackOptions.html" class="tsd-kind-icon">Webpack<wbr>Options</a>
+					</li>
 					<li class=" tsd-kind-function">
 						<a href="../modules.html#dirCreate" class="tsd-kind-icon">dir<wbr>Create</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../modules.html#dirDelete" class="tsd-kind-icon">dir<wbr>Delete</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#fileContents" class="tsd-kind-icon">file<wbr>Contents</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../modules.html#filePath" class="tsd-kind-icon">file<wbr>Path</a>
@@ -460,7 +493,7 @@
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
 			</ul>
 		</div>
 	</div>

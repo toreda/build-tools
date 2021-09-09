@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TranspileOptions | @toreda/build-tools</title>
+	<title>WebpackOptions | @toreda/build-tools</title>
 	<meta name="description" content="Documentation for @toreda/build-tools">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,21 +55,28 @@
 					<a href="../modules.html">@toreda/build-tools</a>
 				</li>
 				<li>
-					<a href="TranspileOptions.html">TranspileOptions</a>
+					<a href="WebpackOptions.html">WebpackOptions</a>
 				</li>
 			</ul>
-			<h1>Interface TranspileOptions</h1>
+			<h1>Interface WebpackOptions</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Options used to configure the webpack process which runs via API.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">TranspileOptions</span>
+						<span class="target">WebpackOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -80,8 +87,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="TranspileOptions.html#tsConfigDirPath" class="tsd-kind-icon">ts<wbr>Config<wbr>Dir<wbr>Path</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="TranspileOptions.html#tsConfigFilePath" class="tsd-kind-icon">ts<wbr>Config<wbr>File<wbr>Path</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="WebpackOptions.html#cfgPathDev" class="tsd-kind-icon">cfg<wbr>Path<wbr>Dev</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="WebpackOptions.html#cfgPathProd" class="tsd-kind-icon">cfg<wbr>Path<wbr>Prod</a></li>
 							</ul>
 						</section>
 					</div>
@@ -90,35 +97,24 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="tsConfigDirPath" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ts<wbr>Config<wbr>Dir<wbr>Path</h3>
-					<div class="tsd-signature tsd-kind-icon">ts<wbr>Config<wbr>Dir<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="cfgPathDev" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> cfg<wbr>Path<wbr>Dev</h3>
+					<div class="tsd-signature tsd-kind-icon">cfg<wbr>Path<wbr>Dev<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in transpile/options.ts:11</li>
+							<li>Defined in webpack/options.ts:8</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Path to dir containing tsconfig.json.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="tsConfigFilePath" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> ts<wbr>Config<wbr>File<wbr>Path</h3>
-					<div class="tsd-signature tsd-kind-icon">ts<wbr>Config<wbr>File<wbr>Path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="cfgPathProd" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> cfg<wbr>Path<wbr>Prod</h3>
+					<div class="tsd-signature tsd-kind-icon">cfg<wbr>Path<wbr>Prod<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in transpile/options.ts:9</li>
+							<li>Defined in webpack/options.ts:7</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Path to tsconfig.json.
-							Uses &#39;./tsconfig.json&#39; by default when not defined.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -174,24 +170,24 @@
 					<li class=" tsd-kind-interface">
 						<a href="LintOptions.html" class="tsd-kind-icon">Lint<wbr>Options</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="TranspileOptions.html" class="tsd-kind-icon">Transpile<wbr>Options</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="TranspileOptions.html" class="tsd-kind-icon">Transpile<wbr>Options</a>
+						<a href="WebpackOptions.html" class="tsd-kind-icon">Webpack<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="TranspileOptions.html#tsConfigDirPath" class="tsd-kind-icon">ts<wbr>Config<wbr>Dir<wbr>Path</a>
+								<a href="WebpackOptions.html#cfgPathDev" class="tsd-kind-icon">cfg<wbr>Path<wbr>Dev</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="TranspileOptions.html#tsConfigFilePath" class="tsd-kind-icon">ts<wbr>Config<wbr>File<wbr>Path</a>
+								<a href="WebpackOptions.html#cfgPathProd" class="tsd-kind-icon">cfg<wbr>Path<wbr>Prod</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface">
-						<a href="WebpackOptions.html" class="tsd-kind-icon">Webpack<wbr>Options</a>
-					</li>
 					<li class=" tsd-kind-function">
 						<a href="../modules.html#dirCreate" class="tsd-kind-icon">dir<wbr>Create</a>
 					</li>

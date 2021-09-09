@@ -1102,15 +1102,15 @@
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@toreda/eslint-config/-/eslint-config-2.2.0.tgz#ee3e0bb8d2263461ea214e04c728f498f2b09278"
 
-"@toreda/log@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@toreda/log/-/log-0.6.0.tgz#61e604ac5eeaa93b4ff1e639abca54e3ab3a6791"
+"@toreda/log@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@toreda/log/-/log-0.6.2.tgz#83f8667bb8c2a8a0522ea50cf8b1e595a4753fea"
 
 "@toreda/prettier-config@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@toreda/prettier-config/-/prettier-config-1.0.1.tgz#bd6c47352aa99560617f0f4a29f16ab7c3070b86"
 
-"@toreda/types@^1.2.2":
+"@toreda/types@^1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@toreda/types/-/types-1.3.0.tgz#afb2a33069950d5e3eb83cc331df91f14b1bf142"
 

@@ -65,6 +65,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Inject data and replace values in template files.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -111,16 +118,26 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/inject.ts:13</li>
+									<li>Defined in inject.ts:22</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>cfg: <a href="Config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Global config instance.</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>events: <span class="tsd-signature-type">EventEmitter</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Global EventEmitter instance.</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="Inject.html" class="tsd-signature-type" data-tsd-kind="Class">Inject</a></h4>
@@ -136,7 +153,7 @@
 					<div class="tsd-signature tsd-kind-icon">cfg<span class="tsd-signature-symbol">:</span> <a href="Config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/inject.ts:11</li>
+							<li>Defined in inject.ts:16</li>
 						</ul>
 					</aside>
 				</section>
@@ -146,7 +163,7 @@
 					<div class="tsd-signature tsd-kind-icon">events<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/inject.ts:10</li>
+							<li>Defined in inject.ts:15</li>
 						</ul>
 					</aside>
 				</section>
@@ -163,7 +180,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/inject.ts:26</li>
+									<li>Defined in inject.ts:35</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -204,9 +221,6 @@
 						<a href="Build.html" class="tsd-kind-icon">Build</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="BuildGulp.html" class="tsd-kind-icon">Build<wbr>Gulp</a>
-					</li>
-					<li class=" tsd-kind-class">
 						<a href="Clean.html" class="tsd-kind-icon">Clean</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -214,6 +228,9 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="Create.html" class="tsd-kind-icon">Create</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="Defaults.html" class="tsd-kind-icon">Defaults</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="GulpSteps.html" class="tsd-kind-icon">Gulp<wbr>Steps</a>
@@ -246,6 +263,12 @@
 						<a href="../interfaces/BuildOptions.html" class="tsd-kind-icon">Build<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="../interfaces/CliArgs.html" class="tsd-kind-icon">Cli<wbr>Args</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/FileOp.html" class="tsd-kind-icon">File<wbr>Op</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="../interfaces/FileOptions.html" class="tsd-kind-icon">File<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
@@ -254,11 +277,17 @@
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/TranspileOptions.html" class="tsd-kind-icon">Transpile<wbr>Options</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/WebpackOptions.html" class="tsd-kind-icon">Webpack<wbr>Options</a>
+					</li>
 					<li class=" tsd-kind-function">
 						<a href="../modules.html#dirCreate" class="tsd-kind-icon">dir<wbr>Create</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../modules.html#dirDelete" class="tsd-kind-icon">dir<wbr>Delete</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#fileContents" class="tsd-kind-icon">file<wbr>Contents</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="../modules.html#filePath" class="tsd-kind-icon">file<wbr>Path</a>
@@ -281,7 +310,7 @@
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
 			</ul>
 		</div>
 	</div>
