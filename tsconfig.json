@@ -5,14 +5,14 @@
 
 	"compilerOptions": {
 		"allowUnreachableCode": false,
-		"alwaysStrict": false,
+		"alwaysStrict": true,
 		"declaration": true,
 		"esModuleInterop": true,
 		"isolatedModules": false,
-		"lib": ["es6", "ES2015", "ES2017.TypedArrays"],
+		"lib": ["es6","ES2017", "ES2015"],
 		"module": "commonjs",
 		"moduleResolution": "node",
-		"noImplicitUseStrict": true,
+		"noImplicitUseStrict": false,
 		"outDir": "./dist",
 		"preserveConstEnums": true,
 		"removeComments": true,
@@ -24,11 +24,20 @@
 		"strictNullChecks": true,
 		"strictPropertyInitialization": false,
 		"target": "es2015",
+		"traceResolution": false
 	},
 	"ts-jest": {
-		"module": "commonjs"
+		"module": "commonjs",
+		"compilerOptions": {
+			"declaration": false,
+			"isolatedModules": true,
+			"sourceMap": false
+		}
 	},
 	"ts-node": {
-		"module": "commonjs"
+		"module": "commonjs",
+		"compilerOptions": {
+			"sourceMap": false
+		}
 	}
 }

@@ -72,7 +72,7 @@ yarn add @toreda/build-tools --dev
 
 ### Install using NPM
 ```bash
-npm install build-tools --save-dev
+npm install @toreda/build-tools --save-dev
 ```
 
 
