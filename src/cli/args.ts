@@ -8,5 +8,9 @@ export interface CliArgs {
 	[k: string]: unknown;
 	env: string;
 	profiler: boolean;
-	mockOperations: boolean;
+	debugMode: boolean;
+	autoMockInJest: boolean;
+	mockAll: boolean;
+	mockFileReads: boolean;
+	mockFileWrites: boolean;
 }

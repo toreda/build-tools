@@ -3,6 +3,7 @@ import {BuildOptions} from '../src/build/options';
 import {CliArgs} from '../src/cli/args';
 import {EventEmitter} from 'events';
 import {Log} from '@toreda/log';
+import {cliArgsMakeMock} from './_data/cli/args/make/mock';
 
 describe('Build', () => {
 	let events: EventEmitter;
@@ -12,11 +13,7 @@ describe('Build', () => {
 	let options: BuildOptions;
 
 	beforeEach(() => {
-		args = {
-			env: 'prod',
-			mockOperations: false,
-			profiler: false
-		};
+		args = cliArgsMakeMock();
 
 		options = {
 			env: 'prod',
@@ -62,9 +59,14 @@ describe('Build', () => {
 			it(`should use options.log when provided`, () => {
 				const sampleLog = new Log();
 				options.log = sampleLog;
+				const spy = jest.spyOn(sampleLog, 'makeLog');
+
 				const result = instance.initLog(options);
-				expect(result).toEqual(sampleLog);
+				expect(spy).toHaveBeenCalledTimes(1);
+				expect(spy).toHaveBeenLastCalledWith('Build');
 				expect(result instanceof Log).toBe(true);
+
+				spy.mockRestore();
 			});
 		});
 
@@ -100,14 +102,14 @@ describe('Build', () => {
 
 		describe('initConfig', () => {
 			it(`should set buildMode to prod when args.env is prod`, () => {
-				args.env = 'prod';
+				args.buildMode = 'prod';
 				const result = instance.initConfig(args, options, log);
 
 				expect(result.buildMode).toBe('prod');
 			});
 
 			it(`should set buildMode to prod args.env is dev`, () => {
-				args.env = 'dev';
+				args.buildMode = 'dev';
 				const result = instance.initConfig(args, options, log);
 
 				expect(result.buildMode).toBe('dev');

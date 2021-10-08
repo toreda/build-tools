@@ -4,6 +4,7 @@ import {Config} from '../src/config';
 import {EventEmitter} from 'events';
 import {Log} from '@toreda/log';
 import {Run} from '../src/run';
+import {cliArgsMakeMock} from './_data/cli/args/make/mock';
 
 describe('Run', () => {
 	let instance: Run;
@@ -14,11 +15,7 @@ describe('Run', () => {
 	let options: BuildOptions;
 
 	beforeAll(() => {
-		args = {
-			env: 'prod',
-			mockOperations: false,
-			profiler: false
-		};
+		args = cliArgsMakeMock();
 		options = {};
 		log = new Log();
 		cfg = new Config(args, options, log);

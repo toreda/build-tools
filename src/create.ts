@@ -22,20 +22,21 @@ export class Create {
 	}
 
 	public webpackCfg(cfg: Config): Configuration {
-		return {};
+		return {
+			entry: cfg.entry,
+			target: [cfg.buildMode],
+			parallelism: 5
+		};
 	}
+
 	/**
 	 * Create dir at target path. Fails by default when a file or dir already exists.
 	 * @param path					Creates dir at this path.
 	 * @param overwriteExisting		Fails when
 	 * @returns
 	 */
-	public async dir(path: string, overwrite?: boolean): Promise<boolean> {
-		if (this.cfg.mockOperations === true) {
-			return true;
-		}
-
-		return dirCreate(path, {
+	public dir(path: string, overwrite?: boolean): Promise<boolean> {
+		return dirCreate(this.cfg, path, {
 			overwrite: overwrite === true ? true : false
 		});
 	}

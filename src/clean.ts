@@ -50,10 +50,7 @@ export class Clean {
 			}
 
 			try {
-				// Skip real file operations when flalg is active.
-				if (this.cfg.mockOperations !== true) {
-					await dirDelete(cleanPath);
-				}
+				await dirDelete(this.cfg, cleanPath);
 			} catch (e) {
 				return reject(e);
 			}

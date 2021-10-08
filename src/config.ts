@@ -1,9 +1,12 @@
 import {BuildMode} from './build/mode';
 import {BuildOptions} from './build/options';
 import {CliArgs} from '.';
+import {ConfigMocks} from './config/mocks';
 import {Defaults} from './defaults';
 import {Log} from '@toreda/log';
 import {WebpackOptions} from './webpack/options';
+import {configBoolean} from './config/boolean';
+import {configValue} from './config/value';
 
 /**
  * Configuration created from initial build options. All properties are guaranteed to
@@ -15,50 +18,23 @@ export class Config {
 	public readonly entry: string;
 	public readonly buildMode: BuildMode;
 	public readonly profiler: boolean;
-	public readonly mockOperations: boolean;
 	public readonly log: Log;
+	public readonly debugMode: boolean;
+	public readonly mocks: ConfigMocks;
+	public readonly autoMockInJest: boolean;
 
 	constructor(args: CliArgs, options: BuildOptions, baseLog: Log) {
 		this.log = baseLog.makeLog('Config');
-		this.buildMode = this.makeBuildMode(args, options);
-		this.profiler = this.makeProfiler(args, options);
-		this.mockOperations = this.makeMockOnly(args, options);
-	}
+		this.buildMode = configValue<BuildMode>('buildMode', 'prod', args, options);
+		this.profiler = configBoolean('profiler', false, args, options);
 
-	public makeMockOnly(args: CliArgs, options: BuildOptions): boolean {
-		if (typeof args.mockOperations === 'boolean') {
-			return args.mockOperations;
-		}
-
-		if (typeof options.mockOperations === 'boolean') {
-			return options.mockOperations;
-		}
-
-		return Defaults.MockOperations;
-	}
-
-	public makeProfiler(args: CliArgs, options: BuildOptions): boolean {
-		if (typeof args?.profiler === 'boolean') {
-			return args.profiler;
-		}
-
-		if (typeof options?.profiler === 'boolean') {
-			return options?.profiler;
-		}
-
-		return Defaults.ProfilerEnabled;
-	}
-
-	public makeBuildMode(args: CliArgs, options: BuildOptions): BuildMode {
-		if (args.env === 'dev' || args.env === 'prod') {
-			return args.env;
-		}
-
-		if (options.env === 'dev' || options.env === 'prod') {
-			return options.env;
-		}
-
-		return Defaults.BuildMode;
+		this.mocks = {
+			all: configBoolean('mockAll', false, args, options),
+			fileReads: configBoolean('mockFileReads', false, args, options),
+			fileWrites: configBoolean('mockFileWrites', false, args, options)
+		};
+		this.debugMode = configBoolean('debugMode', false, args, options);
+		this.autoMockInJest = configBoolean('autoMockInJest', true, args, options);
 	}
 
 	/**
