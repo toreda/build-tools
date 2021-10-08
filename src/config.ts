@@ -15,33 +15,50 @@ export class Config {
 	public readonly entry: string;
 	public readonly buildMode: BuildMode;
 	public readonly profiler: boolean;
+	public readonly mockOperations: boolean;
 	public readonly log: Log;
 
 	constructor(args: CliArgs, options: BuildOptions, baseLog: Log) {
 		this.log = baseLog.makeLog('Config');
-		this.buildMode = this.makeBuildMode(args);
-		this.profiler = this.makeProfiler(args);
+		this.buildMode = this.makeBuildMode(args, options);
+		this.profiler = this.makeProfiler(args, options);
+		this.mockOperations = this.makeMockOnly(args, options);
 	}
 
-	public makeProfiler(args: CliArgs): boolean {
-		if (!args || typeof args.profiler !== 'boolean') {
-			return Defaults.ProfilerEnabled;
+	public makeMockOnly(args: CliArgs, options: BuildOptions): boolean {
+		if (typeof args.mockOperations === 'boolean') {
+			return args.mockOperations;
 		}
 
-		return args.profiler;
+		if (typeof options.mockOperations === 'boolean') {
+			return options.mockOperations;
+		}
+
+		return Defaults.MockOperations;
 	}
 
-	public makeBuildMode(args: CliArgs): BuildMode {
-		if (!args || typeof args.buildMode !== 'string') {
-			return Defaults.BuildMode;
+	public makeProfiler(args: CliArgs, options: BuildOptions): boolean {
+		if (typeof args?.profiler === 'boolean') {
+			return args.profiler;
 		}
 
-		const lower = args.buildMode.toLowerCase();
-		if (lower !== 'dev' && lower !== 'prod') {
-			return Defaults.BuildMode;
+		if (typeof options?.profiler === 'boolean') {
+			return options?.profiler;
 		}
 
-		return lower;
+		return Defaults.ProfilerEnabled;
+	}
+
+	public makeBuildMode(args: CliArgs, options: BuildOptions): BuildMode {
+		if (args.env === 'dev' || args.env === 'prod') {
+			return args.env;
+		}
+
+		if (options.env === 'dev' || options.env === 'prod') {
+			return options.env;
+		}
+
+		return Defaults.BuildMode;
 	}
 
 	/**
@@ -52,7 +69,7 @@ export class Config {
 	 * @returns
 	 */
 	public getWebpackCfgPath(options: WebpackOptions): string {
-		if (this.env === 'dev') {
+		if (this.buildMode === 'dev') {
 			if (typeof options.cfgPathDev === 'string') {
 				return options.cfgPathDev;
 			} else {

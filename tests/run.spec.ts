@@ -1,3 +1,5 @@
+import {BuildOptions, CliArgs} from '../src';
+
 import {Config} from '../src/config';
 import {EventEmitter} from 'events';
 import {Log} from '@toreda/log';
@@ -8,10 +10,18 @@ describe('Run', () => {
 	let events: EventEmitter;
 	let cfg: Config;
 	let log: Log;
+	let args: CliArgs;
+	let options: BuildOptions;
 
 	beforeAll(() => {
+		args = {
+			env: 'prod',
+			mockOperations: false,
+			profiler: false
+		};
+		options = {};
 		log = new Log();
-		cfg = new Config();
+		cfg = new Config(args, options, log);
 		events = new EventEmitter();
 		instance = new Run(cfg, events, log);
 	});

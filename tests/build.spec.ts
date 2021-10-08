@@ -1,5 +1,6 @@
 import {Build} from '../src/build';
 import {BuildOptions} from '../src/build/options';
+import {CliArgs} from '../src/cli/args';
 import {EventEmitter} from 'events';
 import {Log} from '@toreda/log';
 
@@ -7,6 +8,24 @@ describe('Build', () => {
 	let events: EventEmitter;
 	let log: Log;
 	let instance: Build;
+	let args: CliArgs;
+	let options: BuildOptions;
+
+	beforeEach(() => {
+		args = {
+			env: 'prod',
+			mockOperations: false,
+			profiler: false
+		};
+
+		options = {
+			env: 'prod',
+			mockOperations: false,
+			profiler: false,
+			events: events,
+			log: log
+		};
+	});
 
 	describe('Constructor', () => {
 		log = new Log();
@@ -19,16 +38,6 @@ describe('Build', () => {
 	});
 
 	describe('Implementation', () => {
-		let options: BuildOptions;
-
-		beforeEach(() => {
-			options = {
-				env: 'prod',
-				events: events,
-				log: log
-			};
-		});
-
 		describe('initLog', () => {
 			it(`should make a new log instance options is not provided`, () => {
 				const result = instance.initLog();
@@ -90,12 +99,18 @@ describe('Build', () => {
 		});
 
 		describe('initConfig', () => {
-			it(`should set env to prod args.env is prod`, () => {
-				const result = instance.initConfig(['a', 'b', 'aaaa']);
+			it(`should set buildMode to prod when args.env is prod`, () => {
+				args.env = 'prod';
+				const result = instance.initConfig(args, options, log);
+
+				expect(result.buildMode).toBe('prod');
 			});
 
-			it(`should set env to prod args.env is dev`, () => {
-				const result = instance.initConfig(['a', 'b', 'aaaa']);
+			it(`should set buildMode to prod args.env is dev`, () => {
+				args.env = 'dev';
+				const result = instance.initConfig(args, options, log);
+
+				expect(result.buildMode).toBe('dev');
 			});
 		});
 	});

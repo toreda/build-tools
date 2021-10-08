@@ -22,6 +22,12 @@ export class Cli {
 				default: false,
 				demand: false,
 				describe: 'Run profiler. Slows build, but produces a detailed CPU usage report'
+			},
+			mockOperations: {
+				type: 'boolean',
+				default: false,
+				demand: false,
+				describe: 'Use mock file operations.'
 			}
 		}).argv as CliArgs;
 	}

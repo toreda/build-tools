@@ -8,4 +8,5 @@ export interface CliArgs {
 	[k: string]: unknown;
 	env: string;
 	profiler: boolean;
+	mockOperations: boolean;
 }

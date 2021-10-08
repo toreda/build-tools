@@ -19,4 +19,6 @@ export interface BuildOptions {
 	log?: Log;
 	/** Options for webpack build. Deefaults */
 	webpack?: BuildWebpackOptions;
+	profiler?: boolean;
+	mockOperations?: boolean;
 }

@@ -30,7 +30,11 @@ export class Create {
 	 * @param overwriteExisting		Fails when
 	 * @returns
 	 */
-	public dir(path: string, overwrite?: boolean): Promise<boolean> {
+	public async dir(path: string, overwrite?: boolean): Promise<boolean> {
+		if (this.cfg.mockOperations === true) {
+			return true;
+		}
+
 		return dirCreate(path, {
 			overwrite: overwrite === true ? true : false
 		});
