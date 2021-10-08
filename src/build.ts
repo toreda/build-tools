@@ -1,6 +1,7 @@
 import {BuildOptions} from './build/options';
 import {Clean} from './clean';
-import {CliArgs} from './cli/args';
+import {Cli} from './cli';
+import {CliArgs} from '.';
 import {Config} from './config';
 import {Create} from './create';
 import {EventEmitter} from 'events';
@@ -9,8 +10,6 @@ import {GulpSteps} from './gulp/steps';
 import {Log} from '@toreda/log';
 import {Run} from './run';
 import {fileContents} from './file/contents';
-import {hideBin} from 'yargs/helpers';
-import yargs from 'yargs';
 
 /**
  *
@@ -31,6 +30,8 @@ export class Build {
 	public readonly gulpSteps: GulpSteps;
 	/** Global log instance. */
 	public readonly log: Log;
+	/** Command line args */
+	public readonly cli: Cli;
 
 	/**
 	 *
@@ -39,14 +40,14 @@ export class Build {
 	constructor(options: BuildOptions) {
 		this.events = this.initEvents();
 
-		const log = this.initLog(options);
-		this.log = log.makeLog('Build');
+		this.log = this.initLog(options);
+		this.cli = new Cli(this.log);
 
-		const cfg = this.initConfig(hideBin(process.argv));
-		this.run = new Run(cfg, this.events, this.log);
-		this.clean = new Clean(cfg, this.events, this.log);
-		this.create = new Create(cfg, this.events, this.log);
-		this.cfg = new Config();
+		this.cfg = this.initConfig(this.cli.getArgs(), options, this.log);
+		this.run = new Run(this.cfg, this.events, this.log);
+		this.clean = new Clean(this.cfg, this.events, this.log);
+		this.create = new Create(this.cfg, this.events, this.log);
+
 		this.gulpSteps = new GulpSteps(this.run, this.create, this.clean);
 	}
 
@@ -58,14 +59,14 @@ export class Build {
 	 */
 	public initLog(options?: BuildOptions): Log {
 		if (!options || !options.log) {
-			return new Log();
+			return new Log().makeLog('Build');
 		}
 
 		if (!(options.log instanceof Log)) {
-			return new Log();
+			return new Log().makeLog('Build');
 		}
 
-		return options.log;
+		return options.log.makeLog('Build');
 	}
 
 	/**
@@ -92,32 +93,10 @@ export class Build {
 	 * @param argv
 	 * @returns
 	 */
-	public initConfig(argv: string[]): Config {
-		if (!yargs) {
-			throw new Error('Failed parsing args - could not find yargs npm package.');
-		}
+	public initConfig(args: CliArgs, options: BuildOptions, baseLog: Log): Config {
+		const log = baseLog.makeLog('initConfig');
 
-		const cfg = new Config();
-
-		const args: CliArgs = yargs(argv).options({
-			env: {
-				demand: false,
-				type: 'string',
-				default: 'prod',
-				description: 'Build environment'
-			}
-		}).argv as CliArgs;
-
-		if (typeof args.env === 'string') {
-			const lowerEnv = args.env.toLowerCase();
-			if (lowerEnv === 'dev' || lowerEnv === 'development') {
-				cfg.env = 'dev';
-			} else {
-				cfg.env = 'prod';
-			}
-		}
-
-		return cfg;
+		return new Config(args, options, log);
 	}
 
 	public async getContents(path: string, options?: FileOptions): Promise<string | null> {

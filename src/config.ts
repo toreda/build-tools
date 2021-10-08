@@ -1,5 +1,8 @@
+import {BuildMode} from './build/mode';
 import {BuildOptions} from './build/options';
+import {CliArgs} from '.';
 import {Defaults} from './defaults';
+import {Log} from '@toreda/log';
 import {WebpackOptions} from './webpack/options';
 
 /**
@@ -9,14 +12,36 @@ import {WebpackOptions} from './webpack/options';
  * @category Config
  */
 export class Config {
-	public env: string;
+	public readonly entry: string;
+	public readonly buildMode: BuildMode;
+	public readonly profiler: boolean;
+	public readonly log: Log;
 
-	constructor(options?: BuildOptions) {
-		this.env = 'dev';
+	constructor(args: CliArgs, options: BuildOptions, baseLog: Log) {
+		this.log = baseLog.makeLog('Config');
+		this.buildMode = this.makeBuildMode(args);
+		this.profiler = this.makeProfiler(args);
+	}
 
-		if (options && typeof options.env === 'string') {
-			this.env = options.env;
+	public makeProfiler(args: CliArgs): boolean {
+		if (!args || typeof args.profiler !== 'boolean') {
+			return Defaults.ProfilerEnabled;
 		}
+
+		return args.profiler;
+	}
+
+	public makeBuildMode(args: CliArgs): BuildMode {
+		if (!args || typeof args.buildMode !== 'string') {
+			return Defaults.BuildMode;
+		}
+
+		const lower = args.buildMode.toLowerCase();
+		if (lower !== 'dev' && lower !== 'prod') {
+			return Defaults.BuildMode;
+		}
+
+		return lower;
 	}
 
 	/**

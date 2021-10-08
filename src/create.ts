@@ -1,4 +1,5 @@
 import {Config} from './config';
+import {Configuration} from 'webpack';
 import {EventEmitter} from 'events';
 import {Log} from '@toreda/log';
 import {dirCreate} from './dir/create';
@@ -17,9 +18,12 @@ export class Create {
 	constructor(cfg: Config, events: EventEmitter, log: Log) {
 		this.events = events;
 		this.cfg = cfg;
-		this.log = log.makeLog('Create');
+		this.log = log.makeLog('create');
 	}
 
+	public webpackCfg(cfg: Config): Configuration {
+		return {};
+	}
 	/**
 	 * Create dir at target path. Fails by default when a file or dir already exists.
 	 * @param path					Creates dir at this path.

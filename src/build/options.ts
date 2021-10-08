@@ -1,3 +1,4 @@
+import {BuildWebpackOptions} from './webpack/options';
 import {EventEmitter} from 'events';
 import {Log} from '@toreda/log';
 
@@ -16,4 +17,6 @@ export interface BuildOptions {
 	env?: string;
 	/** Global logging instance for debugging. Log output to console disabled by default */
 	log?: Log;
+	/** Options for webpack build. Deefaults */
+	webpack?: BuildWebpackOptions;
 }
