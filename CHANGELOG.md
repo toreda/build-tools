@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.0] - 2021-08-27
+## [0.4.1] - 2021-10-23
+* Upgraded all dependencies to latest versions. Specific `eslint` and `gulp-eslint` versions are causing conflicts for some packages. The version conflicts are not related to this package, but are solved by temporarrily adding `resolutions` for `eslint` and `lodash`.
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/olivierlacan/keep-a-changelog/releases/tag/v0.1.0
+[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/olivierlacan/keep-a-changelog/releases/tag/v0.4.1
