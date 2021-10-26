@@ -1,12 +1,13 @@
 import {BuildOptions} from './build/options';
 import {Clean} from './clean';
 import {Cli} from './cli';
-import {CliArgs} from '.';
+import {CliArgs} from './cli/args';
 import {Config} from './config';
 import {Create} from './create';
 import {EventEmitter} from 'events';
 import {FileOptions} from './file/options';
 import {GulpSteps} from './gulp/steps';
+import {Linter} from './linter';
 import {Log} from '@toreda/log';
 import {Run} from './run';
 import {fileContents} from './file/contents';
@@ -28,6 +29,8 @@ export class Build {
 	public readonly create: Create;
 	/** Build steps wrapped in Gulp compatible functions. */
 	public readonly gulpSteps: GulpSteps;
+	/** Perform linter operations using ESLint. */
+	public readonly linter: Linter;
 	/** Global log instance. */
 	public readonly log: Log;
 	/** Command line args */
@@ -47,8 +50,9 @@ export class Build {
 		this.run = new Run(this.cfg, this.events, this.log);
 		this.clean = new Clean(this.cfg, this.events, this.log);
 		this.create = new Create(this.cfg, this.events, this.log);
+		this.linter = new Linter(this.cfg, this.events, this.log);
 
-		this.gulpSteps = new GulpSteps(this.run, this.create, this.clean);
+		this.gulpSteps = new GulpSteps(this.run, this.create, this.linter, this.clean);
 	}
 
 	/**

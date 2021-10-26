@@ -2,12 +2,10 @@ import {dest, src} from 'gulp';
 
 import {Clean} from '../clean';
 import {Create} from '../create';
-import {LintOptions} from '../lint/options';
+import {Linter} from '../linter';
+import {LinterTarget} from '../linter/target';
 import {Run} from '../run';
 import {TranspileOptions} from '../transpile/options';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const eslint = require('gulp-eslint');
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const nunjucksRender = require('gulp-nunjucks-render');
@@ -21,7 +19,7 @@ export class GulpSteps {
 	public readonly create: Create;
 	/** Clean files & folders in preparation for build. */
 	public readonly clean: Clean;
-
+	public readonly linter: Linter;
 	/**
 	 * Constructor
 	 * @param build
@@ -29,10 +27,11 @@ export class GulpSteps {
 	 * @param create
 	 * @param clean
 	 */
-	constructor(run: Run, create: Create, clean: Clean) {
+	constructor(run: Run, create: Create, linter: Linter, clean: Clean) {
 		this.run = run;
 		this.create = create;
 		this.clean = clean;
+		this.linter = linter;
 	}
 
 	/**
@@ -41,18 +40,6 @@ export class GulpSteps {
 	 */
 	public async webpack(): Promise<NodeJS.ReadWriteStream> {
 		await this.run.webpack();
-
-		return src('.', {allowEmpty: true});
-	}
-
-	/**
-	 * Run lint
-	 * @param options
-	 * @returns
-	 */
-	public async lint(options: LintOptions): Promise<NodeJS.ReadWriteStream> {
-		const lintPath = options.path ? options.path : 'src/**';
-		this.eslint(lintPath);
 
 		return src('.', {allowEmpty: true});
 	}
@@ -112,35 +99,14 @@ export class GulpSteps {
 		return await this.run.typescript(tsConfigDir, tsConfigFilname);
 	}
 
-	/**
-	 * Run eslint inside gulp.
-	 * @param lintPaths			Target paths to lint.
-	 * @returns
-	 */
-	public eslint(lintPaths?: string | string[]): NodeJS.ReadWriteStream {
-		const defaultPath = 'src/**';
-		let paths: string[] = [];
+	public async lint(tgt: LinterTarget): Promise<NodeJS.ReadWriteStream> {
+		const result = await this.linter.execute(tgt);
 
-		if (Array.isArray(lintPaths)) {
-			paths = lintPaths;
-		} else if (typeof lintPaths === 'string') {
-			paths.push(lintPaths);
-		} else {
-			paths.push(defaultPath);
-		}
 
-		return (
-			src(paths)
-				// eslint() attaches the lint output to the "eslint" property
-				// of the file object so it can be used by other modules.
-				.pipe(eslint())
-				// eslint.format() outputs the lint results to the console.
-				// Alternatively use eslint.formatEach() (see Docs).
-				.pipe(eslint.format())
-				// To have the process exit with an error code (1) on
-				// lint error, return the stream and pipe to failAfterError last.
-				.pipe(eslint.failAfterError())
-		);
+
+		return src([], {
+			read: false
+		});
 	}
 
 	public renderNunjucksHtml(

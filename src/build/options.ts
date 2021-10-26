@@ -1,5 +1,6 @@
 import {BuildWebpackOptions} from './webpack/options';
 import {EventEmitter} from 'events';
+import {LinterOptions} from '../linter/options';
 import {Log} from '@toreda/log';
 
 /**
@@ -28,4 +29,5 @@ export interface BuildOptions {
 	mockFileReads?: boolean;
 	mockFileWrites?: boolean;
 	debugMode?: boolean;
+	linter?: LinterOptions;
 }

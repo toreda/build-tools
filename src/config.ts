@@ -1,6 +1,7 @@
 import {BuildMode} from './build/mode';
 import {BuildOptions} from './build/options';
 import {CliArgs} from '.';
+import {ConfigLinter} from './config/linter';
 import {ConfigMocks} from './config/mocks';
 import {Defaults} from './defaults';
 import {Log} from '@toreda/log';
@@ -22,6 +23,7 @@ export class Config {
 	public readonly debugMode: boolean;
 	public readonly mocks: ConfigMocks;
 	public readonly autoMockInJest: boolean;
+	public readonly linter: ConfigLinter;
 
 	constructor(args: CliArgs, options: BuildOptions, baseLog: Log) {
 		this.log = baseLog.makeLog('Config');
@@ -35,6 +37,8 @@ export class Config {
 		};
 		this.debugMode = configBoolean('debugMode', false, args, options);
 		this.autoMockInJest = configBoolean('autoMockInJest', true, args, options);
+
+		this.linter = new ConfigLinter(options?.linter);
 	}
 
 	/**
