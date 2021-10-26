@@ -4,6 +4,7 @@ import {Clean} from '../clean';
 import {Create} from '../create';
 import {Linter} from '../linter';
 import {LinterTarget} from '../linter/target';
+import {Log} from '@toreda/log';
 import {Run} from '../run';
 import {TranspileOptions} from '../transpile/options';
 
@@ -14,12 +15,13 @@ const nunjucksRender = require('gulp-nunjucks-render');
  * Build steps that can be used directly in
  */
 export class GulpSteps {
-	public readonly run: Run;
+	private readonly run: Run;
 	/** Create files and directories. */
-	public readonly create: Create;
+	private readonly create: Create;
 	/** Clean files & folders in preparation for build. */
-	public readonly clean: Clean;
-	public readonly linter: Linter;
+	private readonly clean: Clean;
+	private readonly linter: Linter;
+	private readonly log: Log;
 	/**
 	 * Constructor
 	 * @param build
@@ -27,11 +29,12 @@ export class GulpSteps {
 	 * @param create
 	 * @param clean
 	 */
-	constructor(run: Run, create: Create, linter: Linter, clean: Clean) {
+	constructor(run: Run, create: Create, linter: Linter, clean: Clean, log: Log) {
 		this.run = run;
 		this.create = create;
 		this.clean = clean;
 		this.linter = linter;
+		this.log = log.makeLog('GulpSteps');
 	}
 
 	/**
@@ -99,10 +102,24 @@ export class GulpSteps {
 		return await this.run.typescript(tsConfigDir, tsConfigFilname);
 	}
 
+	/**
+	 * Lint all source files identified by target srcPattern globs.
+	 * @param tgt
+	 * @returns
+	 */
 	public async lint(tgt: LinterTarget): Promise<NodeJS.ReadWriteStream> {
-		const result = await this.linter.execute(tgt);
+		const fnLog = this.log.makeLog('lint');
+		const summary = await this.linter.execute(tgt);
 
+		if (!summary.status.success) {
+			const msg = `Linter did not complete successfully due to error code '${summary.status.code}'. ${summary.status.description}.`;
 
+			if (tgt.abortOnLimitBreak === true) {
+				throw new Error(msg);
+			} else {
+				fnLog.error(msg);
+			}
+		}
 
 		return src([], {
 			read: false

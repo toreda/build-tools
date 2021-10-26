@@ -11,6 +11,6 @@ const build = new Build({
 
 (async (): Promise<void> => {
 	await build.linter.execute({
-		srcPatterns: ['./examples/file.ts']
+		srcPatterns: ['examples/file.ts', 'examples/**/**.ts']
 	});
 })();

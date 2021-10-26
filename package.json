@@ -1,6 +1,6 @@
 {
 	"name": "@toreda/build-tools",
-	"version": "0.5.0",
+	"version": "0.5.3",
 	"description": "",
 	"public": true,
 	"main": "./dist/index.js",

@@ -52,7 +52,7 @@ export class Build {
 		this.create = new Create(this.cfg, this.events, this.log);
 		this.linter = new Linter(this.cfg, this.events, this.log);
 
-		this.gulpSteps = new GulpSteps(this.run, this.create, this.linter, this.clean);
+		this.gulpSteps = new GulpSteps(this.run, this.create, this.linter, this.clean, this.log);
 	}
 
 	/**

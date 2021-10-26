@@ -20,11 +20,29 @@ export class Linter {
 		this.events = events;
 
 		this._eslint = new ESLint(cfg.linter.eslintOptions());
+		this.execute = this.execute.bind(this);
+	}
+
+	public assertTarget(tgt: LinterTarget): void {
+		if (!tgt) {
+			throw new Error(`Linter failure - tgt arg is missing.`);
+		}
+
+		if (tgt.srcPatterns === undefined || tgt.srcPatterns === null) {
+			throw new Error(`Linter failure - srcPatterns arg is missing.`);
+		}
+
+		if (!Array.isArray(tgt.srcPatterns)) {
+			throw new Error(`Linter failure - srcPatterns arg is not a valid array.`);
+		}
 	}
 
 	public async execute(tgt: LinterTarget): Promise<LinterSummary> {
 		const summary = new LinterSummary();
 		const fnLog = this.log.makeLog('execute');
+		fnLog.debug('Linter execution started');
+
+		this.assertTarget(tgt);
 
 		try {
 			const results = await this._eslint.lintFiles(tgt.srcPatterns);
@@ -43,14 +61,12 @@ export class Linter {
 		} catch (e: unknown) {
 			if (e instanceof Error) {
 				fnLog.error(e.message);
+			} else {
+				fnLog.error(`Unknown error type thrown during execute call.`);
 			}
 		}
 
-		if (tgt.abortOnLimitBreak === true && !summary.success) {
-			fnLog.error(`Linter scan exceeded the configured error or warning limits.`);
-			throw new Error(`Linter scan exceeded configured error or warning limits.`);
-		}
-
+		fnLog.debug('Linter execution complete.');
 		return summary;
 	}
 }

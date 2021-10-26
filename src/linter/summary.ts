@@ -1,21 +1,35 @@
 import {LinterFileResult} from './file/result';
 import {LinterLimits} from './limits';
 import {LinterTotals} from './totals';
+import {string} from '@jest/types/node_modules/@types/yargs';
 
 export class LinterSummary {
 	public readonly limits: LinterLimits;
 	public readonly errors: LinterTotals;
 	public readonly warnings: LinterTotals;
 	public resultText: string | null;
-	public success: boolean;
 	public readonly fileResults: LinterFileResult[];
+	public errorCode: string;
+	public readonly status: {
+		success: boolean;
+		code: string;
+		description: string;
+		errors: Error[];
+	};
 
 	constructor(limits?: Partial<LinterLimits>) {
 		this.errors = this.makeTotals();
 		this.warnings = this.makeTotals();
 		this.limits = this.makeLimits(limits);
+
 		this.fileResults = [];
 		this.resultText = null;
+		this.status = {
+			success: false,
+			errors: [],
+			code: '',
+			description: ''
+		};
 	}
 
 	public makeTotals(): LinterTotals {
@@ -92,27 +106,37 @@ export class LinterSummary {
 
 	public done(): void {
 		if (this.limits.errors.total !== 0 && this.errors.total > this.limits.errors.total) {
-			this.success = false;
+			this.status.code = 'ERROR_LIMIT_EXCEEDED';
+			this.status.description = `Too many total errors detected. Total error count of '${this.errors.total}' exceeded limit '${this.limits.errors.total}'`;
+			this.status.success = false;
 			return;
 		}
 
 		if (this.errors.fixable !== 0 && this.errors.fixable > this.limits.errors.fixable) {
-			this.success = false;
+			this.status.success = false;
+			this.status.code = 'FIXABLE_ERROR_LIMIT_EXCEEDED';
+			this.status.description = `Too many fixable errors detected. Fixable error count '${this.errors.fixable}' exceeds the configured limit '${this.limits.errors.fixable}'.`;
 			return;
 		}
 
 		if (this.errors.fatal !== 0 && this.errors.fatal > this.limits.errors.fatal) {
-			this.success = false;
+			this.status.success = false;
+			this.status.code = 'FATAL_ERROR_LIMIT_EXCEEDED';
+			this.status.description = `Too many fatal errors detected. Fatal error count '${this.errors.fatal}' exceeds configured limit '${this.limits.errors.fatal}.`;
 			return;
 		}
 
 		if (this.warnings.fixable !== 0 && this.warnings.fixable > this.limits.warn.fixable) {
-			this.success = false;
+			this.status.success = false;
+			this.status.code = 'FIXABLE_WARN_LIMIT_EXCEEDED';
+			this.status.description = `Too many fixable warnings detected. Fixable warning count '${this.warnings.fixable}' exceeds configured limit '${this.limits.warn.fixable}'.`;
 			return;
 		}
 
 		if (this.warnings.total !== 0 && this.warnings.total > this.limits.warn.total) {
-			this.success = false;
+			this.status.success = false;
+			this.status.code = 'WARN_LIMIT_EXCEEDED';
+			this.status.description = `Too many warnings detected. Total warning count '${this.warnings.total}' exceeds configured limit '${this.limits.warn.total}'`;
 			return;
 		}
 	}
