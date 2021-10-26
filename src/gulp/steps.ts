@@ -121,9 +121,7 @@ export class GulpSteps {
 			}
 		}
 
-		return src([], {
-			read: false
-		});
+		return src('.', {allowEmpty: true});
 	}
 
 	public renderNunjucksHtml(

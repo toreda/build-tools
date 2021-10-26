@@ -1,7 +1,6 @@
 import {LinterFileResult} from './file/result';
 import {LinterLimits} from './limits';
 import {LinterTotals} from './totals';
-import {string} from '@jest/types/node_modules/@types/yargs';
 
 export class LinterSummary {
 	public readonly limits: LinterLimits;
@@ -139,5 +138,7 @@ export class LinterSummary {
 			this.status.description = `Too many warnings detected. Total warning count '${this.warnings.total}' exceeds configured limit '${this.limits.warn.total}'`;
 			return;
 		}
+
+		this.status.success = true;
 	}
 }
