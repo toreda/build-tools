@@ -1,10 +1,23 @@
 //const eslint = require('gulp-eslint');
 import gulp, {dest, series, src} from 'gulp';
 
+import {ESLint} from 'eslint';
 import del from 'del';
 import ts from 'gulp-typescript';
 
 const tsc = ts.createProject('tsconfig.json');
+const eslint = new ESLint({
+	useEslintrc: true
+});
+const srcPatterns = ['src/**.ts', 'src/**/*.ts'];
+
+async function linter() {
+	const result = await eslint.lintFiles(srcPatterns);
+	const formatter = await eslint.loadFormatter('stylish');
+
+	const output = formatter.format(result);
+	console.log(output);
+}
 
 function createDist() {
 	// Hack to create folder structures without actually reading files.
@@ -18,7 +31,7 @@ function cleanDist() {
 
 function buildSrc() {
 	// Build typescript sources and output them in './dist'.
-	return src(['src/**.ts', 'src/**/*.ts']).pipe(tsc()).pipe(dest('dist'));
+	return src(srcPatterns).pipe(tsc()).pipe(dest('dist'));
 }
 
-exports.default = series(createDist, cleanDist, buildSrc);
+exports.default = series(createDist, cleanDist, linter, buildSrc);

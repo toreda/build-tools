@@ -2,7 +2,7 @@ import {Configuration, WebpackPluginInstance} from 'webpack';
 
 import {Config} from '../../config';
 
-export async function webpackConfigPluginsMake(cfg: Config): Promise<WebpackPluginInstance[]> {
+export async function webpackConfigPluginsMake(_cfg: Config): Promise<WebpackPluginInstance[]> {
 	const plugins: WebpackPluginInstance[] = [];
 
 	return plugins;
