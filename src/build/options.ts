@@ -1,7 +1,7 @@
 import {BuildWebpackOptions} from './webpack/options';
 import {EventEmitter} from 'events';
 import {LinterOptions} from '../linter/options';
-import {Log} from '@toreda/log';
+import {Log, LogOptions, LogOptionsGlobal} from '@toreda/log';
 
 /**
  * Options used by Build on instantiation to seed initial objects
@@ -20,7 +20,7 @@ export interface BuildOptions {
 	 */
 	env?: string;
 	/** Global logging instance for debugging. Log output to console disabled by default */
-	log?: Log;
+	log?: Log | LogOptionsGlobal;
 	/** Options for webpack build. Deefaults */
 	webpack?: BuildWebpackOptions;
 	autoMockInJest?: boolean;

@@ -67,7 +67,7 @@ export class Build {
 		}
 
 		if (!(options.log instanceof Log)) {
-			return new Log().makeLog('Build');
+			return new Log(options.log).makeLog('Build');
 		}
 
 		return options.log.makeLog('Build');
