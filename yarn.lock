@@ -1103,15 +1103,14 @@
 "@toreda/log@^0.6.7":
   version "0.6.7"
   resolved "https://registry.yarnpkg.com/@toreda/log/-/log-0.6.7.tgz#754d8a8ec7c7a788fbc732987688be3820b6bc6c"
-  integrity sha512-w06Qt+S236/l6zsACgSxMC5MizETEDb3Tv42YFijRsQeGM1kBJhRLN5c7OvN4yQ+INztzYGR0u5roOjjwHvIfQ==
 
 "@toreda/prettier-config@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@toreda/prettier-config/-/prettier-config-1.0.1.tgz#bd6c47352aa99560617f0f4a29f16ab7c3070b86"
 
-"@toreda/types@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@toreda/types/-/types-2.3.0.tgz#dfa44694b00f4a6a6dbf75719dcd36ee9b1696ef"
+"@toreda/types@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@toreda/types/-/types-2.5.0.tgz#f57c02694d5642b7ecc8dc7136fe5ebd19ceb2af"
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.8"

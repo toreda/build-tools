@@ -1,13 +1,16 @@
+![Toreda](https://content.toreda.com/logo/toreda-logo.png)
+
+![CI](https://img.shields.io/github/workflow/status/toreda/build-tools/CI?style=for-the-badge) [![Coverage](https://img.shields.io/sonar/coverage/toreda_build-tools?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)](https://sonarcloud.io/dashboard?id=toreda_build-tools) ![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/toreda_build-tools?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)
+
+![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/toreda/build-tools/master?style=for-the-badge) ![GitHub Release Date](https://img.shields.io/github/release-date/toreda/build-tools?style=for-the-badge) ![GitHub issues](https://img.shields.io/github/issues/toreda/build-tools?style=for-the-badge)
+
+ ![license](https://img.shields.io/github/license/toreda/build-tools?style=for-the-badge)
 
 # `@toreda/build-tools`
 
-![Toreda](https://content.toreda.com/logo/toreda-logo.png)
-
-![CI](https://github.com/toreda/build-tools/workflows/CI/badge.svg?branch=master) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=toreda_build-tools&metric=coverage)](https://sonarcloud.io/dashboard?id=toreda_build-tools) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=toreda_build-tools&metric=alert_status)](https://sonarcloud.io/dashboard?id=toreda_build-tools)
-
-
-
 Helpers for common gulp build flows. Reduce complexity and code duplication in your gulpfile. Reduce redundancy and upkeep across multiple projects.
+
+&nbsp;
 
 # Contents
 * [**Usage**](#usage)
@@ -19,8 +22,9 @@ Helpers for common gulp build flows. Reduce complexity and code duplication in y
 	-   [License](#license)
 
 
-# Usage
+&nbsp;
 
+# Usage
 ## Examples
 
 ### `gulpfile.ts` for TypeScript library
@@ -59,6 +63,8 @@ exports.default = series(createDist, cleanDist, runLint, buildSrc);
 ```
 
 ### Using `Build`
+
+&nbsp;
 
 # Package
 
@@ -102,6 +108,15 @@ yarn build
 npm run-script build
 ```
 
-# License
+&nbsp;
+# Legal
 
+## License
 [MIT](LICENSE) &copy; Toreda, Inc.
+
+&nbsp;
+
+## Copyright
+Copyright &copy; 2019 - 2022 Toreda, Inc. All Rights Reserved.
+
+https://www.toreda.com

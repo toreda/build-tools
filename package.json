@@ -1,6 +1,6 @@
 {
 	"name": "@toreda/build-tools",
-	"version": "0.5.8",
+	"version": "0.5.9",
 	"description": "",
 	"public": true,
 	"main": "./dist/index.js",
@@ -18,15 +18,14 @@
 		"url": "git+https://github.com/toreda/build-tools.git"
 	},
 	"keywords": [
-		"toreda",
-		"build helper",
 		"build",
-		"build script",
-		"helper",
+		"build package",
+		"buildscript",
+		"gulp-eslint",
 		"gulp",
-		"typescript",
 		"lightweight",
-		"gulp-eslint"
+		"toreda",
+		"typescript"
 	],
 	"author": "Toreda, Inc.",
 	"license": "MIT",
@@ -37,6 +36,7 @@
 	"resolutions": {
 		"lodash": "^4.17.21"
 	},
+	"sideEffects": false,
 	"dependencies": {
 		"@toreda/eslint-config": "^2.2.0",
 		"@toreda/log": "^0.6.7",
@@ -72,7 +72,7 @@
 		"@babel/plugin-transform-modules-commonjs": "^7.15.4",
 		"@babel/preset-env": "^7.16.0",
 		"@babel/preset-typescript": "^7.16.0",
-		"@toreda/types": "^2.3.0",
+		"@toreda/types": "^2.5.0",
 		"@types/fs-extra": "^9.0.13",
 		"@types/gulp": "^4.0.9",
 		"@types/gulp-sourcemaps": "^0.0.35",

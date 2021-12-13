@@ -2,6 +2,12 @@ import {CliArgs} from '.';
 import {Log} from '@toreda/log';
 import yargs from 'yargs';
 
+/**
+ * CLI functionality used when package is called via command line. Not used
+ * when importing classes as an NPM package.
+ *
+ * @category CLI
+ */
 export class Cli {
 	public readonly log: Log;
 

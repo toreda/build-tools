@@ -1,3 +1,28 @@
+/**
+ *	MIT License
+ *
+ *	Copyright (c) 2019 - 2022 Toreda, Inc.
+ *
+ *	Permission is hereby granted, free of charge, to any person obtaining a copy
+ *	of this software and associated documentation files (the "Software"), to deal
+ *	in the Software without restriction, including without limitation the rights
+ *	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *	copies of the Software, and to permit persons to whom the Software is
+ *	furnished to do so, subject to the following conditions:
+
+ * 	The above copyright notice and this permission notice shall be included in all
+ * 	copies or substantial portions of the Software.
+ *
+ * 	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * 	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * 	SOFTWARE.
+ *
+ */
+
 import {dest, src} from 'gulp';
 
 import {Clean} from '../clean';
@@ -6,13 +31,15 @@ import {Linter} from '../linter';
 import {LinterTarget} from '../linter/target';
 import {Log} from '@toreda/log';
 import {Run} from '../run';
-import {TranspileOptions} from '../transpile/options';
+import type {TranspileOptions} from '../transpile/options';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const nunjucksRender = require('gulp-nunjucks-render');
 
 /**
- * Build steps that can be used directly in
+ * Build steps that can be used directly in gulp.
+ *
+ * @category Gulp
  */
 export class GulpSteps {
 	private readonly run: Run;
