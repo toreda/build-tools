@@ -27,7 +27,7 @@ import {Config} from './config';
 import {ESLint} from 'eslint';
 import {EventEmitter} from 'stream';
 import {LinterSummary} from './linter/summary';
-import {LinterTarget} from './linter/target';
+import type {LinterTarget} from './linter/target';
 import {Log} from '@toreda/log';
 
 /**

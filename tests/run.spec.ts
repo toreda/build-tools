@@ -1,5 +1,5 @@
-import {BuildOptions, CliArgs} from '../src';
-
+import {BuildOptions} from '../src/build/options';
+import {CliArgs} from '../src/cli/args';
 import {Config} from '../src/config';
 import {EventEmitter} from 'events';
 import {Log} from '@toreda/log';

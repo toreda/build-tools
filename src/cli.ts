@@ -1,4 +1,4 @@
-import {CliArgs} from '.';
+import {CliArgs} from './cli/args';
 import {Log} from '@toreda/log';
 import yargs from 'yargs';
 

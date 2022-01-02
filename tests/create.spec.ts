@@ -1,5 +1,5 @@
-import {Config, Create} from '../src';
-
+import {Config} from '../src/config';
+import {Create} from '../src/create';
 import {EventEmitter} from 'events';
 import {Log} from '@toreda/log';
 import {cliArgsMakeMock} from './_data/cli/args/make/mock';
