@@ -1111,9 +1111,9 @@
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@toreda/eslint-config/-/eslint-config-2.2.0.tgz#ee3e0bb8d2263461ea214e04c728f498f2b09278"
 
-"@toreda/log@^0.6.11":
-  version "0.6.11"
-  resolved "https://registry.yarnpkg.com/@toreda/log/-/log-0.6.11.tgz#82e9b6374f0d57e3ae9055a022224f4ecdbeffc0"
+"@toreda/log@^0.6.12":
+  version "0.6.12"
+  resolved "https://registry.yarnpkg.com/@toreda/log/-/log-0.6.12.tgz#0435f7f9a867e343dd347f4874e39917040453d7"
 
 "@toreda/prettier-config@^1.0.1":
   version "1.0.1"
