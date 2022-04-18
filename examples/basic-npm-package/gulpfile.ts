@@ -4,23 +4,23 @@ import {series, src} from 'gulp';
 import {Build} from '@toreda/build-tools';
 import {EventEmitter} from 'events';
 
-const events = new EventEmitter();
-const build = new Build({
-	events: events,
-	log: new Log({
-		globalLevel: Levels.ALL,
-		consoleEnabled: true
-	})
+const log = new Log({
+	consoleEnabled: true,
+	globalLevel: Levels.ALL
+});
+
+const build: Build = new Build({
+	log: log,
+	events: new EventEmitter(),
+	linter: {
+		globInputPaths: true
+	}
 });
 
 async function runLint(): Promise<NodeJS.ReadWriteStream> {
-	await build.linter.execute({
+	return build.gulpSteps.lint({
 		formatterId: 'stylish',
 		srcPatterns: ['./src/**.ts', './src/**/**.ts']
-	});
-
-	return src(['*'], {
-		read: false
 	});
 }
 

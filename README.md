@@ -1,10 +1,14 @@
 ![Toreda](https://content.toreda.com/logo/toreda-logo.png)
 
-[![CI](https://img.shields.io/github/workflow/status/toreda/build-tools/CI?style=for-the-badge)](https://github.com/toreda/build-tools/actions) [![Coverage](https://img.shields.io/sonar/coverage/toreda_build-tools?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)](https://sonarcloud.io/project/activity?graph=coverage&id=toreda_build-tools) [![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/toreda_build-tools?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)](https://sonarcloud.io/project/overview?id=toreda_build-tools)
+[![CI](https://img.shields.io/github/workflow/status/toreda/build-tools/CI?style=for-the-badge)](https://github.com/toreda/build-tools/actions)
+[![Coverage](https://img.shields.io/sonar/coverage/toreda_build-tools?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)](https://sonarcloud.io/project/activity?graph=coverage&id=toreda_build-tools)
+[![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/toreda_build-tools?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge)](https://sonarcloud.io/project/overview?id=toreda_build-tools)
 
-![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/toreda/build-tools/master?style=for-the-badge) [![GitHub Release Date](https://img.shields.io/github/release-date/toreda/build-tools?style=for-the-badge)](https://github.com/toreda/build-tools/releases) [![GitHub issues](https://img.shields.io/github/issues/toreda/build-tools?style=for-the-badge)](https://github.com/toreda/build-tools/issues)
+[![GitHub package.json version (branch)](https://img.shields.io/github/package-json/v/toreda/build-tools/master?style=for-the-badge)](https://github.com/toreda/build-tools/releases/latest)
+[![GitHub Release Date](https://img.shields.io/github/release-date/toreda/build-tools?style=for-the-badge)](https://github.com/toreda/build-tools/releases)
+[![GitHub issues](https://img.shields.io/github/issues/toreda/build-tools?style=for-the-badge)](https://github.com/toreda/build-tools/issues)
 
- [![license](https://img.shields.io/github/license/toreda/build-tools?style=for-the-badge)](https://github.com/toreda/build-tools/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/toreda/build-tools?style=for-the-badge)](https://github.com/toreda/build-tools/blob/master/LICENSE)
 
 # `@toreda/build-tools`
 
