@@ -40,8 +40,8 @@ import {configValue} from './value';
 export function configBoolean(
 	key: string,
 	fallback: boolean,
-	args?: CliArgs,
-	options?: BuildOptions
+	args?: Partial<CliArgs>,
+	options?: Partial<BuildOptions>
 ): boolean {
 	return configValue<boolean>(key, fallback, args, options);
 }

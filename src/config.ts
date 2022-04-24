@@ -25,7 +25,7 @@ export class Config {
 	public readonly autoMockInJest: boolean;
 	public readonly linter: ConfigLinter;
 
-	constructor(args: CliArgs, options: BuildOptions, baseLog: Log) {
+	constructor(args: Partial<CliArgs>, options: Partial<BuildOptions>, baseLog: Log) {
 		this.log = baseLog.makeLog('Config');
 		this.buildMode = configValue<BuildMode>('buildMode', 'prod', args, options);
 		this.profiler = configBoolean('profiler', false, args, options);

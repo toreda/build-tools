@@ -1,17 +1,28 @@
+import {Levels, Log} from '@toreda/log';
 //const eslint = require('gulp-eslint');
 import gulp, {dest, series, src} from 'gulp';
 
+import {Config} from './src/config';
 import {ESLint} from 'eslint';
+import {EventEmitter} from 'stream';
+import {Run} from './src/run';
 import del from 'del';
-import ts from 'gulp-typescript';
 
-const tsc = ts.createProject('tsconfig.json');
-const eslint = new ESLint({
-	useEslintrc: true
+const log = new Log({
+	globalLevel: Levels.ALL,
+	consoleEnabled: true
 });
+
+const cfg = new Config({}, {}, log);
+const events = new EventEmitter();
+
 const srcPatterns = ['src/**.ts', 'src/**/*.ts'];
 
 async function linter() {
+	const eslint = new ESLint({
+		useEslintrc: true
+	});
+
 	const result = await eslint.lintFiles(srcPatterns);
 	const formatter = await eslint.loadFormatter('stylish');
 
@@ -29,9 +40,11 @@ function cleanDist() {
 	return del(`dist/**`, {force: true});
 }
 
-function buildSrc() {
+async function buildSrc() {
 	// Build typescript sources and output them in './dist'.
-	return src(srcPatterns).pipe(tsc()).pipe(dest('dist'));
+	//return src(srcPatterns).pipe(tsc()).pipe(dest('dist'));
+	const run = new Run(cfg, events, log);
+	await run.typescript('./dist', './tsconfig.json');
 }
 
 exports.default = series(createDist, cleanDist, linter, buildSrc);

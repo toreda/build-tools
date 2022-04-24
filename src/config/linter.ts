@@ -25,6 +25,7 @@
 
 import {ESLint, Linter, Rule} from 'eslint';
 
+import type {BaseObject} from '@toreda/types';
 import type {LinterOptions} from '../linter/options';
 
 /**
@@ -53,9 +54,9 @@ export class ConfigLinter {
 	public readonly baseConfig?: Linter.Config;
 	public readonly overrideConfig?: Linter.Config;
 	public readonly overrideConfigFile?: string;
-	public readonly reportUnusedDisableDirectives?: Linter.RuleLevel;
+	public readonly reportUnusedDisableDirectives?: boolean;
 
-	constructor(o?: LinterOptions) {
+	constructor(o?: Partial<LinterOptions>) {
 		this.quiet = typeof o?.quiet === 'boolean' ? o?.quiet : false;
 		this.autofix = typeof o?.autofix === 'boolean' ? o?.autofix : false;
 		this.cwd = typeof o?.cwd === 'string' ? o?.cwd : undefined;
@@ -68,20 +69,48 @@ export class ConfigLinter {
 		this.cacheLocation = typeof o?.cacheLocation === 'string' ? o?.cacheLocation : undefined;
 		this.fixTypes = Array.isArray(o?.fixTypes) ? o?.fixTypes : undefined;
 		this.rulePaths = Array.isArray(o?.rulePaths) ? o?.rulePaths : undefined;
-		this.resolvePluginsRelativeTo = typeof o?.resolvePluginsRelativeTo
-			? o?.resolvePluginsRelativeTo
-			: undefined;
-		this.plugins = o?.plugins ? o.plugins : undefined;
-		this.baseConfig = o?.baseConfig ? o?.baseConfig : undefined;
-		this.overrideConfig = o?.overrideConfig ? o?.overrideConfig : undefined;
+		this.resolvePluginsRelativeTo =
+			typeof o?.resolvePluginsRelativeTo === 'string' ? o?.resolvePluginsRelativeTo : undefined;
+		this.plugins = this.mkPlugins(o?.plugins);
+		this.baseConfig = this.mkConfig(o?.baseConfig);
+		this.overrideConfig = this.mkConfig(o?.overrideConfig);
+		this.cacheStrategy =
+			o?.cacheStrategy === 'content' || o?.cacheStrategy === 'metadata' ? o?.cacheStrategy : undefined;
 		this.overrideConfigFile =
 			typeof o?.overrideConfigFile === 'string' ? o?.overrideConfigFile : undefined;
 		this.ignore = typeof o?.ignore === 'boolean' ? o?.ignore : false;
 		this.reportUnusedDisableDirectives =
-			typeof o?.reportUnusedDisableDirectives === 'string' ||
-			typeof o?.reportUnusedDisableDirectives === 'number'
-				? o.reportUnusedDisableDirectives
-				: 'warn';
+			typeof o?.reportUnusedDisableDirectives === 'boolean'
+				? o?.reportUnusedDisableDirectives
+				: undefined;
+	}
+
+	public mkConfig(o?: unknown): Record<string, unknown> | undefined {
+		if (!o) {
+			return undefined;
+		}
+
+		if (Array.isArray(o) || typeof o !== 'object') {
+			return undefined;
+		}
+
+		return o as BaseObject;
+	}
+
+	public mkPlugins(o?: unknown): Record<string, unknown> | undefined {
+		if (!o) {
+			return undefined;
+		}
+
+		if (Array.isArray(o)) {
+			return undefined;
+		}
+
+		if (typeof o !== 'object') {
+			return undefined;
+		}
+
+		return o as BaseObject;
 	}
 
 	public eslintOptions(): ESLint.Options {

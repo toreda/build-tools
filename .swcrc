@@ -1,0 +1,13 @@
+{
+	"jsc": {
+		"parser": {
+			"syntax": "typescript",
+			"jsx": false,
+			"tsx": false,
+			"decorators": false,
+			"dynamicImport": false
+		},
+		"target": "es2015"
+	},
+	"sourceMaps": true
+}

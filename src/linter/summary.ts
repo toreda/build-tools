@@ -47,9 +47,9 @@ export class LinterSummary {
 	};
 
 	constructor(limits?: Partial<LinterLimits>) {
-		this.errors = this.makeTotals();
-		this.warnings = this.makeTotals();
-		this.limits = this.makeLimits(limits);
+		this.errors = this.mkTotals();
+		this.warnings = this.mkTotals();
+		this.limits = this.mkLimits(limits);
 
 		this.fileResults = [];
 		this.resultText = null;
@@ -61,7 +61,7 @@ export class LinterSummary {
 		};
 	}
 
-	public makeTotals(): LinterTotals {
+	public mkTotals(): LinterTotals {
 		return {
 			fatal: 0,
 			fixable: 0,
@@ -69,7 +69,7 @@ export class LinterSummary {
 		};
 	}
 
-	public makeLimits(o?: Partial<LinterLimits>): LinterLimits {
+	public mkLimits(o?: Partial<LinterLimits>): LinterLimits {
 		const limits: LinterLimits = {
 			errors: {
 				total: 0,
@@ -86,6 +86,10 @@ export class LinterSummary {
 			if (o.errors) {
 				if (typeof o.errors.total === 'number') {
 					limits.errors.total = o.errors.total;
+				}
+
+				if (typeof o.errors.fatal === 'number') {
+					limits.errors.fatal = o.errors.fatal;
 				}
 
 				if (typeof o.errors.fixable === 'number') {
@@ -107,29 +111,32 @@ export class LinterSummary {
 		return limits;
 	}
 
-	public add(fileResult: LinterFileResult): void {
-		if (!fileResult) {
-			throw new Error(`Bad linter file result while building summary.`);
+	public add(result: Partial<LinterFileResult>): void {
+		if (!result) {
+			throw new Error(`add:result:arg:missing`);
 		}
 
-		if (typeof fileResult.errorCount === 'number') {
-			this.errors.total += fileResult.errorCount;
+		if (typeof result.errorCount === 'number') {
+			this.errors.total += result.errorCount;
 		}
 
-		if (typeof fileResult.fixableErrorCount === 'number') {
-			this.errors.fixable += fileResult.fixableErrorCount;
+		if (typeof result.fixableErrorCount === 'number') {
+			this.errors.fixable += result.fixableErrorCount;
+			this.errors.total += result.fixableErrorCount;
 		}
 
-		if (typeof fileResult.fatalErrorCount === 'number') {
-			this.errors.fatal += fileResult.fatalErrorCount;
+		if (typeof result.fatalErrorCount === 'number') {
+			this.errors.fatal += result.fatalErrorCount;
+			this.errors.total += result.fatalErrorCount;
 		}
 
-		if (typeof fileResult.warningCount === 'number') {
-			this.warnings.total += fileResult.warningCount;
+		if (typeof result.warningCount === 'number') {
+			this.warnings.total += result.warningCount;
 		}
 
-		if (typeof fileResult.fixableWarningCount === 'number') {
-			this.warnings.fixable += fileResult.fixableWarningCount;
+		if (typeof result.fixableWarningCount === 'number') {
+			this.warnings.fixable += result.fixableWarningCount;
+			this.warnings.total += result.fixableWarningCount;
 		}
 	}
 

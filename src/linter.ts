@@ -50,15 +50,15 @@ export class Linter {
 
 	public assertTarget(tgt: LinterTarget): void {
 		if (!tgt) {
-			throw new Error(`Linter failure - tgt arg is missing.`);
+			throw new Error(`linter:tgt:missing`);
 		}
 
 		if (tgt.srcPatterns === undefined || tgt.srcPatterns === null) {
-			throw new Error(`Linter failure - srcPatterns arg is missing.`);
+			throw new Error(`linter:tgt.srcPatterns:missing.`);
 		}
 
 		if (!Array.isArray(tgt.srcPatterns)) {
-			throw new Error(`Linter failure - srcPatterns arg is not a valid array.`);
+			throw new Error(`linter:tgt.srcPatterns:bad_format`);
 		}
 	}
 
@@ -74,7 +74,7 @@ export class Linter {
 			const formatterId = typeof tgt?.formatterId === 'string' ? tgt?.formatterId : 'stylish';
 			const formatter = await this._eslint.loadFormatter(formatterId);
 
-			const resultText = formatter.format(results);
+			const resultText = await formatter.format(results);
 
 			summary.resultText = resultText;
 			for (const result of results) {

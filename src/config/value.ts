@@ -37,7 +37,7 @@ import type {CliArgs} from '../cli/args';
  *
  * @category Config
  */
-export function configValue<T>(key: string, fallback: T, args?: CliArgs, options?: BuildOptions): T {
+export function configValue<T>(key: string, fallback: T, args?: Partial<CliArgs>, options?: BuildOptions): T {
 	if (typeof key !== 'string' || !key) {
 		return fallback;
 	}

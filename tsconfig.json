@@ -1,15 +1,14 @@
 {
-	"exclude": ["node_modules", "**/*.spec.ts", "dist/**"],
-	"include": ["./src/**.ts"],
-	"filesGlob": ["./src/**.ts", "!./node_modules/**"],
-
+	"exclude": ["**/node_modules", "dist/**"],
+	"include": ["./src"],
+	"filesGlob": ["./src/**.ts", "./src/**/*.ts", "!./node_modules/**"],
 	"compilerOptions": {
 		"allowUnreachableCode": false,
 		"alwaysStrict": true,
 		"declaration": true,
 		"esModuleInterop": true,
 		"isolatedModules": false,
-		"lib": ["es6","ES2017", "ES2015"],
+		"lib": ["es6", "ES2017", "ES2015"],
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"noImplicitUseStrict": false,
@@ -26,18 +25,7 @@
 		"target": "es2015",
 		"traceResolution": false
 	},
-	"ts-jest": {
-		"module": "commonjs",
-		"compilerOptions": {
-			"declaration": false,
-			"isolatedModules": true,
-			"sourceMap": false
-		}
-	},
 	"ts-node": {
-		"module": "commonjs",
-		"compilerOptions": {
-			"sourceMap": false
-		}
+		"swc": true
 	}
 }
