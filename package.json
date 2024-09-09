@@ -43,7 +43,7 @@
 	},
 	"sideEffects": false,
 	"dependencies": {
-		"@swc-node/core": "^1.8.2",
+		"@swc-node/core": "^1.13.3",
 		"@swc-node/register": "^1.4.2",
 		"@swc/helpers": "^0.3.8",
 		"@swc/register": "^0.1.10",
