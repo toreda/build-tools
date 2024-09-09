@@ -47,7 +47,7 @@
 		"@swc-node/register": "^1.4.2",
 		"@swc/helpers": "^0.3.8",
 		"@swc/register": "^0.1.10",
-		"@swc/wasm": "^1.2.171",
+		"@swc/wasm": "^1.7.12",
 		"@toreda/eslint-config": "^2.2.0",
 		"@toreda/log": "^0.6.16",
 		"@toreda/prettier-config": "^1.0.1",
