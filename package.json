@@ -45,7 +45,7 @@
 	"dependencies": {
 		"@swc-node/core": "^1.8.2",
 		"@swc-node/register": "^1.4.2",
-		"@swc/helpers": "^0.3.8",
+		"@swc/helpers": "^0.5.12",
 		"@swc/register": "^0.1.10",
 		"@swc/wasm": "^1.2.171",
 		"@toreda/eslint-config": "^2.2.0",
