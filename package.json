@@ -71,7 +71,7 @@
 		"swc-node": "^1.0.0",
 		"through2": "^4.0.2",
 		"ts-node": "^10.7.0",
-		"webpack": "^5.72.0",
+		"webpack": "^5.98.0",
 		"webpack-cli": "^4.9.2",
 		"yargs": "^17.4.1"
 	},
