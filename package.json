@@ -60,7 +60,7 @@
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-prettier": "^5.5.5",
 		"fs-extra": "^10.1.0",
-		"gulp": "^4.0.2",
+		"gulp": "^5.0.0",
 		"gulp-nunjucks-render": "^2.2.3",
 		"gulp-sourcemaps": "^3.0.0",
 		"gulp-swc": "^2.2.0",
