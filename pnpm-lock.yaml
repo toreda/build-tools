@@ -37,9 +37,6 @@ importers:
       '@toreda/log':
         specifier: ^0.6.16
         version: 0.6.16
-      '@toreda/prettier-config':
-        specifier: ^1.0.1
-        version: 1.0.1
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.59.3
         version: 8.59.3(@typescript-eslint/parser@8.59.3(eslint@10.3.0)(typescript@6.0.3))(eslint@10.3.0)(typescript@6.0.3)
@@ -82,15 +79,9 @@ importers:
       jest-cli:
         specifier: ^30.4.2
         version: 30.4.2(@types/node@25.7.0)(ts-node@10.9.2(@swc/core@1.15.33(@swc/helpers@0.5.21))(@swc/wasm@1.15.33)(@types/node@25.7.0)(typescript@6.0.3))
-      jest-sonar-reporter:
-        specifier: ^2.0.0
-        version: 2.0.0
       merge-stream:
         specifier: ^2.0.0
         version: 2.0.0
-      regenerator-runtime:
-        specifier: ^0.13.11
-        version: 0.13.11
       swc-node:
         specifier: ^1.0.0
         version: 1.0.0(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@swc/core@1.15.33(@swc/helpers@0.5.21))(@swc/types@0.1.26)(typescript@6.0.3)
@@ -116,9 +107,12 @@ importers:
       '@swc/jest':
         specifier: ^0.2.39
         version: 0.2.39(@swc/core@1.15.33(@swc/helpers@0.5.21))
-      '@toreda/types':
-        specifier: ^2.16.0
-        version: 2.16.0
+      '@toreda/prettier-config':
+        specifier: ^1.0.1
+        version: 1.0.1
+      '@toreda/shared-types':
+        specifier: ^3.0.0
+        version: 3.0.0
       '@types/fs-extra':
         specifier: ^9.0.13
         version: 9.0.13
@@ -817,8 +811,8 @@ packages:
   '@toreda/prettier-config@1.0.1':
     resolution: {integrity: sha512-YE13umi84GlKSOVPAEN1WRsoAGPjT3C3VmOGORtQAeZm5bqayL7XRHQM/ifXaF1ZWSkzeEAXYEnFflmIen/4kw==}
 
-  '@toreda/types@2.16.0':
-    resolution: {integrity: sha512-+7oy3YDH0W2QTm8voSxCvrBp8+gcbQmRs5eguVgmXgjr1UQd8Oo3VeSygcWtiKakdFMBNJrLtfTaKlDUvQHdtw==}
+  '@toreda/shared-types@3.0.0':
+    resolution: {integrity: sha512-NDJ2P/fwlDcSb3mLlB8iHS3VKhYVx6Vi2Jc3Ve52xrAndVIHCHjo7iYJbTYKlL2HF9nQIJ4xZtnVFA4lcgmOYw==}
 
   '@tsconfig/node10@1.0.12':
     resolution: {integrity: sha512-UCYBaeFvM11aU2y3YPZ//O5Rhj+xKyzy7mvcIoAjASbigy8mHMryP5cK7dgjlz2hWxh1g5pLw084E0a/wlUSFQ==}
@@ -2643,10 +2637,6 @@ packages:
     resolution: {integrity: sha512-tEOkkfOMppUyeiHwjZswOQ3lcnoTnws/q5FnGIaeIh/jmoU0ZlgMYRR8sTlTj+nNGCoJ0RDq6SfxGxCsyMTPmw==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
-  jest-sonar-reporter@2.0.0:
-    resolution: {integrity: sha512-ZervDCgEX5gdUbdtWsjdipLN3bKJwpxbvhkYNXTAYvAckCihobSLr9OT/IuyNIRT1EZMDDwR6DroWtrq+IL64w==}
-    engines: {node: '>=8.0.0'}
-
   jest-util@30.4.1:
     resolution: {integrity: sha512-vjQb1sACEiv13DKJMDToJpzVW0joCsIQrmbg0fi7CyOOt+g9jTuQl2A216pWRBYhOVt53XbL/2LbMKg1BECWOw==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
@@ -3310,9 +3300,6 @@ packages:
   rechoir@0.8.0:
     resolution: {integrity: sha512-/vxpCXddiX8NGfGO/mTafwjq4aFa/71pvamip0++IQk3zG8cbCj0fifNPrjjF1XMXUne91jL9OoxmdykoEtifQ==}
     engines: {node: '>= 10.13.0'}
-
-  regenerator-runtime@0.13.11:
-    resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
 
   regex-not@1.0.2:
     resolution: {integrity: sha512-J6SDjUgDxQj5NusnOtdFxDwN/+HWykR8GELwctJ7mdqhcyy1xEc4SRFHUXvxTp661YaVKAjfRLZ9cCqS6tn32A==}
@@ -4059,9 +4046,6 @@ packages:
   xml-name-validator@4.0.0:
     resolution: {integrity: sha512-ICP2e+jsHvAj2E2lIHxa5tjXRlKDJo4IdvPvCXbXQGdzSfmSpNVyIKMvoZHjDY9DP0zV17iI85o90vRFXNccRw==}
     engines: {node: '>=12'}
-
-  xml@1.0.1:
-    resolution: {integrity: sha512-huCv9IH9Tcf95zuYCsQraZtWnJvBtLVE0QHMOs8bWyZAFZNDcYjsPq1nEx8jKA9y+Beo9v+7OBPRisQTjinQMw==}
 
   xmlchars@2.2.0:
     resolution: {integrity: sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==}
@@ -4850,9 +4834,8 @@ snapshots:
 
   '@toreda/prettier-config@1.0.1': {}
 
-  '@toreda/types@2.16.0':
+  '@toreda/shared-types@3.0.0':
     dependencies:
-      del: 6.1.1
       marked: 4.3.0
 
   '@tsconfig/node10@1.0.12': {}
@@ -7041,10 +7024,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  jest-sonar-reporter@2.0.0:
-    dependencies:
-      xml: 1.0.1
-
   jest-util@30.4.1:
     dependencies:
       '@jest/types': 30.4.1
@@ -7775,8 +7754,6 @@ snapshots:
   rechoir@0.8.0:
     dependencies:
       resolve: 1.22.12
-
-  regenerator-runtime@0.13.11: {}
 
   regex-not@1.0.2:
     dependencies:
@@ -8584,8 +8561,6 @@ snapshots:
       utf-8-validate: 5.0.10
 
   xml-name-validator@4.0.0: {}
-
-  xml@1.0.1: {}
 
   xmlchars@2.2.0: {}
 

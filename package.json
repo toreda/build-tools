@@ -2,9 +2,11 @@
 	"name": "@toreda/build-tools",
 	"version": "0.8.0",
 	"description": "",
-	"public": true,
 	"main": "./dist/index.js",
 	"typings": "./dist/index.d.ts",
+	"publishConfig": {
+		"access": "public"
+	},
 	"scripts": {
 		"test": "cross-env COVERAGE=full jest --coverage",
 		"test:ci": "cross-env COVERAGE=full jest --ci --coverage --maxWorkers=50% --reporters=default --reporters=jest-junit",
@@ -52,7 +54,6 @@
 		"@swc/wasm": "^1.15.33",
 		"@toreda/eslint-config": "^3.1.0",
 		"@toreda/log": "^0.6.16",
-		"@toreda/prettier-config": "^1.0.1",
 		"@typescript-eslint/eslint-plugin": "^8.59.3",
 		"@typescript-eslint/parser": "^8.59.3",
 		"@typescript-eslint/typescript-estree": "^8.59.3",
@@ -67,9 +68,7 @@
 		"gulp-typescript": "6.0.0-alpha.1",
 		"jest": "^30.4.2",
 		"jest-cli": "^30.4.2",
-		"jest-sonar-reporter": "^2.0.0",
 		"merge-stream": "^2.0.0",
-		"regenerator-runtime": "^0.13.11",
 		"swc-node": "^1.0.0",
 		"through2": "^4.0.2",
 		"ts-node": "^10.9.2",
@@ -81,7 +80,8 @@
 	"devDependencies": {
 		"@swc/core": "^1.15.33",
 		"@swc/jest": "^0.2.39",
-		"@toreda/types": "^2.16.0",
+		"@toreda/prettier-config": "^1.0.1",
+		"@toreda/shared-types": "^3.0.0",
 		"@types/fs-extra": "^9.0.13",
 		"@types/gulp": "^4.0.18",
 		"@types/gulp-sourcemaps": "^0.0.35",
