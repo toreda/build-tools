@@ -31,13 +31,15 @@
 *.tsx			text 	eol=lf
 *.txt           text    eol=lf
 *.xml           text    eol=lf
+*.yaml          text    eol=lf
+*.yml           text    eol=lf
 *.code-workspace text	eol=lf
 LICENSE			text	eol=lf
 README			text	eol=lf
 SECURITY		text	eol=lf
-*.md			text	eol=lf
 yarn.lock		text	eol=lf
 npm.lock		text	eol=lf
+pnpm-lock.yaml	text	eol=lf
 
 # These files are binary and should be left untouched
 # (binary is a macro for -text -diff)
