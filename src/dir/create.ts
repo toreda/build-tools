@@ -23,7 +23,7 @@
  *
  */
 
-import {existsSync, mkdirSync} from 'fs-extra';
+import {existsSync, mkdirSync} from 'fs';
 
 import {Config} from '../config';
 import type {FileOptions} from '../file/options';

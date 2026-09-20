@@ -1,6 +1,6 @@
 import type {BuildMode} from './build/mode';
 import type {BuildOptions} from './build/options';
-import {CliArgs} from './cli/args';
+import type {CliArgs} from './cli/args';
 import {ConfigLinter} from './config/linter';
 import {ConfigMocks} from './config/mocks';
 import {Defaults} from './defaults';

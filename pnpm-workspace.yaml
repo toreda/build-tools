@@ -1,0 +1,20 @@
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  canvas: true
+  es5-ext: true
+  unrs-resolver: true
+  utf-8-validate: true
+
+overrides:
+  '@babel/core': ">=7.29.6"
+  brace-expansion': ">=5.0.9"
+  braces: ">=3.0.3"
+  browserslist: ">=4.28.7"
+  decode-uri-component: ">=0.5.0"
+  fast-uri: ">=3.1.6"
+  form-data': '>=4.0.6'
+  js-yaml: ">=3.15.2"
+  micromatch: ">=4.0.8"
+  postcss: ">=8.5.23"
+  tar: '>=7.5.18'

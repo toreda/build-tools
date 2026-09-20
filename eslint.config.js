@@ -1,16 +1,11 @@
-const {FlatCompat} = require('@eslint/eslintrc');
-const globals = require('globals');
-
-const compat = new FlatCompat({
-	baseDirectory: __dirname
-});
+const toredaConfig = require('@toreda/eslint-config');
 
 /** @type {import('eslint').Linter.Config[]} */
 module.exports = [
 	{
 		ignores: ['dist/**']
 	},
-	...compat.extends('@toreda/eslint-config'),
+	...toredaConfig,
 	{
 		files: ['src/**/*.ts'],
 		languageOptions: {

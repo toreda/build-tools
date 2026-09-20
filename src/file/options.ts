@@ -30,7 +30,7 @@
  */
 export interface FileOptions {
 	/** File encoding charset. */
-	encoding?: string;
+	encoding?: BufferEncoding;
 	/** Is operation recursive? */
 	recursive?: boolean;
 	/** Used by write operations to decide if the process failed when target

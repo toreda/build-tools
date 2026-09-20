@@ -30,11 +30,15 @@ import {Create} from '../create';
 import {Linter} from '../linter';
 import {LinterTarget} from '../linter/target';
 import {Log} from '@toreda/log';
+import Path from 'path';
 import {Run} from '../run';
+import type {TranspileFormat} from '../transpile/format';
 import type {TranspileOptions} from '../transpile/options';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const nunjucksRender = require('gulp-nunjucks-render');
+import {cjsFinalize, esmFinalize} from '../esm/finalize';
+import {finished} from 'stream/promises';
+import nunjucksRender from 'gulp-nunjucks-render';
+import {readFileSync} from 'fs';
+import {transpileFormats} from '../transpile/formats';
 
 /**
  * Build steps that can be used directly in gulp.
@@ -121,12 +125,170 @@ export class GulpSteps {
 		return src('.', {allowEmpty: true});
 	}
 
-	public async transpile(options: TranspileOptions): Promise<NodeJS.ReadWriteStream> {
-		const tsConfigDir = typeof options.tsConfigDirPath === 'string' ? options.tsConfigDirPath : './dist';
-		const tsConfigFilname =
-			typeof options.tsConfigFilePath === 'string' ? options.tsConfigDirPath : 'tsconfig.json';
+	/**
+	 * Transpile typescript sources to each target format, in the order provided. Each format
+	 * key calls the matching `transpile{Format}` step. e.g. `['cjs', 'esm']` calls
+	 * `transpileCjs` then `transpileEsm`.
+	 * @param formats		Format keys to transpile. Duplicate keys are only transpiled once.
+	 * @param options		Options shared by all formats.
+	 * @returns
+	 */
+	public async transpile(
+		formats: TranspileFormat[],
+		options: TranspileOptions = {}
+	): Promise<NodeJS.ReadWriteStream> {
+		if (!Array.isArray(formats) || formats.length === 0) {
+			throw new Error('transpile failed - formats arg must be a non-empty array of format keys.');
+		}
 
-		return await this.run.typescript(tsConfigDir, tsConfigFilname);
+		const steps = this.transpileSteps();
+
+		for (const format of formats) {
+			if (!Object.prototype.hasOwnProperty.call(steps, format)) {
+				const supported = Object.keys(steps).join(', ');
+				throw new Error(
+					`transpile failed - unsupported format '${format}'. Supported: ${supported}.`
+				);
+			}
+		}
+
+		for (const format of new Set(formats)) {
+			await steps[format](options);
+		}
+
+		return src('.', {allowEmpty: true});
+	}
+
+	/**
+	 * Transpile typescript sources to every supported format.
+	 * @param options		Options shared by all formats.
+	 * @returns
+	 */
+	public async transpileAll(options: TranspileOptions = {}): Promise<NodeJS.ReadWriteStream> {
+		return this.transpile(transpileFormats(), options);
+	}
+
+	/**
+	 * Transpile typescript sources to CommonJS output. Output dir gets a package.json with
+	 * type `commonjs`, so Node reads it correctly regardless of the root package.json `type`.
+	 * @param options
+	 * @returns
+	 */
+	public async transpileCjs(options: TranspileOptions = {}): Promise<NodeJS.ReadWriteStream> {
+		const cjsDir = this.transpileDir(options, options.cjsDirName, 'cjs');
+		const tsConfigPath = this.transpileTsConfigPath(options, options.cjsTsConfigPath);
+		const cjsModule = typeof options.cjsModule === 'string' ? options.cjsModule : 'commonjs';
+		// A separate CJS tsconfig is expected to set its own module format.
+		const compilerOptions =
+			typeof options.cjsTsConfigPath === 'string'
+				? {...options.cjsCompilerOptions}
+				: {module: cjsModule, ...options.cjsCompilerOptions};
+
+		await finished(this.run.typescript(cjsDir, tsConfigPath, compilerOptions, options.srcPatterns));
+		await this.transpileDeclarations(cjsDir, tsConfigPath, options);
+		await cjsFinalize(cjsDir, options.finalize);
+
+		return src('.', {allowEmpty: true});
+	}
+
+	/**
+	 * Transpile typescript sources to ES module output. Output is fixed up to run in Node:
+	 * relative imports get file extensions, and the output dir gets a package.json with
+	 * type `module`.
+	 * @param options
+	 * @returns
+	 */
+	public async transpileEsm(options: TranspileOptions = {}): Promise<NodeJS.ReadWriteStream> {
+		const esmDir = this.transpileDir(options, options.esmDirName, 'esm');
+		const tsConfigPath = this.transpileTsConfigPath(options, options.esmTsConfigPath);
+		const esmModule = typeof options.esmModule === 'string' ? options.esmModule : 'es2020';
+		// A separate ESM tsconfig is expected to set its own module format.
+		const compilerOptions =
+			typeof options.esmTsConfigPath === 'string'
+				? {...options.esmCompilerOptions}
+				: {module: esmModule, ...options.esmCompilerOptions};
+
+		await finished(this.run.typescript(esmDir, tsConfigPath, compilerOptions, options.srcPatterns));
+		// Declarations are emitted before finalizing, so their import specifiers are also rewritten.
+		await this.transpileDeclarations(esmDir, tsConfigPath, options);
+		await esmFinalize(esmDir, null, options.finalize);
+
+		return src('.', {allowEmpty: true});
+	}
+
+	/**
+	 * Steps called for each transpile format key. Supporting a new format
+	 * requires a key in `TranspileFormat` and a matching step here.
+	 * @returns
+	 */
+	private transpileSteps(): Record<
+		TranspileFormat,
+		(options: TranspileOptions) => Promise<NodeJS.ReadWriteStream>
+	> {
+		return {
+			cjs: (options) => this.transpileCjs(options),
+			esm: (options) => this.transpileEsm(options)
+		};
+	}
+
+	private transpileDir(
+		options: TranspileOptions,
+		dirName: string | undefined,
+		defaultName: string
+	): string {
+		const outDir = typeof options.outDir === 'string' ? options.outDir : './dist';
+
+		return Path.join(outDir, typeof dirName === 'string' ? dirName : defaultName);
+	}
+
+	private transpileTsConfigPath(options: TranspileOptions, formatTsConfigPath?: string): string {
+		if (typeof formatTsConfigPath === 'string') {
+			return formatTsConfigPath;
+		}
+
+		return typeof options.tsConfigPath === 'string' ? options.tsConfigPath : './tsconfig.json';
+	}
+
+	/**
+	 * Emit declarations again with comments intact when needed for target output dir.
+	 * @param destPath
+	 * @param tsConfigPath		Path to tsconfig used to transpile target output.
+	 * @param options
+	 */
+	private async transpileDeclarations(
+		destPath: string,
+		tsConfigPath: string,
+		options: TranspileOptions
+	): Promise<void> {
+		if (!this.declarationComments(options, tsConfigPath)) {
+			return;
+		}
+
+		const typesConfigPath =
+			typeof options.typesTsConfigPath === 'string' ? options.typesTsConfigPath : tsConfigPath;
+
+		await this.run.declarations(destPath, typesConfigPath, options.typesTscArgs, options.tscPath);
+	}
+
+	/**
+	 * Check whether declarations should be emitted again with comments intact.
+	 * @param options
+	 * @param tsConfigPath
+	 * @returns
+	 */
+	private declarationComments(options: TranspileOptions, tsConfigPath: string): boolean {
+		if (typeof options.declarationComments === 'boolean') {
+			return options.declarationComments;
+		}
+
+		if (typeof options.typesTsConfigPath === 'string') {
+			return true;
+		}
+
+		// Declarations only lose comments when the transpile removed them.
+		const tsConfig = JSON.parse(readFileSync(Path.resolve(tsConfigPath), 'utf8'));
+
+		return tsConfig?.compilerOptions?.removeComments === true;
 	}
 
 	/**

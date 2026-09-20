@@ -66,35 +66,103 @@ function buildSrc() {
 exports.default = series(createDist, cleanDist, runLint, buildSrc);
 ```
 
-### Using `Build`
+### Transpile to CommonJS, ES modules, or both
+Each output format has its own step, and which formats a project builds is the project's call.
 
-&nbsp;
+| Step | Output |
+|---|---|
+| `gulpSteps.transpileCjs(options)` | CommonJS in `./dist/cjs`. |
+| `gulpSteps.transpileEsm(options)` | ES modules in `./dist/esm`. |
+| `gulpSteps.transpile(formats, options)` | Each format key in `formats`, in the order provided. `['cjs', 'esm']` calls `transpileCjs` then `transpileEsm`. |
+| `gulpSteps.transpileAll(options)` | Every supported format. |
 
-# Package
+```typescript
+// Both formats, so consumers of your package can use `import` or `require`.
+function buildSrc() {
+	return build.gulpSteps.transpileAll();
+}
 
-## Install
-Install `@toreda/build-tools` directly from NPM.
+// Only the formats you choose.
+function buildSrc() {
+	return build.gulpSteps.transpile(['esm']);
+}
 
-### Install with Yarn (preferred)
-```bash
-yarn add @toreda/build-tools --dev
+exports.default = series(createDist, cleanDist, runLint, buildSrc);
 ```
 
-### Install using NPM
-```bash
-npm install @toreda/build-tools --save-dev
+With no options each step reads `./tsconfig.json` and overrides `module` for its format (`commonjs` for CJS, `es2020` for ESM), so one tsconfig builds every format.
+
+Steps then make their output loadable in Node:
+* Relative imports in ESM `.js` and `.d.ts` files get file extensions (`'./config'` becomes `'./config.js'`), which Node requires in ES modules.
+* Each output dir gets a `package.json` with its module `type`, so Node reads it correctly regardless of the `type` in your root `package.json`.
+* When the tsconfig sets `removeComments`, declaration files are emitted again with comments intact so your JSDoc still shows in editors.
+
+When building both formats, point your `package.json` at both outputs:
+```json
+{
+	"main": "./dist/cjs/index.js",
+	"module": "./dist/esm/index.js",
+	"typings": "./dist/cjs/index.d.ts",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/esm/index.d.ts",
+				"default": "./dist/esm/index.js"
+			},
+			"require": {
+				"types": "./dist/cjs/index.d.ts",
+				"default": "./dist/cjs/index.js"
+			}
+		},
+		"./package.json": "./package.json"
+	}
+}
 ```
 
-
-## Run Tests
-Install or clone `@toreda/build-tools` [(see above)](#install).
-
-Our unit tests use [Jest](https://jestjs.io/).
-
-Installing jest is not required after project dependencies are installed ([see above](#install)).
-```bash
-yarn test
+When building one format, set its dir name to an empty string to write output directly to `outDir`:
+```typescript
+// ESM only, written to './dist'.
+function buildSrc() {
+	return build.gulpSteps.transpileEsm({esmDirName: ''});
+}
 ```
+
+### Transpile options
+Every default can be changed. All steps take the same options, and all options are optional. Options prefixed with a format key only apply to that format.
+
+| Option | Default | Description |
+|---|---|---|
+| `outDir` | `./dist` | Root output dir. |
+| `cjsDirName` | `cjs` | Name of the CommonJS dir inside `outDir`. Empty string writes to `outDir`. |
+| `esmDirName` | `esm` | Name of the ES module dir inside `outDir`. Empty string writes to `outDir`. |
+| `tsConfigPath` | `./tsconfig.json` | tsconfig used by formats without their own tsconfig path. |
+| `cjsTsConfigPath` | | Separate tsconfig for CommonJS output. When not set, `tsConfigPath` is used with `module` overridden. |
+| `esmTsConfigPath` | | Separate tsconfig for ESM output. When not set, `tsConfigPath` is used with `module` overridden. |
+| `cjsModule` | `commonjs` | `module` value for CommonJS output when `cjsTsConfigPath` is not set. |
+| `esmModule` | `es2020` | `module` value for ESM output when `esmTsConfigPath` is not set. |
+| `srcPatterns` | tsconfig `filesGlob`, then `['./src/**/*.ts']` | Glob patterns matching source files to transpile. |
+| `cjsCompilerOptions` | | Compiler options applied on top of the tsconfig for CommonJS output. |
+| `esmCompilerOptions` | | Compiler options applied on top of the tsconfig for ESM output. |
+| `declarationComments` | auto | `true` always emits declarations again with comments, `false` never does. When not set, they are emitted again only when the tsconfig uses `removeComments` or `typesTsConfigPath` is set. |
+| `typesTsConfigPath` | tsconfig used by the format | tsconfig used when emitting declarations again. |
+| `typesTscArgs` | | Additional `tsc` args used when emitting declarations again. |
+| `tscPath` | `typescript` package in the working dir | Path to the `tsc` script. |
+| `finalize` | | Controls the fixes applied after transpiling. See below. |
+
+`finalize` options:
+
+| Option | Default | Description |
+|---|---|---|
+| `rewriteImports` | `true` | Add file extensions to relative imports in ESM output. |
+| `packageTypes` | `true` | Write a `package.json` with the module `type` to each output dir. |
+| `extMap` | `{'.js': '.js', '.d.ts': '.js'}` | File types to rewrite, mapped to the extension appended to imports found in them. Projects emitting `.mjs` could use `{'.mjs': '.mjs', '.d.mts': '.mjs'}`. |
+| `resolvedExts` | `['.js', '.mjs', '.cjs', '.json', '.node']` | Imports already ending in one of these are left unchanged. |
+| `indexName` | `index` | Base name of the file a directory import resolves to. |
+
+The pieces used by each step are also exported for pipelines that need a different order or only some of them: `Run.typescript`, `Run.declarations`, `esmFinalize`, `cjsFinalize`, `esmImports`, and `esmSpecifier`.
+
+Source code must itself be valid in every format it is transpiled to. `require()`, `__dirname`, and `__filename` do not exist in ES modules, and named imports from some CommonJS packages fail in Node ESM. Import rewriting covers static imports, re-exports, and `import()` calls with a literal path. It does not cover computed paths or tsconfig `paths` aliases.
+
 
 # Build from source
 

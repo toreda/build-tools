@@ -87,7 +87,6 @@ export class Clean {
 	 * Alias for clean dir.
 	 * @param path
 	 * @param force
-	 * @returns
 	 */
 	public folder(path: string, force?: boolean): Promise<boolean> {
 		return this.dir(path, force);

@@ -9,7 +9,6 @@ const config: Config = {
 		'^.+\\.tsx?$': '@swc/jest',
 		'^.+\\.m?js$': '@swc/jest'
 	},
-	testResultsProcessor: 'jest-sonar-reporter',
 	coverageDirectory: 'coverage',
 	coveragePathIgnorePatterns: [
 		'/node_modules/',

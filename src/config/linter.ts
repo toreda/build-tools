@@ -23,9 +23,9 @@
  *
  */
 
-import {ESLint, Linter, Rule} from 'eslint';
+import {ESLint, Linter} from 'eslint';
 
-import type {BaseObject} from '@toreda/types';
+import type {BaseObject} from '@toreda/shared-types';
 import type {LinterOptions} from '../linter/options';
 
 /**
@@ -38,50 +38,39 @@ export class ConfigLinter {
 	public readonly autofix: boolean;
 	public readonly cwd?: string;
 	public readonly allowInlineConfig: boolean;
-	public readonly useEslintrc?: boolean;
 	public readonly cache: boolean;
 	public readonly cacheStrategy?: 'content' | 'metadata';
 	public readonly cacheLocation?: string;
 	public readonly globInputPaths?: boolean;
 	public readonly ignore?: boolean;
-	public readonly ignorePath?: string;
-	public readonly extensions?: string[];
+	public readonly ignorePatterns?: string[];
 	public readonly fix?: boolean | ((message: Linter.LintMessage) => boolean);
-	public readonly fixTypes?: Array<Rule.RuleMetaData['type']>;
-	public readonly rulePaths?: string[];
-	public readonly resolvePluginsRelativeTo?: string;
+	public readonly fixTypes?: ESLint.Options['fixTypes'];
 	public readonly plugins?: Record<string, unknown>;
 	public readonly baseConfig?: Linter.Config;
 	public readonly overrideConfig?: Linter.Config;
-	public readonly overrideConfigFile?: string;
-	public readonly reportUnusedDisableDirectives?: boolean;
+	public readonly overrideConfigFile?: string | true;
 
 	constructor(o?: Partial<LinterOptions>) {
 		this.quiet = typeof o?.quiet === 'boolean' ? o?.quiet : false;
 		this.autofix = typeof o?.autofix === 'boolean' ? o?.autofix : false;
 		this.cwd = typeof o?.cwd === 'string' ? o?.cwd : undefined;
 		this.allowInlineConfig = typeof o?.allowInlineConfig === 'boolean' ? o?.allowInlineConfig : false;
-		this.useEslintrc = typeof o?.useEslintrc === 'boolean' ? o?.useEslintrc : true;
 		this.cache = typeof o?.cache === 'boolean' ? o?.cache : false;
 		this.globInputPaths = typeof o?.globInputPaths === 'boolean' ? o?.globInputPaths : undefined;
-		this.ignorePath = typeof o?.ignorePath === 'string' ? o?.ignorePath : undefined;
-		this.extensions = Array.isArray(o?.extensions) ? o?.extensions : undefined;
+		this.ignore = typeof o?.ignore === 'boolean' ? o?.ignore : undefined;
+		this.ignorePatterns = Array.isArray(o?.ignorePatterns) ? o?.ignorePatterns : undefined;
 		this.cacheLocation = typeof o?.cacheLocation === 'string' ? o?.cacheLocation : undefined;
+		this.fix = typeof o?.fix === 'boolean' || typeof o?.fix === 'function' ? o?.fix : undefined;
 		this.fixTypes = Array.isArray(o?.fixTypes) ? o?.fixTypes : undefined;
-		this.rulePaths = Array.isArray(o?.rulePaths) ? o?.rulePaths : undefined;
-		this.resolvePluginsRelativeTo =
-			typeof o?.resolvePluginsRelativeTo === 'string' ? o?.resolvePluginsRelativeTo : undefined;
 		this.plugins = this.mkPlugins(o?.plugins);
 		this.baseConfig = this.mkConfig(o?.baseConfig);
 		this.overrideConfig = this.mkConfig(o?.overrideConfig);
 		this.cacheStrategy =
 			o?.cacheStrategy === 'content' || o?.cacheStrategy === 'metadata' ? o?.cacheStrategy : undefined;
 		this.overrideConfigFile =
-			typeof o?.overrideConfigFile === 'string' ? o?.overrideConfigFile : undefined;
-		this.ignore = typeof o?.ignore === 'boolean' ? o?.ignore : false;
-		this.reportUnusedDisableDirectives =
-			typeof o?.reportUnusedDisableDirectives === 'boolean'
-				? o?.reportUnusedDisableDirectives
+			typeof o?.overrideConfigFile === 'string' || o?.overrideConfigFile === true
+				? o?.overrideConfigFile
 				: undefined;
 	}
 
@@ -119,12 +108,16 @@ export class ConfigLinter {
 			globInputPaths: this.globInputPaths,
 			cache: this.cache,
 			cacheStrategy: this.cacheStrategy,
-			allowInlineConfig: this.allowInlineConfig,
-			useEslintrc: this.useEslintrc,
-			ignorePath: this.ignorePath,
-			extensions: this.extensions,
 			cacheLocation: this.cacheLocation,
-			fixTypes: this.fixTypes
+			allowInlineConfig: this.allowInlineConfig,
+			ignore: this.ignore,
+			ignorePatterns: this.ignorePatterns,
+			fix: this.fix !== undefined ? this.fix : this.autofix,
+			fixTypes: this.fixTypes,
+			baseConfig: this.baseConfig,
+			overrideConfig: this.overrideConfig,
+			overrideConfigFile: this.overrideConfigFile,
+			plugins: this.plugins as ESLint.Options['plugins']
 		};
 	}
 }

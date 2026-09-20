@@ -25,7 +25,7 @@
 
 import {Config} from './config';
 import {ESLint} from 'eslint';
-import {EventEmitter} from 'stream';
+import {EventEmitter} from 'events';
 import {LinterSummary} from './linter/summary';
 import type {LinterTarget} from './linter/target';
 import {Log} from '@toreda/log';
@@ -71,24 +71,31 @@ export class Linter {
 
 		try {
 			const results = await this._eslint.lintFiles(tgt.srcPatterns);
-			const formatterId = typeof tgt?.formatterId === 'string' ? tgt?.formatterId : 'stylish';
+
+			if (this.cfg.linter.autofix) {
+				await ESLint.outputFixes(results);
+			}
+
+			const reported = this.cfg.linter.quiet ? ESLint.getErrorResults(results) : results;
+			const formatterId = typeof tgt.formatterId === 'string' ? tgt.formatterId : 'stylish';
 			const formatter = await this._eslint.loadFormatter(formatterId);
 
-			const resultText = await formatter.format(results);
-
-			summary.resultText = resultText;
+			summary.resultText = await formatter.format(reported);
 			for (const result of results) {
 				summary.add(result);
 			}
 
-			fnLog.info(resultText);
+			if (!this.cfg.linter.quiet) {
+				fnLog.info(summary.resultText);
+			}
+
 			summary.done();
 		} catch (e: unknown) {
-			if (e instanceof Error) {
-				fnLog.error(e.message);
-			} else {
-				fnLog.error(`Unknown error type thrown during execute call.`);
-			}
+			const err = e instanceof Error ? e : new Error(`Unknown error type thrown during execute call.`);
+			fnLog.error(err.message);
+			summary.status.errors.push(err);
+			summary.status.code = 'EXECUTE_EXCEPTION';
+			summary.status.description = err.message;
 		}
 
 		fnLog.debug('Linter execution complete.');

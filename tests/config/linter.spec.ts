@@ -1,4 +1,5 @@
 import {ConfigLinter} from '../../src/config/linter';
+import {ESLint} from 'eslint';
 import type {LinterOptions} from '../../src/linter/options';
 
 const RANGE_BOOL = {
@@ -84,6 +85,39 @@ const RANGE_STRINGS = {
 	]
 };
 
+const RANGE_FIX = {
+	valid: [
+		{value: true, label: 'true'},
+		{value: false, label: 'false'},
+		{value: (): boolean => true, label: 'filter function'}
+	],
+	invalid: [
+		{value: 1, label: 'truthy integer 1'},
+		{value: 0, label: 'falsy integer 0'},
+		{value: 'aaa', label: 'string'},
+		{value: [], label: 'empty array'},
+		{value: {}, label: 'empty object'},
+		{value: undefined, label: 'undefined'},
+		{value: null, label: 'null'}
+	]
+};
+
+const RANGE_OVERRIDE_CONFIG_FILE = {
+	valid: [
+		{value: 'eslint.config.js', label: 'config file path'},
+		{value: true, label: 'true (disable config file lookup)'}
+	],
+	invalid: [
+		{value: 1, label: 'truthy integer 1'},
+		{value: 0, label: 'falsy integer 0'},
+		{value: false, label: 'false'},
+		{value: [], label: 'empty array'},
+		{value: {}, label: 'empty object'},
+		{value: undefined, label: 'undefined'},
+		{value: null, label: 'null'}
+	]
+};
+
 const SCHEMA = [
 	{label: 'quiet', property: 'quiet', initial: false, type: 'boolean', range: RANGE_BOOL},
 	{label: 'autofix', property: 'autofix', initial: false, type: 'boolean', range: RANGE_BOOL},
@@ -116,13 +150,6 @@ const SCHEMA = [
 		range: RANGE_BOOL
 	},
 	{
-		label: 'useEslintrc',
-		property: 'useEslintrc',
-		initial: true,
-		type: 'boolean',
-		range: RANGE_BOOL
-	},
-	{
 		label: 'cache',
 		property: 'cache',
 		initial: false,
@@ -137,6 +164,13 @@ const SCHEMA = [
 		range: RANGE_BOOL
 	},
 	{
+		label: 'fix',
+		property: 'fix',
+		initial: undefined,
+		type: 'boolean | function',
+		range: RANGE_FIX
+	},
+	{
 		label: 'fixTypes',
 		property: 'fixTypes',
 		initial: undefined,
@@ -144,46 +178,18 @@ const SCHEMA = [
 		range: RANGE_ARRAY_STRINGS
 	},
 	{
-		label: 'extensions',
-		property: 'extensions',
-		initial: undefined,
-		type: 'array<string>',
-		range: RANGE_ARRAY_STRINGS
-	},
-	{
-		label: 'cacheLocation',
-		property: 'cacheLocation',
-		initial: undefined,
-		type: 'string',
-		range: RANGE_STRINGS
-	},
-	{
-		label: 'rulePaths',
-		property: 'rulePaths',
-		initial: undefined,
-		type: 'array<string>',
-		range: RANGE_ARRAY_STRINGS
-	},
-	{
 		label: 'ignore',
 		property: 'ignore',
-		initial: false,
+		initial: undefined,
 		type: 'boolean',
 		range: RANGE_BOOL
 	},
 	{
-		label: 'ignorePath',
-		property: 'ignorePath',
+		label: 'ignorePatterns',
+		property: 'ignorePatterns',
 		initial: undefined,
-		type: 'string',
-		range: RANGE_STRINGS
-	},
-	{
-		label: 'resolvePluginsRelativeTo',
-		property: 'resolvePluginsRelativeTo',
-		initial: undefined,
-		type: 'string',
-		range: RANGE_STRINGS
+		type: 'array<string>',
+		range: RANGE_ARRAY_STRINGS
 	},
 	{
 		label: 'overrideConfig',
@@ -203,15 +209,8 @@ const SCHEMA = [
 		label: 'overrideConfigFile',
 		property: 'overrideConfigFile',
 		initial: undefined,
-		type: 'string',
-		range: RANGE_STRINGS
-	},
-	{
-		label: 'reportUnusedDisableDirectives',
-		property: 'reportUnusedDisableDirectives',
-		initial: undefined,
-		type: 'boolean',
-		range: RANGE_BOOL
+		type: 'string | true',
+		range: RANGE_OVERRIDE_CONFIG_FILE
 	},
 	{
 		label: 'plugins',
@@ -273,12 +272,45 @@ describe('LinterConfig', () => {
 		});
 	}
 
-	describe('Property Test Coverage', () => {
-		for (const key of propKeys) {
-			it(`should include tests for ConfigLinter.${key}`, () => {
-				expect(typeof propTests[key]).toBe('number');
-				expect(propTests[key]).toBeGreaterThan(0);
-			});
-		}
+	describe('eslintOptions', () => {
+		it(`should not include options removed in ESLint 9+`, () => {
+			const custom = new ConfigLinter();
+			const eslintOptions = custom.eslintOptions() as Record<string, unknown>;
+
+			for (const removed of [
+				'useEslintrc',
+				'ignorePath',
+				'extensions',
+				'rulePaths',
+				'resolvePluginsRelativeTo',
+				'reportUnusedDisableDirectives'
+			]) {
+				expect(Object.keys(eslintOptions)).not.toContain(removed);
+			}
+		});
+
+		it(`should set fix from autofix when fix is not provided`, () => {
+			const custom = new ConfigLinter({autofix: true});
+			expect(custom.eslintOptions().fix).toBe(true);
+		});
+
+		it(`should prefer explicit fix value over autofix`, () => {
+			const fixFn = (): boolean => false;
+			const custom = new ConfigLinter({autofix: true, fix: fixFn});
+			expect(custom.eslintOptions().fix).toBe(fixFn);
+		});
+
+		it(`should default fix to false when neither fix nor autofix provided`, () => {
+			const custom = new ConfigLinter();
+			expect(custom.eslintOptions().fix).toBe(false);
+		});
+
+		it(`should be accepted by the ESLint constructor`, () => {
+			const custom = new ConfigLinter();
+
+			expect(() => {
+				new ESLint(custom.eslintOptions());
+			}).not.toThrow();
+		});
 	});
 });

@@ -23,13 +23,11 @@
  *
  */
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const nunjucksRender = require('gulp-nunjucks-render');
-
 import {dest, src} from 'gulp';
 
 import {Config} from './config';
 import {EventEmitter} from 'events';
+import nunjucksRender from 'gulp-nunjucks-render';
 
 /**
  * Inject data and replace values in template files.

@@ -23,34 +23,17 @@
  *
  */
 
-import type {FileOptions} from './options';
-import {readFile} from 'fs';
+import type {EsmOptions} from './options';
 
 /**
- * Get file contents as a string for target file found at `filePath`.
- * @param filePath
- * @param options
- * @returns			File contents as string when file is found at filePath, or null file is not found,
- *					or the file could not be read due to permissions, or other errors.
+ * Default values for ESM options not provided by the caller.
  *
- * @category Files
+ * @category ESM
  */
-export async function fileContents(filePath: string, options?: FileOptions): Promise<string | null> {
-	const encoding = options && typeof options.encoding === 'string' ? options.encoding : 'utf8';
-
-	return new Promise((resolve, reject) => {
-		readFile(filePath, encoding, (err, data: string) => {
-			if (err) {
-				return reject(
-					new Error(`Build failed to get file contents from '${filePath}' - ${err.message}.`)
-				);
-			}
-
-			if (typeof data !== 'string') {
-				return resolve(null);
-			}
-
-			resolve(data);
-		});
-	});
-}
+export const esmDefaults: Required<EsmOptions> = {
+	extMap: {'.js': '.js', '.d.ts': '.js'},
+	resolvedExts: ['.js', '.mjs', '.cjs', '.json', '.node'],
+	indexName: 'index',
+	rewriteImports: true,
+	packageTypes: true
+};

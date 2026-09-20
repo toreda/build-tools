@@ -2,10 +2,9 @@ import {Levels, Log} from '@toreda/log';
 //const eslint = require('gulp-eslint');
 import gulp, {dest, series, src} from 'gulp';
 
-import {Config} from './src/config';
+import {Build} from './src/build';
 import {ESLint} from 'eslint';
 import {EventEmitter} from 'stream';
-import {Run} from './src/run';
 import del from 'del';
 
 const log = new Log({
@@ -13,15 +12,12 @@ const log = new Log({
 	consoleEnabled: true
 });
 
-const cfg = new Config({}, {}, log);
-const events = new EventEmitter();
+const build = new Build({log: log, events: new EventEmitter()});
 
 const srcPatterns = ['src/**.ts', 'src/**/*.ts'];
 
 async function linter() {
-	const eslint = new ESLint({
-		useEslintrc: true
-	});
+	const eslint = new ESLint();
 
 	const result = await eslint.lintFiles(srcPatterns);
 	const formatter = await eslint.loadFormatter('stylish');
@@ -40,11 +36,9 @@ function cleanDist() {
 	return del(`dist/**`, {force: true});
 }
 
-async function buildSrc() {
-	// Build typescript sources and output them in './dist'.
-	//return src(srcPatterns).pipe(tsc()).pipe(dest('dist'));
-	const run = new Run(cfg, events, log);
-	await run.typescript('./dist', './tsconfig.json');
+function buildSrc() {
+	// Build typescript sources as both CommonJS ('./dist/cjs') and ES modules ('./dist/esm').
+	return build.gulpSteps.transpileAll();
 }
 
 exports.default = series(createDist, cleanDist, linter, buildSrc);

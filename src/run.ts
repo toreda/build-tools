@@ -30,12 +30,14 @@ import {EventEmitter} from 'events';
 import {Log} from '@toreda/log';
 import Path from 'path';
 import {WebpackOptions} from './webpack/options';
+import {createRequire} from 'module';
+import {execFile} from 'child_process';
+import mergeStream from 'merge-stream';
+import {pathToFileURL} from 'url';
+import {readFileSync} from 'fs';
 import sourcemaps from 'gulp-sourcemaps';
 import tsc from 'gulp-typescript';
 import webpack from 'webpack';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const mergeStream = require('merge-stream');
 
 /**
  * Run other packages used in the build process with minimal config.
@@ -74,7 +76,17 @@ export class Run {
 		const resolvedPath = Path.resolve(cfgPath);
 
 		return new Promise((resolve, reject) => {
-			import(resolvedPath).then((webpackConfig) => {
+			// CJS output loads the config with require. ESM output has no require and
+			// needs a file URL to import absolute windows paths.
+			const loaded: Promise<any> =
+				typeof require === 'function'
+					? // eslint-disable-next-line @typescript-eslint/no-require-imports
+						Promise.resolve(require(resolvedPath))
+					: import(pathToFileURL(resolvedPath).href);
+
+			loaded.then((mod) => {
+				const webpackConfig = mod.default ?? mod;
+
 				webpack(webpackConfig, (err, stats) => {
 					if (err) {
 						fnLog.error(`Webpack stopped due to failure: ${err.message}.`);
@@ -99,14 +111,93 @@ export class Run {
 		});
 	}
 
-	public typescript(destPath: string, tsConfigPath?: string): Promise<NodeJS.ReadWriteStream> {
+	/**
+	 * Transpile typescript sources using `compilerOptions` from target tsconfig.
+	 * @param destPath			Dir where transpiled output is written.
+	 * @param tsConfigPath		Path to tsconfig file. Defaults to `./tsconfig.json`.
+	 * @param compilerOptions	Overrides applied on top of tsconfig `compilerOptions`. Allows
+	 *							multiple outputs (e.g. CJS + ESM) from a single tsconfig.
+	 * @param srcPatterns		Glob patterns matching source files to transpile. Defaults to
+	 *							`filesGlob` in the tsconfig, then all `.ts` files in `./src`.
+	 * @returns
+	 */
+	public typescript(
+		destPath: string,
+		tsConfigPath?: string,
+		compilerOptions?: tsc.Settings,
+		srcPatterns?: string[]
+	): NodeJS.ReadWriteStream {
 		const outputPath = typeof destPath === 'string' ? destPath : 'dist';
 		const useConfigPath = tsConfigPath ? tsConfigPath : './tsconfig.json';
-		// eslint-disable-next-line @typescript-eslint/no-var-requires
-		const tsConfig = require(Path.resolve(useConfigPath));
-		const filesGlob = tsConfig.filesGlob;
+		const tsConfig = JSON.parse(readFileSync(Path.resolve(useConfigPath), 'utf8'));
+		// filesGlob is not a standard tsconfig field. Projects may not have one.
+		const filesGlob = Array.isArray(srcPatterns)
+			? srcPatterns
+			: Array.isArray(tsConfig.filesGlob)
+				? tsConfig.filesGlob
+				: ['./src/**/*.ts'];
 
-		const tsResult = src(filesGlob).pipe(tsc(tsConfig.compilerOptions));
-		return mergeStream(tsResult, tsResult.js).pipe(sourcemaps.write('.')).pipe(dest(outputPath));
+		const tsResult = src(filesGlob).pipe(tsc({...tsConfig.compilerOptions, ...compilerOptions}));
+		return mergeStream<NodeJS.ReadableStream>(tsResult, tsResult.js)
+			.pipe(sourcemaps.write('.'))
+			.pipe(dest(outputPath));
+	}
+
+	/**
+	 * Emit declaration files only, with comments intact. Transpiling with `removeComments`
+	 * also strips comments from declarations, which removes JSDoc hover docs for consumers.
+	 * Declarations never reach a runtime bundle, so re-emitting them with comments is safe.
+	 * @param destPath			Dir where declaration files are written.
+	 * @param tsConfigPath		Path to tsconfig file. Defaults to `./tsconfig.json`.
+	 * @param tscArgs			Additional `tsc` command line args. Applied last, so they
+	 *							override the args used by default.
+	 * @param tscPath			Path to the `tsc` script. Defaults to the `typescript` package
+	 *							resolved from the current working dir.
+	 * @returns
+	 */
+	public declarations(
+		destPath: string,
+		tsConfigPath?: string,
+		tscArgs?: string[],
+		tscPath?: string
+	): Promise<void> {
+		const fnLog = this.log.makeLog('declarations');
+		const useConfigPath = tsConfigPath ? tsConfigPath : './tsconfig.json';
+		const extraArgs = Array.isArray(tscArgs) ? tscArgs : [];
+		const args = [
+			typeof tscPath === 'string' ? tscPath : this.tscPath(),
+			'-p',
+			useConfigPath,
+			'--outDir',
+			destPath,
+			'--declaration',
+			'--emitDeclarationOnly',
+			'--removeComments',
+			'false',
+			...extraArgs
+		];
+
+		return new Promise((resolve, reject) => {
+			execFile(process.execPath, args, (err, stdout, stderr) => {
+				if (err) {
+					fnLog.error(`tsc failed:
+${stdout}${stderr}`);
+					return reject(err);
+				}
+
+				resolve();
+			});
+		});
+	}
+
+	/**
+	 * Find the `tsc` script in the `typescript` package installed by the project being built.
+	 * @returns
+	 */
+	public tscPath(): string {
+		// Resolve from the current working dir. createRequire works in both CJS and ESM output.
+		const projectRequire = createRequire(Path.resolve('package.json'));
+
+		return Path.join(Path.dirname(projectRequire.resolve('typescript')), 'tsc.js');
 	}
 }

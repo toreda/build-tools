@@ -23,34 +23,26 @@
  *
  */
 
-import type {FileOptions} from './options';
-import {readFile} from 'fs';
-
 /**
- * Get file contents as a string for target file found at `filePath`.
- * @param filePath
- * @param options
- * @returns			File contents as string when file is found at filePath, or null file is not found,
- *					or the file could not be read due to permissions, or other errors.
+ * Options controlling how ESM output is fixed up to load in Node. All options are
+ * optional. Defaults suit typescript output using `.js` and `.d.ts` files.
  *
- * @category Files
+ * @category ESM
  */
-export async function fileContents(filePath: string, options?: FileOptions): Promise<string | null> {
-	const encoding = options && typeof options.encoding === 'string' ? options.encoding : 'utf8';
-
-	return new Promise((resolve, reject) => {
-		readFile(filePath, encoding, (err, data: string) => {
-			if (err) {
-				return reject(
-					new Error(`Build failed to get file contents from '${filePath}' - ${err.message}.`)
-				);
-			}
-
-			if (typeof data !== 'string') {
-				return resolve(null);
-			}
-
-			resolve(data);
-		});
-	});
+export interface EsmOptions {
+	/** Maps the extension of each file type to rewrite, to the extension appended to relative
+	 *  specifiers found in it. The key is also used to find import targets on disk. Files
+	 *  with extensions not in the map are left unchanged.
+	 *  Defaults to `{'.js': '.js', '.d.ts': '.js'}`. Projects emitting `.mjs` could use
+	 *  `{'.mjs': '.mjs', '.d.mts': '.mjs'}`. */
+	extMap?: Record<string, string>;
+	/** Specifiers already ending in one of these extensions are left unchanged.
+	 *  Defaults to `['.js', '.mjs', '.cjs', '.json', '.node']`. */
+	resolvedExts?: string[];
+	/** Base name of the file a directory import resolves to. Defaults to `index`. */
+	indexName?: string;
+	/** Rewrite relative import specifiers in ESM output. Defaults to `true`. */
+	rewriteImports?: boolean;
+	/** Write a `package.json` with the module `type` to each output dir. Defaults to `true`. */
+	packageTypes?: boolean;
 }

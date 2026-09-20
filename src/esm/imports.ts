@@ -22,35 +22,31 @@
  * 	SOFTWARE.
  *
  */
-
-import type {FileOptions} from './options';
-import {readFile} from 'fs';
+import type {EsmOptions} from './options';
+import {esmSpecifier} from './specifier';
 
 /**
- * Get file contents as a string for target file found at `filePath`.
- * @param filePath
- * @param options
- * @returns			File contents as string when file is found at filePath, or null file is not found,
- *					or the file could not be read due to permissions, or other errors.
- *
- * @category Files
+ * Matches relative specifiers in static imports & exports (`from './x'`), side effect
+ * imports (`import './x'`), and dynamic imports with literal args (`import('./x')`).
  */
-export async function fileContents(filePath: string, options?: FileOptions): Promise<string | null> {
-	const encoding = options && typeof options.encoding === 'string' ? options.encoding : 'utf8';
+const SPECIFIER_PATTERN = /(\bfrom\s*|\bimport\s*\(?\s*)(['"])(\.{1,2}\/[^'"]*)\2/g;
 
-	return new Promise((resolve, reject) => {
-		readFile(filePath, encoding, (err, data: string) => {
-			if (err) {
-				return reject(
-					new Error(`Build failed to get file contents from '${filePath}' - ${err.message}.`)
-				);
-			}
+/**
+ * Rewrite all relative import specifiers in file contents to include file extensions.
+ * @param contents		Contents of an emitted file. e.g. `.js` or `.d.ts`
+ * @param fileDir		Dir containing the file.
+ * @param ext			Extension of the file contents were read from.
+ * @param options		Overrides for extensions and index file name.
+ * @returns				Contents with rewritten specifiers.
+ *
+ * @category ESM
+ */
+export function esmImports(contents: string, fileDir: string, ext: string, options?: EsmOptions): string {
+	if (typeof contents !== 'string') {
+		return contents;
+	}
 
-			if (typeof data !== 'string') {
-				return resolve(null);
-			}
-
-			resolve(data);
-		});
+	return contents.replace(SPECIFIER_PATTERN, (_match, prefix, quote, specifier) => {
+		return `${prefix}${quote}${esmSpecifier(fileDir, specifier, ext, options)}${quote}`;
 	});
 }
